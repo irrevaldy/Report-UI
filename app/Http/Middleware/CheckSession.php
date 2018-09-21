@@ -20,7 +20,7 @@ class CheckSession
      */
     public function handle($request, Closure $next)
     {
-        
+
         return $next($request);
 
         //letakkan kode kamu disini...
@@ -29,7 +29,7 @@ class CheckSession
 
             return redirect()->guest('/');
         } else {
-            
+
             // if( Session::get('client_ip') == $_SERVER['REMOTE_ADDR'] ) {
 
                 $client = new \GuzzleHttp\Client();
@@ -39,9 +39,9 @@ class CheckSession
                         'username' => Session::get('username')
                     ]
                 ]);
-                
+
                 $var = json_decode($form_post->getBody()->getContents(), true);
-                
+
                 if($var['success'] == true) {
                     // Session::put('session_counter', Session::get('session_counter')+1);
 
@@ -71,9 +71,9 @@ class CheckSession
         //             'username' => Session::get('username')
         //         ]
         //     ]);
-            
+
         //     $var = json_decode($form_post->getBody()->getContents(), true);
-            
+
         //     if($var['success'] == true) {
         //         return $next($request);
         //     } else {
@@ -113,9 +113,9 @@ class CheckSession
             if( count($resp) == 0 ) {
                 $res[] = 'Response is null';
             } else {
-                foreach( $resp as $key => $value ) {
+                /*foreach( $resp as $key => $value ) {
                     Log::info('Response data: '. $key .' -> ' . json_encode($value) );
-                }
+                }*/
             }
 
             Log::info('Log end ===========================');

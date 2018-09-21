@@ -24,25 +24,17 @@
 	Route::get('/re-token', 												['uses' => 'tokenController@create']);
 	//Route::get('/index', function () { return view('home'); });
 
-
 Route::group(['middleware' => 'global_middleware' ], function()
 {
 	Route::get('/index', 													['uses' => 'indexController@index']);
 
-	Route::get('/get_total_summary', 										['uses' => 'DashproviderController@get_total_summary']);
-
 	Route::get('/dashbank', 												['uses' => 'DashbankController@index_copy']);
-	//Route::get('/dashbank_copy', 											['uses' => 'DashbankController@index_copy']);
-	//Route::get('/dashprovider', 											['uses' => 'DashprovController@index']);
+	Route::get('/dashbank_copy', 											['uses' => 'DashbankController@index_copy']);
+	Route::get('/dashprovider', 											['uses' => 'DashprovController@index']);
 	// Route::get('/dashprovider', 											['uses' => 'DashproviderController@index']);
-	//Route::get('/dashmerchant',												['uses' => 'DashmerchantController@index']);
-	Route::get('/dashprovider', 											['uses' => 'DashproviderController@index']);
-	Route::get('/dashacquirer', 											['uses' => 'DashacquirerController@index']);
-	Route::get('/dashcorporate', 											['uses' => 'DashcorporateController@index']);
-	Route::get('/dashmerchant', 											['uses' => 'DashmerchantController@index']);
-	Route::get('/dashmerchant2', 											['uses' => 'Dashmerchant2Controller@index']);
-	Route::get('/dashbranch', 												['uses' => 'DashbranchController@index']);
-	Route::get('/dashstore', 												['uses' => 'DashstoreController@index']);
+	Route::get('/dashmerchant',												['uses' => 'DashmerchantController@index']);
+
+	Route::get('/dashserviceprovider', 										['uses' => 'DashserviceprovController@index']);
 
 	Route::get('/monitoring', 												['uses' => 'monitoringController@index']);
 	Route::get('/mon_data', 												['uses' => 'monitoringController@getMonitoringData']);
@@ -54,19 +46,6 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::get('/dashboard_merchant/monthly_storehigh',  					['uses' => 'DashmerchantController@GetMonthlyStoreTransactionTop5']);
 	Route::get('/dashboard_merchant/monthly_storelow',  					['uses' => 'DashmerchantController@GetMonthlyStoreTransactionLow5']);
 
-	Route::get('/dashboard_merchant/data_dashboard_merchant',  		['uses' => 'DashmerchantController@GetDataDashboardMerchant']);
-	Route::get('/dashboard_merchant/trxvolume',  		['uses' => 'DashmerchantController@GetTransactionVolume']);
-	Route::get('/dashboard_merchant/trxcount',  		['uses' => 'DashmerchantController@GetTransactionCount']);
-	Route::get('/dashboard_merchant/top5acq_trxvolume',  					['uses' => 'DashmerchantController@GetTop5AcquirerTransactionVolume']);
-	Route::get('/dashboard_merchant/top5acq_trxcount',  					['uses' => 'DashmerchantController@GetTop5AcquirerTransactionCount']);
-	Route::get('/dashboard_merchant/top5bra_trxvolume',  					['uses' => 'DashmerchantController@GetTop5BranchTransactionVolume']);
-	Route::get('/dashboard_merchant/top5bra_trxcount',  					['uses' => 'DashmerchantController@GetTop5BranchTransactionCount']);
-	Route::get('/dashboard_merchant/top5sto_trxvolume',  					['uses' => 'DashmerchantController@GetTop5StoreTransactionVolume']);
-	Route::get('/dashboard_merchant/top5sto_trxcount',  					['uses' => 'DashmerchantController@GetTop5StoreTransactionCount']);
-	Route::get('/dashboard_merchant/top5ctp_trxvolume',  					['uses' => 'DashmerchantController@GetTop5CardTypeTransactionVolume']);
-	Route::get('/dashboard_merchant/top5ctp_trxcount',  					['uses' => 'DashmerchantController@GetTop5CardTypeTransactionCount']);
-	Route::get('/dashboard_merchant/top5ttp_trxvolume',  					['uses' => 'DashmerchantController@GetTop5TransactionTypeTransactionVolume']);
-	Route::get('/dashboard_merchant/top5ttp_trxcount',  					['uses' => 'DashmerchantController@GetTop5TransactionTypeTransactionCount']);
 
 	//Search Transaction
 	Route::get('/search_transaction', 													['uses' => 'SearchController@index']);
@@ -105,36 +84,6 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::get('/download_recon_report_branch/get_list_report',			['uses' => 'DownloadReconReportBranchController@GetListReport']);
 	Route::post('/download_recon_report_branch/zip_list_report',			['uses' => 'DownloadReconReportBranchController@ZipListReport']);
 	Route::post('/download_recon_report_branch/filter_report_table',			['uses' => 'DownloadReconReportBranchController@FilterReportTable']);
-
-	Route::get('/download_detail_report_provider',							['uses' => 'DownloadDetailReportProviderController@index']);
-	Route::get('/download_detail_report_provider/get_list_report',			['uses' => 'DownloadDetailReportProviderController@GetListReport']);
-	Route::post('/download_detail_report_provider/zip_list_report',			['uses' => 'DownloadDetailReportProviderController@ZipListReport']);
-	Route::post('/download_detail_report_provider/filter_report_table',			['uses' => 'DownloadDetailReportProviderController@FilterReportTable']);
-
-	Route::get('/download_recon_report_provider',							['uses' => 'DownloadReconReportProviderController@index']);
-	Route::get('/download_recon_report_provider/get_list_report',			['uses' => 'DownloadReconReportProviderController@GetListReport']);
-	Route::post('/download_recon_report_provider/zip_list_report',			['uses' => 'DownloadReconReportProviderController@ZipListReport']);
-	Route::post('/download_recon_report_provider/filter_report_table',			['uses' => 'DownloadReconReportProviderController@FilterReportTable']);
-
-	Route::get('/download_detail_report_corporate',							['uses' => 'DownloadDetailReportCorporateController@index']);
-	Route::get('/download_detail_report_corporate/get_list_report',			['uses' => 'DownloadDetailReportCorporateController@GetListReport']);
-	Route::post('/download_detail_report_provide/zip_list_report',			['uses' => 'DownloadDetailReportCorporateController@ZipListReport']);
-	Route::post('/download_detail_report_corporate/filter_report_table',			['uses' => 'DownloadDetailReportCorporateController@FilterReportTable']);
-
-	Route::get('/download_recon_report_corporate',							['uses' => 'DownloadReconReportCorporateController@index']);
-	Route::get('/download_recon_report_corporate/get_list_report',			['uses' => 'DownloadReconReportCorporateController@GetListReport']);
-	Route::post('/download_recon_report_corporate/zip_list_report',			['uses' => 'DownloadReconReportCorporateController@ZipListReport']);
-	Route::post('/download_recon_report_corporate/filter_report_table',			['uses' => 'DownloadReconReportCorporateController@FilterReportTable']);
-
-	Route::get('/download_detail_report_store',							['uses' => 'DownloadDetailReportStoreController@index']);
-	Route::get('/download_detail_report_store/get_list_report',			['uses' => 'DownloadDetailReportStoreController@GetListReport']);
-	Route::post('/download_detail_report_provide/zip_list_report',			['uses' => 'DownloadDetailReportStoreController@ZipListReport']);
-	Route::post('/download_detail_report_store/filter_report_table',			['uses' => 'DownloadDetailReportStoreController@FilterReportTable']);
-
-	Route::get('/download_recon_report_store',							['uses' => 'DownloadReconReportStoreController@index']);
-	Route::get('/download_recon_report_store/get_list_report',			['uses' => 'DownloadReconReportStoreController@GetListReport']);
-	Route::post('/download_recon_report_store/zip_list_report',			['uses' => 'DownloadReconReportStoreController@ZipListReport']);
-	Route::post('/download_recon_report_store/filter_report_table',			['uses' => 'DownloadReconReportStoreController@FilterReportTable']);
 
 	/* Change Password */
 	Route::get('/change_password', 											['uses' => 'PasswordController@index']);

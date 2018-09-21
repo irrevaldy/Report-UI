@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use Session;
 
-class DashproviderController extends Controller
+class Dashmerchant2Controller extends Controller
 {
    	public function __construct(){
 
@@ -21,20 +21,18 @@ class DashproviderController extends Controller
 
         $user_id = Session::get('user_id');
 
-        $form_post = $client->request('GET', config('constants.api_serverv').'data_dashboard_provider/'.$user_id);
+        $form_post = $client->request('GET', config('constants.api_serverv').'data_dashboard_merchant2/'.$user_id);
 
         $from_be = json_decode($form_post->getBody(), true);
 
-        // $from_be['last_month'] = "August"; 
+        // $from_be['last_month'] = "August";
         // $from_be['total_amount'] = "1241345240";
         // $from_be['total_trx'] = "21567";
         // $from_be['total_trx_success'] = "21066";
         // $from_be['total_trx_failed'] = "501";
 
-        return view('dashboard_provider')->with([
-            'total_acquirer'      => $from_be['total_acquirer'],
-            'total_corporate'     => $from_be['total_corporate'],
-            'total_merchant'      => $from_be['total_merchant'],
+        return view('dashboard_merchant2a')->with([
+            'total_branch'        => $from_be['total_branch'],
             'total_store'         => $from_be['total_store'],
             'total_terminal'      => $from_be['total_terminal'],
             'terminal_active'     => $from_be['terminal_active'],
@@ -52,26 +50,15 @@ class DashproviderController extends Controller
             //'chart_trx_count'     => $from_be['chart_trx_count'],
             'top5acq_trx_volume'  => $from_be['top5acq_trx_volume'],
             'top5acq_trx_count'   => $from_be['top5acq_trx_count'],
-            'top5mer_trx_volume'  => $from_be['top5mer_trx_volume'],
-            'top5mer_trx_count'   => $from_be['top5mer_trx_count'],
+            'top5bra_trx_volume'  => $from_be['top5bra_trx_volume'],
+            'top5bra_trx_count'   => $from_be['top5bra_trx_count'],
+            'top5sto_trx_volume'  => $from_be['top5sto_trx_volume'],
+            'top5sto_trx_count'   => $from_be['top5sto_trx_count'],
             'top5ctp_trx_volume'  => $from_be['top5ctp_trx_volume'],
             'top5ctp_trx_count'   => $from_be['top5ctp_trx_count'],
             'top5ttp_trx_volume'  => $from_be['top5ttp_trx_volume'],
             'top5ttp_trx_count'   => $from_be['top5ttp_trx_count']
         ]);
-
-        // return view('dashboard_provider');
-    }
-
-    public function get_total_summary(Request $request)
-    {
-        $client = new \GuzzleHttp\Client();
-
-        $user_id = Session::get('user_id');
-
-        $form_post = $client->request('GET', config('constants.api_serverv').'data_dashboard_provider/'.$user_id);
-
-        $from_be = json_decode($form_post->getBody(), true);
     }
 
     public function GetMonthlyBranchTransactionTop5(Request $request)

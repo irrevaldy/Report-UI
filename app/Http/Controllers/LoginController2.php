@@ -61,7 +61,6 @@ class LoginController extends Controller
             Session::put('user_subgroup_id', $var['data']['user_subgroup_id']);
             Session::put('username', $username);
             Session::put('name', $var['data']['name']);
-            Session::put('user_id', $var['data']['user_id']);
 
             $var['success']         = true;
             $var['message']         = 'Login success, '.$var['data']['name'].' !';

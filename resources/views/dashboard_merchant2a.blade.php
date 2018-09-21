@@ -1,8 +1,8 @@
-@extends('layout')      
+@extends('layout')
 
 @section('content')
-<?php 
-   //dd(session()->all());
+<?php
+   // dd(session()->all());
  ?>
 <script>
   // FontAwesomeConfig = { searchPseudoElements: true };
@@ -110,9 +110,9 @@
 
     .back-gray {
         background-color: darkgray;
-        color: #1a1a1a;
+        color: #eeeeee;
     }
-      
+
 
     .tile_stats_count {
       padding-top: 10px;
@@ -186,16 +186,12 @@
       text-align: center;
       transform: rotate(-180deg);
     }
-    .custom-col {
-      padding: 0px;
-      
-    }
 
     /*f1b2*/
 </style>
 
     <div class="header panel-header" style="border-bottom: none;">
-        <h2><i class="fas fa-home"></i> <strong>Service Provider</strong></h3>
+        <h2><i class="fas fa-home"></i> <strong>Merchant</strong></h3>
     </div>
 
     <?php
@@ -208,12 +204,13 @@
         $total_trx_success_percent = 100;
         $total_trx_failed_percent  = 100;
       }
+
     ?>
 
     <div class="row tile_count">
       <div class="panel transparent" style="margin-bottom: 0px">
         <div class="panel-header" style="border-bottom: none;">
-          <h3><strong>Service Provider </strong> Summary</h3>
+          <h3><strong>Merchant </strong> Summary</h3>
         </div>
         <div class="panel-content row" style="padding-top: 0; padding-bottom: 0">
           <div style="width: 3%; padding: 0px;" class="col-md-1"> <!-- background-color: #ab1313; color: white -->
@@ -221,41 +218,15 @@
           </div>
           <div style="width: 97%; padding: 0px; " class="col-md-11">
             <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-              <!-- <div class="left" style="border-left: none;"></div> -->
+              <div class="left" style="border-left: none;"></div>
               <div class="right">
-                <span class="count_top f-16"><i class="fa fa-building blue"></i> Acquirer</span>
+                <span class="count_top f-16"><i class="fa fa-sitemap blue"></i> Branch</span>
 
                 <?php
-                  if( $total_acquirer == 0 ) { $class = ''; } else { $class = 'countup'; }
+                  if( $total_branch == 0 ) { $class = ''; } else { $class = 'countup'; }
                 ?>
 
-                <div class="count blue number f-30 {{ $class }}" data-from="0" data-to="{{ $total_acquirer }}">{{ $total_acquirer }}</div>
-                <!-- <span class="count_bottom"><i class="">{{ $total_trx_percent }}% </i> from Total</span> -->
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-              <div class="left"></div>
-              <div class="right">
-                <span class="count_top f-16"><i class="fa fa-university blue"></i> Corporate</span>
-
-                <?php
-                  if( $total_corporate == 0 ) { $class = ''; } else { $class = 'countup'; }
-                ?>
-
-                <div class="count blue number f-30 {{ $class }}" data-from="0" data-to="{{ $total_corporate }}">{{ $total_corporate }}</div>
-                <!-- <span class="count_bottom"><i class="">{{ $total_trx_percent }}% </i> from Total</span> -->
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-              <div class="left"></div>
-              <div class="right">
-                <span class="count_top f-16"><svg aria-hidden="true" data-prefix="fas" data-icon="school" class="svg-inline--fa fa-school fa-w-16 blue" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M0 224v272c0 8.84 7.16 16 16 16h80V192H32c-17.67 0-32 14.33-32 32zm360-48h-24v-40c0-4.42-3.58-8-8-8h-16c-4.42 0-8 3.58-8 8v64c0 4.42 3.58 8 8 8h48c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zm137.75-63.96l-160-106.67a32.02 32.02 0 0 0-35.5 0l-160 106.67A32.002 32.002 0 0 0 128 138.66V512h128V368c0-8.84 7.16-16 16-16h96c8.84 0 16 7.16 16 16v144h128V138.67c0-10.7-5.35-20.7-14.25-26.63zM320 256c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80zm288-64h-64v320h80c8.84 0 16-7.16 16-16V224c0-17.67-14.33-32-32-32z"></path></svg></i> Merchant</span>
-
-                <?php
-                  if( $total_merchant == 0 ) { $class = ''; } else { $class = 'countup'; }
-                ?>
-
-                <div class="count blue number f-30 {{ $class }}" data-from="0" data-to="{{ $total_merchant }}">{{ $total_merchant }}</div>
+                <div class="count blue number f-30 {{ $class }}" data-from="0" data-to="{{ $total_branch }}">{{ $total_branch }}</div>
                 <!-- <span class="count_bottom"><i class="">{{ $total_trx_percent }}% </i> from Total</span> -->
               </div>
             </div>
@@ -280,7 +251,7 @@
           </div>
           <div style="width: 97%; padding: 0px; " class="col-md-11">
             <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-            
+              <div class="left" style="border-left: none;"></div>
               <div class="right">
                 <span class="count_top"><i class="fa fa-calculator blue"></i> Terminal</span>
 
@@ -298,10 +269,10 @@
                 <span class="count_top"><i class="glyphicon glyphicon-transfer orange"></i> Active Transaction</span>
 
                 <?php
-                  if( $total_trx_count == 0 ) { $class = ''; } else { $class = 'countup'; }
+                  if( $total_active_trx == 0 ) { $class = ''; } else { $class = 'countup'; }
                 ?>
 
-                <div class="count orange number f-30 {{ $class }}" data-from="0" data-to="{{ $total_trx_count }}">{{ $total_trx_count }}</div>
+                <div class="count orange number f-30 {{ $class }}" data-from="0" data-to="{{ $total_active_trx }}">{{ $total_active_trx }}</div>
                 <span class="count_bottom"><i class="">{{ $total_trx_percent }}% </i> from Total</span>
               </div>
             </div>
@@ -333,21 +304,20 @@
             </div>
           </div>
         </div>
-          
         <div class="panel-content row" style="padding-top: 0; padding-bottom: 0;">
           <div style="width: 3%; padding: 0px; background-color: #ab1313; color: white" class="col-md-1">
             <div class="vertical-text" style="margin: 22px 0px 22px 5px"><center>Last Day</center></div>
           </div>
           <div style="width: 97%; padding: 0px; " class="col-md-11">
             <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-              <!-- <div class="left" style="border-left: none; margin-top: 0px"></div> -->
+              <div class="left" style="border-left: none;"></div>
               <div class="right">
                 <span class="count_top"><i class="fa fa-database blue"></i> Transaction Volume</span>
 
                 <?php
                   if( $total_trx_volume == 0 ) { $class = ''; } else { $class = ''; }
-                  if( strlen($total_trx_volume) > 10 ) { $total_trx_volume = substr($total_trx_volume, 0, -6); $symbol = 'M'; } 
-                  else if ( strlen($total_trx_volume) > 7 ) { $total_trx_volume = substr($total_trx_volume, 0, -3); $symbol = 'K'; } 
+                  if( strlen($total_trx_volume) > 10 ) { $total_trx_volume = substr($total_trx_volume, 0, -6); $symbol = 'M'; }
+                  else if ( strlen($total_trx_volume) > 7 ) { $total_trx_volume = substr($total_trx_volume, 0, -3); $symbol = 'K'; }
                   else { $symbol = ''; }
                 ?>
 
@@ -409,12 +379,12 @@
             $total_offus_onus_percent   = 100;
             $total_offus_percent        = "No data";
             $total_onus_percent         = 0;
-            
+
             $class_offus  = "col-sm-12";
             $class_onus   = "col-sm-0";
             $style_offus  = "";
             $style_onus   = "";
-          
+
           }else{
 
             $total_offus_onus_percent   = round($total_offus_onus / $total_offus_onus * 100);
@@ -478,20 +448,20 @@
       // $success_decline_chart_data = $data['mon_data']['SuccessDeclineTrx'];
 
     ?>
-    
-    
+
+
 
     <div class="row tile_count">
-      
+
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Service Provider Transaction Volume</strong> Charts</h3>
+        <h3><strong>Merchant Transaction Volume</strong> Charts</h3>
         <div>
           <canvas id="trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
 
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Service Provider Transaction Count</strong> Charts</h3>
+        <h3><strong>Merchant Transaction Count</strong> Charts</h3>
         <div>
           <canvas id="trxcount_chart" class="full" height="100"></canvas>
         </div>
@@ -501,7 +471,7 @@
 
     <!-- TOP 5 ACQUIRER -->
     <div class="row tile_count">
-      
+
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Acquirer Highest Transaction Volume</strong> Charts</h3>
         <div>
@@ -518,30 +488,47 @@
 
     </div>
 
-
-    <!-- TOP 5 MERCHANT -->
+    <!-- TOP 5 BRANCH -->
     <div class="row tile_count">
-      
+
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Top 5 Merchant Highest Transaction Volume</strong> Charts</h3>
+        <h3><strong>Top 5 Branch Highest Transaction Volume</strong> Charts</h3>
         <div>
-          <canvas id="mer_top5trxvolume_chart"  class="full" height="100"/>
+          <canvas id="bra_top5trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
 
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Top 5 Merchant Highest Transaction Count</strong> Charts</h3>
+        <h3><strong>Top 5 Branch Highest Transaction Count</strong> Charts</h3>
         <div>
-          <canvas id="mer_top5trxcount_chart" class="full" height="100"></canvas>
+          <canvas id="bra_top5trxcount_chart" class="full" height="100"></canvas>
         </div>
       </div>
 
     </div>
 
+    <!-- TOP 5 STORE -->
+    <div class="row tile_count">
+
+      <div class="col-md-6 hov_effect" style="padding-left: 20px">
+        <h3><strong>Top 5 Store Highest Transaction Volume</strong> Charts</h3>
+        <div>
+          <canvas id="sto_top5trxvolume_chart"  class="full" height="100"/>
+        </div>
+      </div>
+
+      <div class="col-md-6 hov_effect" style="padding-left: 20px">
+        <h3><strong>Top 5 Store Highest Transaction Count</strong> Charts</h3>
+        <div>
+          <canvas id="sto_top5trxcount_chart" class="full" height="100"></canvas>
+        </div>
+      </div>
+
+    </div>
 
     <!-- TOP 5 CARDTYPE -->
     <div class="row tile_count">
-      
+
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Transaction Volume By Card Type</strong> Charts</h3>
         <div>
@@ -560,7 +547,7 @@
 
     <!-- TOP 5 TRXTYPE -->
     <div class="row tile_count">
-      
+
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Transaction Volume By Transaction Type</strong> Charts</h3>
         <div>
@@ -578,7 +565,7 @@
     </div>
 
    <!-- <div class="row tile_count">
-      
+
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Total Transaction By Cardtype</strong> Charts</h3>
         <div>
@@ -592,7 +579,7 @@
           <canvas id="trx_type_chart" class="full" height="100"></canvas>
         </div>
       </div>
-      
+
     </div> -->
 
 @endsection
@@ -603,12 +590,12 @@
     <!-- <script src="https://code.highcharts.com/modules/export-data.js"></script> -->
     <!-- <script src="{{ asset('assets/plugins/Highcharts-6.1.1/code/js/highcharts.js') }}"></script>  -->
     <!-- <script src="{{ asset('assets/plugins/charts-highstock/js/highstock.min.js') }}"></script>  -->
-    <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script> 
-    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script> 
-    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script> 
+    <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
 
     <script type="text/javascript">
-    
+
         $('.panel-header-section').click(function() {
             $(this).toggleClass("closed").parents(".panel:first").find(".panel-content").slideToggle();
             $(this).find(".svg-inline--fa.icon").slideToggle();
@@ -620,22 +607,23 @@
 
     animateNumber();
 
-    var last_month      = 8;
     // var last_month      = <?php // echo json_encode($last_month); ?>;
     // var top5high_amount   = <?php // echo json_encode($top5high_amount); ?>;
     // var top5low_amount    = <?php // echo json_encode($top5low_amount); ?>;
     // var total_trx_cardtype  = <?php // echo json_encode($total_trx_cardtype); ?>;
     // var total_trx_type  = <?php // echo json_encode($total_trx_type); ?>;
+    //var chart_trx_volume  = <?php //echo json_encode($chart_trx_volume); ?>;
+    //var chart_trx_count  = <?php //echo json_encode($chart_trx_count); ?>;
     var top5acq_trx_volume  = <?php echo json_encode($top5acq_trx_volume); ?>;
     var top5acq_trx_count  = <?php echo json_encode($top5acq_trx_count); ?>;
-    var top5mer_trx_volume  = <?php echo json_encode($top5mer_trx_volume); ?>;
-    var top5mer_trx_count  = <?php echo json_encode($top5mer_trx_count); ?>;
+    var top5bra_trx_volume  = <?php echo json_encode($top5bra_trx_volume); ?>;
+    var top5bra_trx_count  = <?php echo json_encode($top5bra_trx_count); ?>;
+    var top5sto_trx_volume  = <?php echo json_encode($top5sto_trx_volume); ?>;
+    var top5sto_trx_count  = <?php echo json_encode($top5sto_trx_count); ?>;
     var top5ctp_trx_volume  = <?php echo json_encode($top5ctp_trx_volume); ?>;
     var top5ctp_trx_count  = <?php echo json_encode($top5ctp_trx_count); ?>;
     var top5ttp_trx_volume  = <?php echo json_encode($top5ttp_trx_volume); ?>;
     var top5ttp_trx_count  = <?php echo json_encode($top5ttp_trx_count); ?>;
-    
-    // console.log(total_amount);
 
     // console.log(top5high_amount);
 
@@ -653,14 +641,15 @@
 
     var time = new Date();
 
-    var curr_month = time.getMonth();
-    var curr_year = time.getFullYear()-1;
-    var str_year = curr_year.toString().substr(2);
+    var curr_month      = time.getMonth();
+    var last_month      = time.getMonth()-1;
+    var curr_year       = time.getFullYear()-1;
+    var str_year        = curr_year.toString().substr(2);
 
     console.log(curr_year);
 
     for (var i = 1; i < MONTHS.length; i++) {
-        
+
         curr_month = curr_month + 1;
 
         if (curr_month == 13) {
@@ -685,7 +674,7 @@
       }]
 
     };
-   
+
     var trxcount_data = {
       labels: arr_month,
       datasets: [{
@@ -706,23 +695,38 @@
       labels: top5acq_trx_volume.label,
       datasets: top5acq_trx_volume.dataset_list
     };
-   
+
     var acq_top5trxcount_data = {
       labels: top5acq_trx_count.label,
       datasets: top5acq_trx_count.dataset_list
     };
 
+
     /*
-        ================DATA MERCHANT================
+        ================DATA BRANCH================
     */
-    var mer_top5trxvolume_data = {
-      labels: top5mer_trx_volume.label,
-      datasets: top5mer_trx_volume.dataset_list
+    var bra_top5trxvolume_data = {
+      labels: top5bra_trx_volume.label,
+      datasets: top5bra_trx_volume.dataset_list
     };
 
-    var mer_top5trxcount_data = {
-      labels: top5mer_trx_count.label,
-      datasets: top5mer_trx_count.dataset_list
+    var bra_top5trxcount_data = {
+      labels: top5bra_trx_count.label,
+      datasets: top5bra_trx_count.dataset_list
+    };
+
+
+    /*
+        ================DATA STORE================
+    */
+    var sto_top5trxvolume_data = {
+      labels: top5sto_trx_volume.label,
+      datasets: top5sto_trx_volume.dataset_list
+    };
+
+    var sto_top5trxcount_data = {
+      labels: top5sto_trx_count.label,
+      datasets: top5sto_trx_count.dataset_list
     };
 
 
@@ -733,11 +737,12 @@
       labels: top5ctp_trx_volume.label,
       datasets: top5ctp_trx_volume.dataset_list
     };
-   
+
     var ctp_top5trxcount_data = {
       labels: top5ctp_trx_count.label,
       datasets: top5ctp_trx_count.dataset_list
     };
+
 
     /*
         ================DATA TRXTYPE================
@@ -746,43 +751,18 @@
       labels: top5ttp_trx_volume.label,
       datasets: top5ttp_trx_volume.dataset_list
     };
-   
+
     var ttp_top5trxcount_data = {
       labels: top5ttp_trx_count.label,
       datasets: top5ttp_trx_count.dataset_list
     };
 
-   /* $(document).ready(function(){
-        
-        $.ajax({
-            dataType: 'JSON',
-            type: 'GET',
-            url: '/get_total_summary',
-            success: function(msg){
-            console.log(msg);
-            if(msg == "SUCCESS"){
-              
-              
-
-            }
-            else if(msg == "FAILED"){
-              
-                
-            
-            }else{
-              
-
-            }   
-          }
-        });
-
-    });*/
 
     window.onload = function() {
 
-      $('#offus_onus_nodata').tooltip({title: "No data", animation: true}); 
-      $('#offus_data').tooltip({title: "Count: {{ $offus_trxcount }} | Volume: Rp. {{ number_format($offus_trxvolume) }}", animation: true}); 
-      $('#onus_data').tooltip({title: "Count: {{ $onus_trxcount }} | Volume: Rp. {{ number_format($onus_trxvolume) }}", animation: true}); 
+      $('#offus_onus_nodata').tooltip({title: "No data", animation: true});
+      $('#offus_data').tooltip({title: "Count: {{ $offus_trxcount }} | Volume: Rp. {{ number_format($offus_trxvolume) }}", animation: true});
+      $('#onus_data').tooltip({title: "Count: {{ $onus_trxcount }} | Volume: Rp. {{ number_format($onus_trxvolume) }}", animation: true});
 
       var trxvolume_chart = document.getElementById('trxvolume_chart').getContext('2d');
       window.myBar = new Chart(trxvolume_chart, {
@@ -804,15 +784,15 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
                   }
                 },
                 scaleLabel: {
@@ -854,15 +834,15 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
                   }
                 },
                 scaleLabel: {
@@ -907,15 +887,15 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
                   }
                 },
                 scaleLabel: {
@@ -956,15 +936,15 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
                   }
                 },
                 scaleLabel: {
@@ -988,12 +968,12 @@
 
 
       /*
-        =========================MERCHANT========================
+        =========================BRANCH========================
       */
-      var mer_top5trxvolume = document.getElementById('mer_top5trxvolume_chart').getContext('2d');
-      window.myBar = new Chart(mer_top5trxvolume, {
+      var bra_top5trxvolume = document.getElementById('bra_top5trxvolume_chart').getContext('2d');
+      window.myBar = new Chart(bra_top5trxvolume, {
         type: 'bar',
-        data: mer_top5trxvolume_data,
+        data: bra_top5trxvolume_data,
         options: {
           responsive: true,
           legend: {
@@ -1009,15 +989,15 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
                   }
                 },
                 scaleLabel: {
@@ -1039,10 +1019,10 @@
         }
       });
 
-      var mer_top5trxcount = document.getElementById('mer_top5trxcount_chart').getContext('2d');
-      window.myBar = new Chart(mer_top5trxcount, {
+      var bra_top5trxcount = document.getElementById('bra_top5trxcount_chart').getContext('2d');
+      window.myBar = new Chart(bra_top5trxcount, {
         type: 'bar',
-        data: mer_top5trxcount_data,
+        data: bra_top5trxcount_data,
         options: {
           responsive: true,
           legend: {
@@ -1058,15 +1038,117 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
+                  }
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Value'
+                }
+              }
+            ]
+          },
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItem, data) {
+                return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                  return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+                });
+              }
+            }
+          }
+        }
+      });
+
+
+      /*
+        =========================STORE========================
+      */
+      var sto_top5trxvolume = document.getElementById('sto_top5trxvolume_chart').getContext('2d');
+      window.myBar = new Chart(sto_top5trxvolume, {
+        type: 'bar',
+        data: sto_top5trxvolume_data,
+        options: {
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: false,
+            text: 'Chart.js Bar Chart'
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  callback: function(label, index, labels) {
+                    if(label > 1000000000){
+                      return label/1000000000+'B';
+                    }else if(label > 1000000){
+                      return label/1000000+'M';
+                    }else if(label > 1000){
+                      return label/1000+'K';
+                    }else{
+                      return label;
+                    }
+
+                  }
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Value'
+                }
+              }
+            ]
+          },
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItem, data) {
+                return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                  return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+                });
+              }
+            }
+          }
+        }
+      });
+
+      var sto_top5trxcount = document.getElementById('sto_top5trxcount_chart').getContext('2d');
+      window.myBar = new Chart(sto_top5trxcount, {
+        type: 'bar',
+        data: sto_top5trxcount_data,
+        options: {
+          responsive: true,
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: false,
+            text: 'Chart.js Bar Chart'
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  callback: function(label, index, labels) {
+                    if(label > 1000000000){
+                      return label/1000000000+'B';
+                    }else if(label > 1000000){
+                      return label/1000000+'M';
+                    }else if(label > 1000){
+                      return label/1000+'K';
+                    }else{
+                      return label;
+                    }
+
                   }
                 },
                 scaleLabel: {
@@ -1111,15 +1193,15 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
                   }
                 },
                 scaleLabel: {
@@ -1160,15 +1242,15 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
                   }
                 },
                 scaleLabel: {
@@ -1213,15 +1295,15 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
                   }
                 },
                 scaleLabel: {
@@ -1262,15 +1344,15 @@
                 ticks: {
                   callback: function(label, index, labels) {
                     if(label > 1000000000){
-                      return label/1000000000+'B';  
+                      return label/1000000000+'B';
                     }else if(label > 1000000){
-                      return label/1000000+'M';  
+                      return label/1000000+'M';
                     }else if(label > 1000){
                       return label/1000+'K';
                     }else{
                       return label;
                     }
-                    
+
                   }
                 },
                 scaleLabel: {
@@ -1293,6 +1375,6 @@
       });
 
     };
-    
+
     </script>
 @endsection

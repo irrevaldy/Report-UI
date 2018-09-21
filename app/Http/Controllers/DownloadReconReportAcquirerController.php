@@ -22,9 +22,6 @@ class DownloadReconReportAcquirerController extends Controller
 
     public function GetListReport(Request $request)
     {
-      $this->main_menu = $request->get('main_menu');
-      $this->sub_menu = $request->get('sub_menu');
-
       $client = new \GuzzleHttp\Client();
       $username = $request->session()->get('username');
 
@@ -55,50 +52,31 @@ class DownloadReconReportAcquirerController extends Controller
 
     public function ZipListReport(Request $request)
     {
-      $this->main_menu = $request->get('main_menu');
-      $this->sub_menu = $request->get('sub_menu');
-
-      //$client = new \GuzzleHttp\Client();
+      $client = new \GuzzleHttp\Client();
       //$checkedArr = array();
+      $tmpFile = tempnam(sys_get_temp_dir(), 'reports_');
       $checkedArr = $request->input('checkedArray');
       $checkedA= json_decode($checkedArr);
+      $username = $request->session()->get('username');
+      $filename = $username.'-AllReport.zip';
 
-      $dir = "C://generate/";
-
-      $zipname = 'AllReport.zip';
-      $zip = new ZipArchive;
-
-      if (file_exists($zipname)) {
-          $zip->open($zipname, ZipArchive::OVERWRITE );
-      } else {
-          $zip->open($zipname, ZIPARCHIVE::CREATE );
-      }
-
-      foreach($checkedA as $file)
-      {
-        //echo $file;
-        //echo "<br>";
-        $zip->addFile($dir.$file, $file);
-      }
-
-      $zip->close();
-
-      header('Content-Type: application/zip');
-      header('Content-disposition: attachment; filename='.$zipname);
-      header('Content-Length: ' . filesize($zipname));
-      header("Pragma: no-cache");
-      header("Expires: 0");
-      readfile($zipname);
-
-      //return view('list_report')->with(['main_menu' => $this->main_menu, 'sub_menu' => $this->sub_menu]);
-
+      $form_post = $client->request('POST', config('constants.api_serverv').'zip_list_report', [
+        'sink' => $tmpFile,
+        'json' => [
+          'checkedA' => $checkedA
+        ]
+      ]);
+      return response()->download(
+          $tmpFile,
+          $filename,
+          [
+              'Content-Type' => 'application/zip'
+          ]
+      )->deleteFileAfterSend(true);
     }
 
     public function FilterReportTable(Request $request)
     {
-      $this->main_menu = $request->get('main_menu');
-      $this->sub_menu = $request->get('sub_menu');
-
       $client = new \GuzzleHttp\Client();
       $merchant = $request->input('merchant_code');
       $range = $request->input('range');

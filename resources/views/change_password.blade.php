@@ -86,8 +86,11 @@
             <div class="panel">
 				<div class="panel-header">
 					<div class="row">
-					 	<div class="col-sm-12" style="margin-top: 4px;">
-							<h3><i class="fa fa-warning" aria-hidden="true"></i> <strong>Warning!</strong> IMPORTANT: You will automatically be logged out after you change your password!</h3>
+					 	<div class="col-sm-12" style="margin-top: 4px">
+							<h3>
+                                <span style="color: #ff9122"><i class="fa fa-warning" aria-hidden="true"></i> <strong>Warning!</strong></span> 
+                                IMPORTANT: You will automatically be logged out after you change your password!
+                            </h3>
 					  	</div>
                         
                         <!-- <div class="col-sm-6">
@@ -104,20 +107,20 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                       <label class="control-label">Old Password</label>
-                                      <input class="form-control form-white" name="old_password" id="old_password" maxlength="20" type="password" placeholder="old password" required>
+                                      <input class="form-control form-white" name="old_password" id="old_password" minlength="6" maxlength="20" type="password" placeholder="old password" required>
                                     </div>
                                 </div>
                                 <div id="msg_unmatch" class="mg-t-35 tx-danger" style="display: none"><span class="ion-close tx-12"></span><h7 class="tx-14"> Old password incorrect!</h7></div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="control-label">New Password</label>
-                                      <input class="form-control form-white" name="new_password" id="new_password" maxlength="20" type="password" placeholder="new password" required>
+                                      <input class="form-control form-white" name="new_password" id="new_password" minlength="6" maxlength="20" type="password" placeholder="new password" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="control-label">Confirm New Password</label>
-                                      <input class="form-control form-white" name="conf_new_password" id="conf_new_password" maxlength="20" type="password" placeholder="confirm new password">
+                                      <input class="form-control form-white" name="conf_new_password" id="conf_new_password" minlength="6" maxlength="20" type="password" placeholder="confirm new password">
                                     </div>
                                 </div>
                             </div>

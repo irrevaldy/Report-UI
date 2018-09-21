@@ -110,7 +110,7 @@
 
     .back-gray {
         background-color: darkgray;
-        color: #1a1a1a;
+        color: #eeeeee;
     }
       
 
@@ -186,16 +186,12 @@
       text-align: center;
       transform: rotate(-180deg);
     }
-    .custom-col {
-      padding: 0px;
-      
-    }
 
     /*f1b2*/
 </style>
 
     <div class="header panel-header" style="border-bottom: none;">
-        <h2><i class="fas fa-home"></i> <strong>Service Provider</strong></h3>
+        <h2><i class="fas fa-home"></i> <strong>Corporate</strong></h3>
     </div>
 
     <?php
@@ -213,7 +209,7 @@
     <div class="row tile_count">
       <div class="panel transparent" style="margin-bottom: 0px">
         <div class="panel-header" style="border-bottom: none;">
-          <h3><strong>Service Provider </strong> Summary</h3>
+          <h3><strong>Corporate </strong> Summary</h3>
         </div>
         <div class="panel-content row" style="padding-top: 0; padding-bottom: 0">
           <div style="width: 3%; padding: 0px;" class="col-md-1"> <!-- background-color: #ab1313; color: white -->
@@ -221,41 +217,28 @@
           </div>
           <div style="width: 97%; padding: 0px; " class="col-md-11">
             <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-              <!-- <div class="left" style="border-left: none;"></div> -->
+              <div class="left" style="border-left: none;"></div>
               <div class="right">
-                <span class="count_top f-16"><i class="fa fa-building blue"></i> Acquirer</span>
-
-                <?php
-                  if( $total_acquirer == 0 ) { $class = ''; } else { $class = 'countup'; }
-                ?>
-
-                <div class="count blue number f-30 {{ $class }}" data-from="0" data-to="{{ $total_acquirer }}">{{ $total_acquirer }}</div>
-                <!-- <span class="count_bottom"><i class="">{{ $total_trx_percent }}% </i> from Total</span> -->
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-              <div class="left"></div>
-              <div class="right">
-                <span class="count_top f-16"><i class="fa fa-university blue"></i> Corporate</span>
-
-                <?php
-                  if( $total_corporate == 0 ) { $class = ''; } else { $class = 'countup'; }
-                ?>
-
-                <div class="count blue number f-30 {{ $class }}" data-from="0" data-to="{{ $total_corporate }}">{{ $total_corporate }}</div>
-                <!-- <span class="count_bottom"><i class="">{{ $total_trx_percent }}% </i> from Total</span> -->
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-              <div class="left"></div>
-              <div class="right">
-                <span class="count_top f-16"><svg aria-hidden="true" data-prefix="fas" data-icon="school" class="svg-inline--fa fa-school fa-w-16 blue" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M0 224v272c0 8.84 7.16 16 16 16h80V192H32c-17.67 0-32 14.33-32 32zm360-48h-24v-40c0-4.42-3.58-8-8-8h-16c-4.42 0-8 3.58-8 8v64c0 4.42 3.58 8 8 8h48c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zm137.75-63.96l-160-106.67a32.02 32.02 0 0 0-35.5 0l-160 106.67A32.002 32.002 0 0 0 128 138.66V512h128V368c0-8.84 7.16-16 16-16h96c8.84 0 16 7.16 16 16v144h128V138.67c0-10.7-5.35-20.7-14.25-26.63zM320 256c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80zm288-64h-64v320h80c8.84 0 16-7.16 16-16V224c0-17.67-14.33-32-32-32z"></path></svg></i> Merchant</span>
+                <span class="count_top f-16"><svg aria-hidden="true" data-prefix="fas" data-icon="school" class="svg-inline--fa fa-school fa-w-16 blue" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M0 224v272c0 8.84 7.16 16 16 16h80V192H32c-17.67 0-32 14.33-32 32zm360-48h-24v-40c0-4.42-3.58-8-8-8h-16c-4.42 0-8 3.58-8 8v64c0 4.42 3.58 8 8 8h48c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zm137.75-63.96l-160-106.67a32.02 32.02 0 0 0-35.5 0l-160 106.67A32.002 32.002 0 0 0 128 138.66V512h128V368c0-8.84 7.16-16 16-16h96c8.84 0 16 7.16 16 16v144h128V138.67c0-10.7-5.35-20.7-14.25-26.63zM320 256c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80zm288-64h-64v320h80c8.84 0 16-7.16 16-16V224c0-17.67-14.33-32-32-32z"></path></svg> Merchant</span>
 
                 <?php
                   if( $total_merchant == 0 ) { $class = ''; } else { $class = 'countup'; }
                 ?>
 
                 <div class="count blue number f-30 {{ $class }}" data-from="0" data-to="{{ $total_merchant }}">{{ $total_merchant }}</div>
+                <!-- <span class="count_bottom"><i class="">{{ $total_trx_percent }}% </i> from Total</span> -->
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
+              <div class="left"></div>
+              <div class="right">
+                <span class="count_top f-16"><i class="fa fa-sitemap blue"></i> Branch</span>
+
+                <?php
+                  if( $total_branch == 0 ) { $class = ''; } else { $class = 'countup'; }
+                ?>
+
+                <div class="count blue number f-30 {{ $class }}" data-from="0" data-to="{{ $total_branch }}">{{ $total_branch }}</div>
                 <!-- <span class="count_bottom"><i class="">{{ $total_trx_percent }}% </i> from Total</span> -->
               </div>
             </div>
@@ -280,7 +263,7 @@
           </div>
           <div style="width: 97%; padding: 0px; " class="col-md-11">
             <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-            
+              <div class="left" style="border-left: none;"></div>
               <div class="right">
                 <span class="count_top"><i class="fa fa-calculator blue"></i> Terminal</span>
 
@@ -333,14 +316,13 @@
             </div>
           </div>
         </div>
-          
         <div class="panel-content row" style="padding-top: 0; padding-bottom: 0;">
           <div style="width: 3%; padding: 0px; background-color: #ab1313; color: white" class="col-md-1">
             <div class="vertical-text" style="margin: 22px 0px 22px 5px"><center>Last Day</center></div>
           </div>
           <div style="width: 97%; padding: 0px; " class="col-md-11">
             <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
-              <!-- <div class="left" style="border-left: none; margin-top: 0px"></div> -->
+              <div class="left" style="border-left: none;"></div>
               <div class="right">
                 <span class="count_top"><i class="fa fa-database blue"></i> Transaction Volume</span>
 
@@ -484,14 +466,14 @@
     <div class="row tile_count">
       
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Service Provider Transaction Volume</strong> Charts</h3>
+        <h3><strong>Corporate Transaction Volume</strong> Charts</h3>
         <div>
           <canvas id="trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
 
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Service Provider Transaction Count</strong> Charts</h3>
+        <h3><strong>Corporate Transaction Count</strong> Charts</h3>
         <div>
           <canvas id="trxcount_chart" class="full" height="100"></canvas>
         </div>
@@ -712,6 +694,7 @@
       datasets: top5acq_trx_count.dataset_list
     };
 
+
     /*
         ================DATA MERCHANT================
     */
@@ -739,6 +722,7 @@
       datasets: top5ctp_trx_count.dataset_list
     };
 
+
     /*
         ================DATA TRXTYPE================
     */
@@ -752,31 +736,194 @@
       datasets: top5ttp_trx_count.dataset_list
     };
 
-   /* $(document).ready(function(){
-        
-        $.ajax({
-            dataType: 'JSON',
-            type: 'GET',
-            url: '/get_total_summary',
-            success: function(msg){
-            console.log(msg);
-            if(msg == "SUCCESS"){
-              
-              
 
-            }
-            else if(msg == "FAILED"){
-              
-                
-            
-            }else{
-              
+    /*
+        ================DATA TOTAL CARDTYPE================
+    */
+    // var trx_bycardtype_data = {
+    //   labels: [ MONTHS[last_month-2], MONTHS[last_month-1], MONTHS[last_month] ],
+    //   datasets: [{
+    //     label: "A",
+    //     backgroundColor: color(window.chartColors.red).alpha(0.9).rgbString(),
+    //     borderColor: window.chartColors.red,
+    //     borderWidth: 1,
+    //     data: [ randomScalingFactor(), randomScalingFactor(), randomScalingFactor() ]
+    //   }, {
+    //     label: "B",
+    //     backgroundColor: color(window.chartColors.orange).alpha(0.9).rgbString(),
+    //     borderColor: window.chartColors.orange,
+    //     data: [ randomScalingFactor(), randomScalingFactor(), randomScalingFactor() ]
+    //   }, {
+    //     label: "C",
+    //     backgroundColor: color(window.chartColors.yellow).alpha(0.9).rgbString(),
+    //     borderColor: window.chartColors.yellow,
+    //     data: [ randomScalingFactor(), randomScalingFactor(), randomScalingFactor() ]
+    //   }, {
+    //     label: "D",
+    //     backgroundColor: color(window.chartColors.blue).alpha(0.9).rgbString(),
+    //     borderColor: window.chartColors.blue,
+    //     data: [ randomScalingFactor(), randomScalingFactor(), randomScalingFactor() ]
+    //   }, {
+    //     label: "E",
+    //     backgroundColor: color(window.chartColors.green).alpha(0.9).rgbString(),
+    //     borderColor: window.chartColors.green,
+    //     data: [ randomScalingFactor(), randomScalingFactor(), randomScalingFactor() ]
+    //   }]
 
-            }   
-          }
-        });
+    // };
 
-    });*/
+
+    // /*
+    //     ================DATA TOTAL TRXTYPE================
+    // */
+    // var trx_bytype_data = {
+    //   labels: [ MONTHS[last_month-2], MONTHS[last_month-1], MONTHS[last_month] ],
+    //   datasets: [{
+    //     label: ['Sale'],
+    //     backgroundColor: color(window.chartColors.red).alpha(0.9).rgbString(),
+    //     borderColor: window.chartColors.red,
+    //     borderWidth: 1,
+    //     data: [ randomScalingFactor(), randomScalingFactor(), randomScalingFactor() ]
+    //   }, {
+    //     label: ['Prepaid Sale'],
+    //     backgroundColor: color(window.chartColors.orange).alpha(0.9).rgbString(),
+    //     borderColor: window.chartColors.orange,
+    //     data: [ randomScalingFactor(), randomScalingFactor(), randomScalingFactor() ]
+    //   }, {
+    //     label: ['Prepaid Top Up'],
+    //     backgroundColor: color(window.chartColors.yellow).alpha(0.9).rgbString(),
+    //     borderColor: window.chartColors.yellow,
+    //     data: [ randomScalingFactor(), randomScalingFactor(), randomScalingFactor() ]
+    //   }]
+
+    // };
+
+    /*var amount_top5highdata = {
+      labels: [ MONTHS[last_month] ],
+      datasets: [{
+        label: top5high_amount[0].FMERCHNAME,
+        backgroundColor: color(window.chartColors.red).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+       data: [ top5high_amount[0].total_amount ]
+      },{
+        label: top5high_amount[1].FMERCHNAME,
+        backgroundColor: color(window.chartColors.orange).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.orange,
+        // hoverBackgroundColor: "rgba(117,214,195, 0.9)",
+        data: [ top5high_amount[1].total_amount ]
+      },{
+        label: top5high_amount[2].FMERCHNAME,
+        backgroundColor: color(window.chartColors.yellow).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.yellow,
+        // hoverBackgroundColor: "rgba(117,214,195, 0.9)",
+        data: [ top5high_amount[2].total_amount ]
+      },{
+        label: top5high_amount[3].FMERCHNAME,
+        backgroundColor: color(window.chartColors.blue).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.blue,
+        // hoverBackgroundColor: "rgba(117,214,195, 0.9)",
+        data: [ top5high_amount[3].total_amount ]
+      },{
+        label: top5high_amount[4].FMERCHNAME,
+        backgroundColor: color(window.chartColors.green).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.green,
+        // hoverBackgroundColor: "rgba(117,214,195, 0.9)",
+        data: [ top5high_amount[4].total_amount ]
+      }]
+
+    };
+   
+    var amount_top5lowdata = {
+      labels: [ MONTHS[last_month] ],
+      datasets: [{
+        label: top5low_amount[0].FMERCHNAME,
+        backgroundColor: color(window.chartColors.red).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: [ top5low_amount[0].total_amount ]
+      },{
+        label: top5low_amount[1].FMERCHNAME,
+        backgroundColor: color(window.chartColors.orange).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.orange,
+        // hoverBackgroundColor: "rgba(117,214,195, 0.9)",
+        data: [ top5low_amount[1].total_amount ]
+      },{
+        label: top5low_amount[2].FMERCHNAME,
+        backgroundColor: color(window.chartColors.yellow).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.yellow,
+        // hoverBackgroundColor: "rgba(117,214,195, 0.9)",
+        data: [ top5low_amount[2].total_amount ]
+      },{
+        label: top5low_amount[3].FMERCHNAME,
+        backgroundColor: color(window.chartColors.blue).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.blue,
+        // hoverBackgroundColor: "rgba(117,214,195, 0.9)",
+        data: [ top5low_amount[3].total_amount ]
+      },{
+        label: top5low_amount[4].FMERCHNAME,
+        backgroundColor: color(window.chartColors.green).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.green,
+        // hoverBackgroundColor: "rgba(117,214,195, 0.9)",
+        data: [ top5low_amount[4].total_amount ]
+      }]
+
+    };
+
+    var trx_bycardtype_data = {
+      labels: [ MONTHS[last_month-2], MONTHS[last_month-1], MONTHS[last_month] ],
+      datasets: [{
+        label: total_trx_cardtype[0].FCARDTYPEDESC,
+        backgroundColor: color(window.chartColors.red).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: [ total_trx_cardtype[0].total_trx, total_trx_cardtype[5].total_trx, total_trx_cardtype[10].total_trx ]
+      }, {
+        label: total_trx_cardtype[1].FCARDTYPEDESC,
+        backgroundColor: color(window.chartColors.orange).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.orange,
+        data: [ total_trx_cardtype[1].total_trx, total_trx_cardtype[6].total_trx, total_trx_cardtype[11].total_trx ]
+      }, {
+        label: total_trx_cardtype[2].FCARDTYPEDESC,
+        backgroundColor: color(window.chartColors.yellow).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.yellow,
+        data: [ total_trx_cardtype[2].total_trx, total_trx_cardtype[7].total_trx, total_trx_cardtype[12].total_trx ]
+      }, {
+        label: total_trx_cardtype[3].FCARDTYPEDESC,
+        backgroundColor: color(window.chartColors.blue).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.blue,
+        data: [ total_trx_cardtype[3].total_trx, total_trx_cardtype[8].total_trx, total_trx_cardtype[13].total_trx ]
+      }, {
+        label: total_trx_cardtype[4].FCARDTYPEDESC,
+        backgroundColor: color(window.chartColors.green).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.green,
+        data: [ total_trx_cardtype[4].total_trx, total_trx_cardtype[9].total_trx, total_trx_cardtype[14].total_trx ]
+      }]
+
+    };
+
+    var trx_bytype_data = {
+      labels: [ MONTHS[last_month-2], MONTHS[last_month-1], MONTHS[last_month] ],
+      datasets: [{
+        label: ['Sale'],
+        backgroundColor: color(window.chartColors.red).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.red,
+        borderWidth: 1,
+        data: [ total_trx_type[0].TotalSale, total_trx_type[1].TotalSale, total_trx_type[2].TotalSale ]
+      }, {
+        label: ['Prepaid Sale'],
+        backgroundColor: color(window.chartColors.orange).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.orange,
+        data: [ total_trx_type[0].TotalPrepaidSale, total_trx_type[1].TotalPrepaidSale, total_trx_type[2].TotalPrepaidSale ]
+      }, {
+        label: ['Prepaid Top Up'],
+        backgroundColor: color(window.chartColors.yellow).alpha(0.9).rgbString(),
+        borderColor: window.chartColors.yellow,
+        data: [ total_trx_type[0].TotalPrepaidTopUp, total_trx_type[1].TotalPrepaidTopUp, total_trx_type[2].TotalPrepaidTopUp ]
+      }]
+
+    };*/
+
 
     window.onload = function() {
 
@@ -1291,6 +1438,207 @@
           }
         }
       });
+      
+
+      // var chart_trxcardtype     = document.getElementById('trx_cardtype_chart').getContext('2d');
+      // var ctx_trxcardtype_graph = new Chart(chart_trxcardtype, {
+      //   type: 'horizontalBar',
+      //   data: trx_bycardtype_data,
+      //   options: {
+      //     // Elements options apply to all of the options unless overridden in a dataset
+      //     // In this case, we are setting the border of each horizontal bar to be 2px wide
+      //     elements: {
+      //       rectangle: {
+      //         borderWidth: 2,
+      //       }
+      //     },
+      //     responsive: true,
+      //     legend: {
+      //       position: 'bottom',
+      //     },
+      //     title: {
+      //       display: false,
+      //       text: 'Chart.js Horizontal Bar Chart'
+      //     },
+      //     scales: {
+      //       xAxes: [
+      //         {
+      //           ticks: {
+      //             callback: function(label, index, labels) {
+      //               if(label > 1000000000){
+      //                 return label/1000000000+'B';  
+      //               }else if(label > 1000000){
+      //                 return label/1000000+'M';  
+      //               }else if(label > 1000){
+      //                 return label/1000+'K';
+      //               }else{
+      //                 return label;
+      //               }
+                    
+      //             }
+      //           },
+      //           scaleLabel: {
+      //             display: true,
+      //             labelString: 'Value'
+      //           }
+      //         }
+      //       ]
+      //     },
+      //     tooltips: {
+      //       callbacks: {
+      //         label: function(tooltipItem, data) {
+      //           return "Rp" + Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
+      //             return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+      //           });
+      //         }
+      //       }
+      //     }
+      //   }
+      // });
+
+      // var chart_trxtype     = document.getElementById('trx_type_chart').getContext('2d');
+      // var ctx_trxtype_graph = new Chart(chart_trxtype, {
+      //   type: 'horizontalBar',
+      //   data: trx_bytype_data,
+      //   options: {
+      //     // Elements options apply to all of the options unless overridden in a dataset
+      //     // In this case, we are setting the border of each horizontal bar to be 2px wide
+      //     elements: {
+      //       rectangle: {
+      //         borderWidth: 2,
+      //       }
+      //     },
+      //     responsive: true,
+      //     legend: {
+      //       position: 'bottom',
+      //     },
+      //     title: {
+      //       display: false,
+      //       text: 'Chart.js Horizontal Bar Chart'
+      //     },
+      //     scales: {
+      //       xAxes: [
+      //         {
+      //           ticks: {
+      //             callback: function(label, index, labels) {
+      //               if(label > 1000000000){
+      //                 return label/1000000000+'B';  
+      //               }else if(label > 1000000){
+      //                 return label/1000000+'M';  
+      //               }else if(label > 1000){
+      //                 return label/1000+'K';
+      //               }else{
+      //                 return label;
+      //               }
+                    
+      //             }
+      //           },
+      //           scaleLabel: {
+      //             display: true,
+      //             labelString: 'Value'
+      //           }
+      //         }
+      //       ]
+      //     },
+      //     tooltips: {
+      //       callbacks: {
+      //         label: function(tooltipItem, data) {
+      //           return "Rp" + Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
+      //             return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+      //           });
+      //         }
+      //       }
+      //     }
+      //   }
+      // });
+
+      // window.myHorizontalBar = new Chart(chart_lowamount, {
+      //   type: 'horizontalBar',
+      //   data: amount_top5lowdata,
+      //   options: {
+      //     // Elements options apply to all of the options unless overridden in a dataset
+      //     // In this case, we are setting the border of each horizontal bar to be 2px wide
+      //     elements: {
+      //       rectangle: {
+      //         borderWidth: 2,
+      //       }
+      //     },
+      //     responsive: true,
+      //     legend: {
+      //       position: 'bottom',
+      //     },
+      //     title: {
+      //       display: false,
+      //       text: 'Chart.js Horizontal Bar Chart'
+      //     }
+      //   }
+      // });
+
+      // var chart_line = document.getElementById('cardtype_chart').getContext('2d');
+      // window.myLine = new Chart(chart_line, config);
+
+      // var chart_bar = document.getElementById('trxtype_chart').getContext('2d');
+      // window.myBar = new Chart(chart_bar, {
+      //   type: 'bar',
+      //   data: barChartData,
+      //   options: {
+      //     responsive: true,
+      //     legend: {
+      //       position: 'top',
+      //     },
+      //     title: {
+      //       display: false,
+      //       text: 'Chart.js Bar Chart'
+      //     }
+      //   }
+      // });
+      
+
+    //   var chart_hightrx = document.getElementById('trx_top5high_chart').getContext('2d');
+    //   window.myHorizontalBar = new Chart(chart_hightrx, {
+    //     type: 'horizontalBar',
+    //     data: trx_top5highdata,
+    //     options: {
+    //       // Elements options apply to all of the options unless overridden in a dataset
+    //       // In this case, we are setting the border of each horizontal bar to be 2px wide
+    //       elements: {
+    //         rectangle: {
+    //           borderWidth: 2,
+    //         }
+    //       },
+    //       responsive: true,
+    //       legend: {
+    //         position: 'bottom',
+    //       },
+    //       title: {
+    //         display: false,
+    //         text: 'Chart.js Horizontal Bar Chart'
+    //       }
+    //     }
+    //   });
+
+    //   var chart_lowtrx = document.getElementById('trx_top5low_chart').getContext('2d');
+    //   window.myHorizontalBar = new Chart(chart_lowtrx, {
+    //     type: 'horizontalBar',
+    //     data: trx_top5lowdata,
+    //     options: {
+    //       // Elements options apply to all of the options unless overridden in a dataset
+    //       // In this case, we are setting the border of each horizontal bar to be 2px wide
+    //       elements: {
+    //         rectangle: {
+    //           borderWidth: 2,
+    //         }
+    //       },
+    //       responsive: true,
+    //       legend: {
+    //         position: 'bottom',
+    //       },
+    //       title: {
+    //         display: false,
+    //         text: 'Chart.js Horizontal Bar Chart'
+    //       }
+    //     }
+    //   });
 
     };
     

@@ -55,8 +55,6 @@
             <img src="{{ asset('assets/images/logo/wirecard-logo-home-small.png') }}">
           </div>
 
-
-
           <style type="text/css">
 
             .sidebar .sidebar-inner .nav-sidebar {
@@ -558,6 +556,34 @@
           <ul class="nav nav-sidebar navigation" id="navigation">
             @if ( in_array('SEARCH_TRX_V', $priv)  ) <li class="{{ Request::is('search_transaction') ? 'active' : '' }} "><a href="{{ URL::to('/search_transaction') }}"><i class="fas fa-search"></i><span data-translate="Search Transaction">Search Transaction</span></a></li> @endif
           </ul>
+
+          @if ( 
+            in_array('DASH_PROV_V', $priv) ||
+            in_array('DASH_ACQ_V', $priv) ||
+            in_array('DASH_CORP_V', $priv) ||
+            in_array('DASH_MER_V', $priv) ||
+            in_array('DASH_BRA_V', $priv) ||
+            in_array('DASH_STO_V', $priv)
+          )
+          <div class="menu-title">
+            Dashboard
+          </div>
+
+          <ul class="nav nav-sidebar navigation" id="navigation">
+            @if ( in_array('DASH_PROV_V', $priv)  ) <li><a href="{{ URL::to('/dashprovider') }}"><svg aria-hidden="true" data-prefix="fas" data-icon="box-open" class="svg-inline--fa fa-box-open fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M53.2 41L1.7 143.8c-4.6 9.2.3 20.2 10.1 23l197.9 56.5c7.1 2 14.7-1 18.5-7.3L320 64 69.8 32.1c-6.9-.8-13.5 2.7-16.6 8.9zm585.1 102.8L586.8 41c-3.1-6.2-9.8-9.8-16.7-8.9L320 64l91.7 152.1c3.8 6.3 11.4 9.3 18.5 7.3l197.9-56.5c9.9-2.9 14.7-13.9 10.2-23.1zM425.7 256c-16.9 0-32.8-9-41.4-23.4L320 126l-64.2 106.6c-8.7 14.5-24.6 23.5-41.5 23.5-4.5 0-9-.6-13.3-1.9L64 215v178c0 14.7 10 27.5 24.2 31l216.2 54.1c10.2 2.5 20.9 2.5 31 0L551.8 424c14.2-3.6 24.2-16.4 24.2-31V215l-137 39.1c-4.3 1.3-8.8 1.9-13.3 1.9z"></path></svg><span data-translate="Terminal Profile">Service Provider</span></a></li> @endif 
+            
+            @if ( in_array('DASH_ACQ_V', $priv)  ) <li><a href="{{ URL::to('/dashacquirer') }}"><i class="fa fa-building" aria-hidden="true"></i><span data-translate="Terminal Profile">Acquirer</span></a></li> @endif 
+            
+            @if ( in_array('DASH_CORP_V', $priv)  ) <li><a href="{{ URL::to('/dashcorporate') }}"><i class="fa fa-university" aria-hidden="true"></i><span data-translate="Terminal Profile">Corporate</span></a></li> @endif
+            
+            @if ( in_array('DASH_MER_V', $priv)  ) <li><a href="{{ URL::to('/dashmerchant') }}"><svg aria-hidden="true" data-prefix="fas" data-icon="school" class="svg-inline--fa fa-school fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M0 224v272c0 8.84 7.16 16 16 16h80V192H32c-17.67 0-32 14.33-32 32zm360-48h-24v-40c0-4.42-3.58-8-8-8h-16c-4.42 0-8 3.58-8 8v64c0 4.42 3.58 8 8 8h48c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zm137.75-63.96l-160-106.67a32.02 32.02 0 0 0-35.5 0l-160 106.67A32.002 32.002 0 0 0 128 138.66V512h128V368c0-8.84 7.16-16 16-16h96c8.84 0 16 7.16 16 16v144h128V138.67c0-10.7-5.35-20.7-14.25-26.63zM320 256c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80zm288-64h-64v320h80c8.84 0 16-7.16 16-16V224c0-17.67-14.33-32-32-32z"></path></svg><span data-translate="Terminal Profile">Merchant</span></a></li> @endif
+            
+            @if ( in_array('DASH_BRA_V', $priv)  ) <li><a href="{{ URL::to('/dashbranch') }}"><i class="fa fa-sitemap" aria-hidden="true"></i><span data-translate="Terminal Profile">Branch</span></a></li> @endif
+            
+            @if ( in_array('DASH_STO_V', $priv)  ) <li><a href="{{ URL::to('/dashstore') }}"><svg aria-hidden="true" data-prefix="fas" data-icon="store" class="svg-inline--fa fa-store fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 616 512"><path fill="currentColor" d="M602 118.6L537.1 15C531.3 5.7 521 0 510 0H106C95 0 84.7 5.7 78.9 15L14 118.6c-33.5 53.5-3.8 127.9 58.8 136.4 4.5.6 9.1.9 13.7.9 29.6 0 55.8-13 73.8-33.1 18 20.1 44.3 33.1 73.8 33.1 29.6 0 55.8-13 73.8-33.1 18 20.1 44.3 33.1 73.8 33.1 29.6 0 55.8-13 73.8-33.1 18.1 20.1 44.3 33.1 73.8 33.1 4.7 0 9.2-.3 13.7-.9 62.8-8.4 92.6-82.8 59-136.4zM529.5 288c-10 0-19.9-1.5-29.5-3.8V384H116v-99.8c-9.6 2.2-19.5 3.8-29.5 3.8-6 0-12.1-.4-18-1.2-5.6-.8-11.1-2.1-16.4-3.6V480c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32V283.2c-5.4 1.6-10.8 2.9-16.4 3.6-6.1.8-12.1 1.2-18.2 1.2z"></path></svg><span data-translate="Terminal Profile">Store</span></a></li> @endif
+          </ul>       
+          @endif
+
           @if (
             in_array('SERPRO_TRX_V', $priv) ||
             in_array('SERPRO_CTP_V', $priv) ||
@@ -573,6 +599,8 @@
             in_array('SERPRO_T5CORP_V', $priv) ||
             in_array('SERPRO_T5MER_V', $priv) ||
             in_array('SERPRO_ONOFF_V', $priv) ||
+            in_array('SERPRO_DREP_V', $priv) ||
+            in_array('SERPRO_DREC_V', $priv) ||
             in_array('ACQ_TRX_V', $priv) ||
             in_array('ACQ_CTP_V', $priv) ||
             in_array('ACQ_CORP_V', $priv) ||
@@ -584,6 +612,8 @@
             in_array('CORP_ACQ_V', $priv) ||
             in_array('CORP_MER_V', $priv) ||
             in_array('CORP_T5MER_V', $priv) ||
+            in_array('CORP_DREP_V', $priv) ||
+            in_array('CORP_DREC_V', $priv) ||
             in_array('MER_TRX_V', $priv) ||
             in_array('MER_ACQ_V', $priv) ||
             in_array('MER_BRA_V', $priv) ||
@@ -598,14 +628,16 @@
             in_array('BRA_DREP_V', $priv) ||
             in_array('BRA_DREC_V', $priv) ||
             in_array('STO_TRX_V', $priv) ||
-            in_array('STO_ACQ_V', $priv)
+            in_array('STO_ACQ_V', $priv) ||
+            in_array('STO_DREP_V', $priv) ||
+            in_array('STO_DREC_V', $priv)
           )
           <div class="menu-title">
             Transaction Report
           </div>
 
           <ul class="nav nav-sidebar navigation" id="navigation">
-            @if (
+            @if ( 
               in_array('SERPRO_TRX_V', $priv) ||
               in_array('SERPRO_CTP_V', $priv) ||
               in_array('SERPRO_CSC_V', $priv) ||
@@ -619,7 +651,9 @@
               in_array('SERPRO_T5ACQ_V', $priv) ||
               in_array('SERPRO_T5CORP_V', $priv) ||
               in_array('SERPRO_T5MER_V', $priv) ||
-              in_array('SERPRO_ONOFF_V', $priv)
+              in_array('SERPRO_ONOFF_V', $priv) ||
+              in_array('SERPRO_DREP_V', $priv) ||
+              in_array('SERPRO_DREC_V', $priv)
             )
             <li class="nav-parent ">
               <a><svg aria-hidden="true" data-prefix="fas" data-icon="box-open" class="svg-inline--fa fa-box-open fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M53.2 41L1.7 143.8c-4.6 9.2.3 20.2 10.1 23l197.9 56.5c7.1 2 14.7-1 18.5-7.3L320 64 69.8 32.1c-6.9-.8-13.5 2.7-16.6 8.9zm585.1 102.8L586.8 41c-3.1-6.2-9.8-9.8-16.7-8.9L320 64l91.7 152.1c3.8 6.3 11.4 9.3 18.5 7.3l197.9-56.5c9.9-2.9 14.7-13.9 10.2-23.1zM425.7 256c-16.9 0-32.8-9-41.4-23.4L320 126l-64.2 106.6c-8.7 14.5-24.6 23.5-41.5 23.5-4.5 0-9-.6-13.3-1.9L64 215v178c0 14.7 10 27.5 24.2 31l216.2 54.1c10.2 2.5 20.9 2.5 31 0L551.8 424c14.2-3.6 24.2-16.4 24.2-31V215l-137 39.1c-4.3 1.3-8.8 1.9-13.3 1.9z"></path></svg><span data-translate="Service Provider"> Service Provider</span><span class="fas fa-angle-down arrow"></span></a>
@@ -638,11 +672,14 @@
                 @if ( in_array('SERPRO_T5CORP_V', $priv)  ) <li><a href="#"> Top Five Corporate </a></li> @endif
                 @if ( in_array('SERPRO_T5MER_V', $priv)  ) <li><a href="#"> Top Five Merchant </a></li> @endif
                 @if ( in_array('SERPRO_ONOFF_V', $priv)  ) <li><a href="#"> On Us & Off Us </a></li> @endif
+                @if ( in_array('SERPRO_DREP_V', $priv)  ) <li><a href="/download_detail_report_provider"> Download Detail Report </a></li> @endif
+                @if ( in_array('SERPRO_DREC_V', $priv)  ) <li><a href="/download_recon_report_provider"> Download Reconciliation Report </a></li> @endif
+
               </ul>
             </li>
             @endif
-
-            @if (
+            
+            @if ( 
               in_array('ACQ_TRX_V', $priv) ||
               in_array('ACQ_CTP_V', $priv) ||
               in_array('ACQ_CORP_V', $priv) ||
@@ -664,12 +701,14 @@
               </ul>
             </li>
             @endif
-
-            @if (
+            
+            @if ( 
               in_array('CORP_TRX_V', $priv) ||
               in_array('CORP_ACQ_V', $priv) ||
               in_array('CORP_MER_V', $priv) ||
-              in_array('CORP_T5MER_V', $priv)
+              in_array('CORP_T5MER_V', $priv) ||
+              in_array('CORP_DREP_V', $priv) ||
+              in_array('CORP_DREC_V', $priv)
             )
             <li class="nav-parent ">
               <a><i class="fa fa-university" aria-hidden="true"></i><span data-translate="Service Provider"> Corporate</span><span class="fas fa-angle-down arrow"></span></a>
@@ -678,11 +717,14 @@
                 @if ( in_array('CORP_ACQ_V', $priv)  ) <li><a href="#"> By Acquirer </a></li> @endif
                 @if ( in_array('CORP_MER_V', $priv)  ) <li><a href="#"> By Merchant </a></li> @endif
                 @if ( in_array('CORP_T5MER_V', $priv)  ) <li><a href="#"> Top Ten Merchant </a></li> @endif
+                @if ( in_array('CORP_DREP_V', $priv)  ) <li><a href="/download_detail_report_corporate"> Download Detail Report </a></li> @endif
+                @if ( in_array('CORP_DREC_V', $priv)  ) <li><a href="/download_recon_report_corporate"> Download Reconciliation Report </a></li> @endif
+
               </ul>
             </li>
             @endif
-
-            @if (
+            
+            @if ( 
               in_array('MER_TRX_V', $priv) ||
               in_array('MER_ACQ_V', $priv) ||
               in_array('MER_BRA_V', $priv) ||
@@ -704,14 +746,14 @@
               </ul>
             </li>
             @endif
-
-            @if (
+            
+            @if ( 
               in_array('BRA_TRX_V', $priv) ||
               in_array('BRA_ACQ_V', $priv) ||
               in_array('BRA_STO_V', $priv) ||
               in_array('BRA_T5STO_V', $priv) ||
-      	      in_array('BRA_DREP_V', $priv) ||
-      	      in_array('BRA_DREC_V', $priv)
+	      in_array('BRA_DREP_V', $priv) ||
+	      in_array('BRA_DREC_V', $priv) 
             )
             <li class="nav-parent ">
               <a><i class="fa fa-sitemap" aria-hidden="true"></i><span data-translate="Service Provider"> Branch</span><span class="fas fa-angle-down arrow"></span></a>
@@ -725,23 +767,28 @@
               </ul>
             </li>
             @endif
-
-            @if (
+            
+            @if ( 
               in_array('STO_TRX_V', $priv) ||
-              in_array('STO_ACQ_V', $priv)
+              in_array('STO_ACQ_V', $priv) ||
+              in_array('STO_DREP_V', $priv) ||
+              in_array('STO_DREC_V', $priv)
             )
             <li class="nav-parent ">
               <a><svg aria-hidden="true" data-prefix="fas" data-icon="store" class="svg-inline--fa fa-store fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 616 512"><path fill="currentColor" d="M602 118.6L537.1 15C531.3 5.7 521 0 510 0H106C95 0 84.7 5.7 78.9 15L14 118.6c-33.5 53.5-3.8 127.9 58.8 136.4 4.5.6 9.1.9 13.7.9 29.6 0 55.8-13 73.8-33.1 18 20.1 44.3 33.1 73.8 33.1 29.6 0 55.8-13 73.8-33.1 18 20.1 44.3 33.1 73.8 33.1 29.6 0 55.8-13 73.8-33.1 18.1 20.1 44.3 33.1 73.8 33.1 4.7 0 9.2-.3 13.7-.9 62.8-8.4 92.6-82.8 59-136.4zM529.5 288c-10 0-19.9-1.5-29.5-3.8V384H116v-99.8c-9.6 2.2-19.5 3.8-29.5 3.8-6 0-12.1-.4-18-1.2-5.6-.8-11.1-2.1-16.4-3.6V480c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32V283.2c-5.4 1.6-10.8 2.9-16.4 3.6-6.1.8-12.1 1.2-18.2 1.2z"></path></svg><span data-translate="Service Provider"> Store</span><span class="fas fa-angle-down arrow"></span></a>
               <ul class="children collapse">
                 @if ( in_array('STO_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
                 @if ( in_array('STO_ACQ_V', $priv)  ) <li><a href="#"> By Acquirer </a></li> @endif
+                @if ( in_array('STO_DREP_V', $priv)  ) <li><a href="/download_detail_report_store"> Download Detail Report </a></li> @endif
+                @if ( in_array('STO_DREC_V', $priv)  ) <li><a href="/download_recon_report_store"> Download Reconciliation Report </a></li> @endif
+
               </ul>
             </li>
             @endif
           </ul>
           @endif
 
-          @if (
+          @if ( 
             in_array('TRXSR_TRX_V', $priv) ||
             in_array('TRXSR_ACQ_V', $priv) ||
             in_array('DECTRX_TRX_V', $priv) ||
@@ -754,8 +801,9 @@
             Performance Report
           </div>
 
+
           <ul class="nav nav-sidebar navigation" id="navigation">
-            @if (
+            @if ( 
               in_array('TRXSR_TRX_V', $priv) ||
               in_array('TRXSR_ACQ_V', $priv)
             )
@@ -767,8 +815,8 @@
               </ul>
             </li>
             @endif
-
-            @if (
+            
+            @if ( 
               in_array('DECTRX_TRX_V', $priv) ||
               in_array('DECTRX_ACQ_V', $priv) ||
               in_array('DECTRX_ERR_V', $priv)
@@ -782,8 +830,8 @@
               </ul>
             </li>
             @endif
-
-            @if (
+            
+            @if ( 
               in_array('PROCTIME_ACQ_V', $priv) ||
               in_array('PROCTIME_TRX_V', $priv)
             )
@@ -798,7 +846,7 @@
           </ul>
           @endif
 
-          @if (
+          @if ( 
             in_array('TERMACTIVE_V', $priv) ||
             in_array('INACTIVETID_V', $priv) ||
             in_array('TERMSOFTVER_V', $priv) ||
@@ -810,14 +858,14 @@
           </div>
 
           <ul class="nav nav-sidebar navigation" id="navigation">
-            @if ( in_array('TERMACTIVE_V', $priv)  )
+            @if ( in_array('TERMACTIVE_V', $priv)  ) 
             <li>
               <a href="#">
                 <i class="fa fa-adjust" aria-hidden="true"></i><span data-translate="Active & Inactive Terminal">Active & Inactive Terminal</span>
               </a>
             </li>
             @endif
-            @if ( in_array('INACTIVETID_V', $priv)  )
+            @if ( in_array('INACTIVETID_V', $priv)  ) 
             <li>
               <a href="#">
                 <svg aria-hidden="true" data-prefix="fas" data-icon="check-double" class="svg-inline--fa fa-check-double fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504.5 171.95l-36.2-36.41c-10-10.05-26.21-10.05-36.2 0L192 377.02 79.9 264.28c-10-10.06-26.21-10.06-36.2 0L7.5 300.69c-10 10.05-10 26.36 0 36.41l166.4 167.36c10 10.06 26.21 10.06 36.2 0l294.4-296.09c10-10.06 10-26.36 0-36.42zM166.57 282.71c6.84 7.02 18.18 7.02 25.21.18L403.85 72.62c7.02-6.84 7.02-18.18.18-25.21L362.08 5.29c-6.84-7.02-18.18-7.02-25.21-.18L179.71 161.19l-68.23-68.77c-6.84-7.02-18.18-7.02-25.2-.18l-42.13 41.77c-7.02 6.84-7.02 18.18-.18 25.2l122.6 123.5z"></path></svg>
@@ -825,14 +873,14 @@
               </a>
             </li>
             @endif
-            @if ( in_array('TERMSOFTVER_V', $priv)  )
+            @if ( in_array('TERMSOFTVER_V', $priv)  ) 
             <li>
               <a href="#">
                 <i class="far fa-file-alt" aria-hidden="true"></i><span data-translate="Terminal Software Version">Terminal Software Version</span>
               </a>
             </li>
             @endif
-            @if ( in_array('TERMSTATREP_V', $priv)  )
+            @if ( in_array('TERMSTATREP_V', $priv)  ) 
             <li>
               <a href="#">
                 <svg aria-hidden="true" data-prefix="fas" data-icon="signature" class="svg-inline--fa fa-signature fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M496 320h-91.86c-9.27 0-19.72-11.31-25.78-28.52-15.23-43.36-48.11-70.3-85.8-70.3-30.84 0-58.47 18.05-76.11 49.23L194.8 106.5C188.84 81.08 169.34 64 146.28 64c-23.05 0-42.55 17.08-48.5 42.5L56.16 284.2C50.7 307.45 37.75 320 28.33 320H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h12.33c41.97 0 78.19-34.23 90.14-85.2l23.84-101.78 29.25 222.11c1.98 15.05 13.82 27.45 28.94 28.75.99.09 1.96.13 2.93.13 14.08 0 26.64-9.27 30.69-22.95l33.03-112.34c5.88-16.72 15.84-27.52 25.41-27.52 9.58 0 19.55 10.8 25.78 28.52 15.23 43.36 48.11 70.3 85.8 70.3H496c8.84 0 16-7.16 16-16v-32c0-8.86-7.16-16.02-16-16.02z"></path></svg>
@@ -840,7 +888,7 @@
               </a>
             </li>
             @endif
-            @if ( in_array('SIGNALSTR_V', $priv)  )
+            @if ( in_array('SIGNALSTR_V', $priv)  ) 
             <li>
               <a href="#">
                 <i class="fas fa-signal" aria-hidden="true"></i><span data-translate="Signal Strength by Provider">Signal Strength by Provider</span>
@@ -850,7 +898,7 @@
           </ul>
           @endif
 
-          @if (
+          @if ( 
             in_array('USER_V', $priv) ||
             in_array('SUBGROUP_V', $priv) ||
             in_array('GROUP_V', $priv) ||
@@ -861,14 +909,14 @@
           </div>
 
           <ul class="nav nav-sidebar navigation" id="navigation">
-            @if ( in_array('USER_V', $priv)  ) <li><a href="{{ URL::to('/user_setup') }}"><i class="fas fa-user-circle" aria-hidden="true"></i><span data-translate="Terminal Profile">User Setup</span></a></li> @endif
-            @if ( in_array('SUBGROUP_V', $priv)  ) <li><a href="{{ URL::to('/subgroup_setup') }}"><i class="fas fa-user" aria-hidden="true"></i><span data-translate="Terminal Profile">Subgroup Setup</span></a></li> @endif
+            @if ( in_array('USER_V', $priv)  ) <li><a href="{{ URL::to('/user_setup') }}"><i class="fas fa-user-circle" aria-hidden="true"></i><span data-translate="Terminal Profile">User Setup</span></a></li> @endif 
+            @if ( in_array('SUBGROUP_V', $priv)  ) <li><a href="{{ URL::to('/subgroup_setup') }}"><i class="fas fa-user" aria-hidden="true"></i><span data-translate="Terminal Profile">Subgroup Setup</span></a></li> @endif 
             @if ( in_array('GROUP_V', $priv)  ) <li><a href="{{ URL::to('/group_setup') }}"><i class="fas fa-users" aria-hidden="true"></i><span data-translate="Terminal Profile">Group Setup</span></a></li> @endif
             @if ( in_array('PACKAGE_V', $priv)  ) <li><a href="{{ URL::to('/package_setup') }}"><i class="fab fa-get-pocket" aria-hidden="true"></i><span data-translate="Terminal Profile">Package Setup</span></a></li> @endif
             <!-- <li><a href="{{ URL::to('/privilege_setup') }}"><i class="fas fa-check-square" aria-hidden="true"></i><span data-translate="Terminal Profile">Privilege Setup</span></a></li> -->
             <!-- <li><a href="{{ URL::to('/filter_type_setup') }}"><i class="fas fa-filter" aria-hidden="true"></i><span data-translate="Terminal Profile">Data Filter Type Setup</span></a></li> -->
             <!-- <li><a href="{{ URL::to('/audit_trail') }}"><i class="fa fa-check-square-o"></i><span data-translate="Terminal Profile">Audit Trail</span></a></li> -->
-          </ul>
+          </ul>       
           @endif
         </div>
       </div>
@@ -900,6 +948,9 @@
                 <ul class="dropdown-menu">
                   <li>
                     <a href="#"><i class="icon-user"></i><span>My Profile</span></a>
+                  </li>
+                  <li>
+                    <a href="{{ URL::to('/change_password') }}"><i class="icon-lock-open"></i><span>Change Password</span></a>
                   </li>
                   <li>
                     <a href="{{ route('logout') }}"><i class="icon-logout"></i><span>Logout</span></a>
@@ -1011,7 +1062,7 @@ console.log( encrypted );
 </script>
 
     <script type="text/javascript">
-
+     
 
       $(function () {
         var $displayarea = $(".page-content");

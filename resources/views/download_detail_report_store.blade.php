@@ -1,4 +1,6 @@
-<?php $__env->startSection('content'); ?>
+@extends('layout')
+
+@section('content')
 
 <script>
   // FontAwesomeConfig = { searchPseudoElements: true };
@@ -124,7 +126,7 @@
 		// dd(session()->all());
 	?>
   <div class="header panel-header" style="border-bottom: none;">
-      <h2><i class="fas fa-home"></i> <strong>Download Detail Report - Merchant</strong></h3>
+      <h2><i class="fas fa-home"></i> <strong>Download Detail Report - Store</strong></h3>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -140,7 +142,7 @@
 
 
                     <div class="row">
-                      <form id="ListReportTable_form" method="POST" action="/download_detail_report_merchant/filter_report_table">
+                      <form id="ListReportTable_form" method="POST" action="/download_detail_report_store/filter_report_table">
 
                       <div class="col-md-3">
                         <div class="form-group">
@@ -186,8 +188,8 @@
                     </div>
 
                   <div class="row">
-                    <form id="listReport_form" method="POST" action="/download_detail_report_merchant/zip_list_report">
-                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                    <form id="listReport_form" method="POST" action="/download_detail_report_store/zip_list_report">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <table class="table table-bordered" id="tableListReport">
                       <thead>
                         <tr>
@@ -213,16 +215,16 @@
 </div>
 
 
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('javascript'); ?>
-    <script src="<?php echo e(asset('assets/plugins/charts-highstock/js/highstock.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/plugins/maps-amcharts/ammap/ammap.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/plugins/countup/countUp.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/plugins/chartjs/Chart.min.js')); ?>"></script>
-    <!-- <script src="<?php echo e(asset('assets/js/pages/dashboard.js')); ?>"></script> -->
-    <script src="<?php echo e(asset('assets/plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/plugins/datatables/dataTables.bootstrap.min.js')); ?>"></script>
+@section('javascript')
+    <script src="{{ asset('assets/plugins/charts-highstock/js/highstock.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
+    <!-- <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script> -->
+    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 
 
 <script>
@@ -309,7 +311,7 @@ $(document).ready(function(){
   $.ajax({
     dataType: 'JSON',
     type: 'GET',
-    url: '/download_detail_report_merchant/get_list_report',
+    url: '/download_detail_report_store/get_list_report',
 
     success: function (data) {
       tableListReport.clear().draw();
@@ -403,8 +405,8 @@ $("#ListReportTable_form").submit(function(e) {
               range : $('#range option:selected').val(),
               detailDate : $('#detailDate').val()
             },
-      url: '/download_detail_report_merchant/filter_report_table',
-      headers: {'X-CSRF_TOKEN': "<?php echo e(csrf_token()); ?>" },
+      url: '/download_detail_report_store/filter_report_table',
+      headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
         success: function(data){
 
         // var data = JSON.parse(msg);
@@ -459,6 +461,4 @@ $(function(){
 
 </script>
 
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection

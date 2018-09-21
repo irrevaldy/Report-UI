@@ -243,7 +243,8 @@
 
 
               <div class="panel-footer">
-                <button type="button" class="btn btn-primary btn-embossed" id="btnSubmit">Submit</button>
+
+                <button type="button" class="btn btn-primary btn-embossed" id="btnSubmit" onClick="return empty()">Submit</button>
               </div>
 
 			     </div>
@@ -256,8 +257,8 @@
 
 
                 <div class="form-group">
-                  <div class="panel-content pagination2 force-table-responsive" style="overflow-x: auto;">
-                    <table class="table table-bordered" id="tableSearch">
+                  <div class="panel-content pagination2 force-table-responsive">
+                    <table class="table table-bordered display nowrap" id="tableSearch">
                       <thead>
                         <tr>
                           <th>Host</th>
@@ -339,14 +340,46 @@ $(function(){
 
   });
 
-  $("#btnSubmit").click(function(e)
-  {
-    var x = document.getElementById("box-result");
+function empty()
+{
+    var x;
+    var y;
+    var z;
+    x = document.getElementById("host").value;
+    y = document.getElementById("mid").value;
+    z = document.getElementById("transaction_date").value;
+
+    if (x == "") {
+        alert("Host cannot be empty!");
+        return false;
+    }
+    else if(y == "")
+    {
+      alert("MID cannot be empty!");
+      return false;
+    }
+    else if(z == "")
+    {
+      alert("Transaction date cannot be empty!");
+      return false;
+    }
+    else {
+      submission();
+    };
+}
+
+function submission()
+{
+  var x = document.getElementById("box-result");
     x.style.display = "block";
 
-    e.preventDefault();
-
-    var tableSearch = $('#tableSearch').DataTable();
+    var tableSearch = $('#tableSearch').DataTable({
+      destroy: true,
+        "scrollX": true,
+        "ordering": false,
+    "paging": false,
+    "searching": false,
+    });
 
     $('.btn-primary').prop('disabled', true);
 
@@ -417,7 +450,7 @@ $(function(){
         });
 
       $('.btn-primary').prop('disabled', false);
-    });
+}
 
 </script>
 

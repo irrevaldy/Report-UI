@@ -9,7 +9,7 @@ use GuzzleHttp\Promise;
 use Session;
 use ZIPARCHIVE;
 
-class DownloadReconReportMerchantController extends Controller
+class DownloadDetailReportStoreController extends Controller
 {
    	public function __construct(){
 
@@ -17,7 +17,7 @@ class DownloadReconReportMerchantController extends Controller
 
     public function index(Request $request)
     {
-      return view('download_recon_report_merchant');
+      return view('download_detail_report_store');
     }
 
     public function GetListReport(Request $request)
@@ -25,7 +25,7 @@ class DownloadReconReportMerchantController extends Controller
       $client = new \GuzzleHttp\Client();
       $username = $request->session()->get('username');
 
-      $form_post = $client->request('POST', config('constants.api_serverv').'list_recon_report', [
+      $form_post = $client->request('POST', config('constants.api_serverv').'list_detail_report', [
         'json' => [
           'username' => $username
         ]
@@ -59,7 +59,7 @@ class DownloadReconReportMerchantController extends Controller
       $username = $request->session()->get('username');
       //$merchant = $request->session()->get('merch_id');
 
-      $form_post = $client->request('POST', config('constants.api_serverv').'list_recon_report_filtered', [
+      $form_post = $client->request('POST', config('constants.api_serverv').'list_detail_report_filtered', [
         'json' => [
           'branch' => $branch,
           'range' => $range,
@@ -88,7 +88,6 @@ class DownloadReconReportMerchantController extends Controller
 
     public function ZipListReport(Request $request)
     {
-
       $client = new \GuzzleHttp\Client();
       //$checkedArr = array();
       $tmpFile = tempnam(sys_get_temp_dir(), 'reports_');
@@ -110,7 +109,6 @@ class DownloadReconReportMerchantController extends Controller
               'Content-Type' => 'application/zip'
           ]
       )->deleteFileAfterSend(true);
-
     }
 
 

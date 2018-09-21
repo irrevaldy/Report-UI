@@ -376,71 +376,71 @@
   var chart; // global
   document.addEventListener('DOMContentLoaded', (function() {
 
-  chart =  Highcharts.chart('container', {
+    chart =  Highcharts.chart('container', {
       chart: {
-          type: 'bar',
+        type: 'bar',
       },
       legend: {
         enabled: false
       },
       exporting: { enabled: false },
       title: {
-          text: ''
+        text: ''
       },
       xAxis: {
-     			visible: false,
-          categories: ['']
+     		visible: false,
+        categories: ['']
       },
       yAxis: {
-          min: 0,
-          gridLineWidth: 0,
-          visible: false,
-          title: {
-              text: ''
-          }
+        min: 0,
+        gridLineWidth: 0,
+        visible: false,
+        title: {
+            text: ''
+        }
       },
-     credits: {
+      credits: {
         enabled: false
-    },
-    tooltip: {
-                enabled:false
-    },
-    plotOptions: {
-      bar: {
-                    grouping: true,
-                    groupPadding:0.1,
-                    pointWidth:20,
-                    pointPadding: 0,
-                    dataLabels: {
-                        enabled: true,
-                        inside: true,
-                        useHTML: true,
-                        align: 'center',
-                        color: 'white',
-                        style: {
-                            fontWeight: 'bold'
-                        },
-                        verticalAlign: 'middle',
-                        formatter: function () {
-                            if (this.series.name)
-                              return '<span style="color:white">' + this.series.name + ' = ' + this.y + ' %</span>';
-                            else return '';
-                        }
-                    }
-                },
-      series: {
-        stacking: 'normal'
-      }
-    },
-    series: [{
-          name: 'Off Us',
-          data: [20],
-
-    }, {
-          name: 'On Us',
-          data: [80]
+      },
+      tooltip: {
+        enabled:false
+      },
+      plotOptions: {
+        bar: {
+          grouping: true,
+          groupPadding:0.1,
+          pointWidth:20,
+          pointPadding: 0,
+          dataLabels: {
+            enabled: true,
+            inside: true,
+            useHTML: true,
+            align: 'center',
+            color: 'white',
+            style: {
+              fontWeight: 'bold'
+            },
+            verticalAlign: 'middle',
+            formatter: function () {
+              if (this.series.name)
+                return '<span style="color:white">' + this.series.name + ' = ' + this.y + ' %</span>';
+              else return '';
+            }
+          }
+        },
+        series: {
+          stacking: 'normal'
+        }
+      },
+      series: [{
+        name: 'Off Us',
+        data: [20],
+      }, {
+        name: 'On Us',
+        data: [80]
       }]
     });
+    
   }));
 //end of highchart (horizontal percentage bar)
 

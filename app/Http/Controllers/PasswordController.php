@@ -42,7 +42,8 @@ class PasswordController extends Controller
         $input_new_pass = $request->input('new_password');
         
         $old_password = strtolower($input_old_pass);
-        $old_password = hash('sha256', $old_password);
+        $old_password_oldhash = hash('sha256', $old_password);
+        $old_password_newhash = hash('sha256', $username.$old_password);
 
         $new_password = strtolower($input_new_pass);
         $new_password = hash('sha256', $username.$new_password);        
@@ -51,9 +52,10 @@ class PasswordController extends Controller
         $form_post = $client->request('POST', config('constants.api_serverv').'change_password_data?api_token='.session()->get('token'),
             [
                 "json" => [
-                    "username"            => $username,
-                    "old_password"        => $old_password,
-                    "new_password"        => $new_password
+                    "username"                  => $username,
+                    "old_password_oldhash"      => $old_password_oldhash,
+                    "old_password_newhash"      => $old_password_newhash,
+                    "new_password"              => $new_password
                 ]
             ]
         );

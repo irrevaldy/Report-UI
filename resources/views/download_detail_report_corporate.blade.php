@@ -1,4 +1,6 @@
-<?php $__env->startSection('content'); ?>
+@extends('layout')
+
+@section('content')
 
 <script>
   // FontAwesomeConfig = { searchPseudoElements: true };
@@ -124,7 +126,7 @@
 		// dd(session()->all());
 	?>
   <div class="header panel-header" style="border-bottom: none;">
-      <h2><i class="fas fa-home"></i> <strong>Download Detail Report - Acquirer</strong></h3>
+      <h2><i class="fas fa-home"></i> <strong>Download Detail Report - Corporate</strong></h3>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -138,56 +140,56 @@
           <div class="panel-body p-15 p-b-0">
               <div class="panel-content widget-info">
 
-                <div class="row">
-                  <form id="ListReportTable_form" method="POST" action="/download_detail_report_acquirer/filter_report_table">
 
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Merchant</label>
-                      <select class="form-control select2 selectMerchant" name="merchant_code" id="merchant_code" style="width: 100%;" required>
-                        <option value=""></option>
-                          <option value='AllMerchant'> All Merchant </option>
-                      </select>
+                    <div class="row">
+                      <form id="ListReportTable_form" method="POST" action="/download_detail_report_corporate/filter_report_table">
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Branch</label>
+                          <select class="form-control select2 selectBranch" name="branch_code" id="branch_code" style="width: 100%;" required>
+                            <option value=""></option>
+                            </select>
+                            </div><!-- /.input group -->
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Range</label>
+                          <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')">
+                            <option></option>
+                            <option value="d"> 1 Day </option>
+                            <option value="w"> 1 Week </option>
+                            <option value="m"> 1 Month </option>
+                          </select>
+                        </div><!-- /.form-group -->
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1" id='detailHost'>From Date</label>
+                          <div class="input-group date">
+                            <input type="text" name="date" id="detailDate" class="form-control readonly" placeholder="Select Date" required="required" />
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                          </div>
                         </div><!-- /.input group -->
-                  </div>
-
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label>Range</label>
-                      <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')">
-                        <option></option>
-                        <option value="d"> 1 Day </option>
-                        <option value="w"> 1 Week </option>
-                        <option value="m"> 1 Month </option>
-                      </select>
-                    </div><!-- /.form-group -->
-                  </div>
-
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1" id='detailHost'>From Date</label>
-                      <div class="input-group date">
-                        <input type="text" name="date" id="detailDate" class="form-control readonly" placeholder="Select Date" required="required" />
-                        <div class="input-group-addon">
-                          <i class="fa fa-calendar"></i>
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1" id='detailHost1' style="visibility: hidden;">From Date</label>
+                          <div class="">
+                            <input type="Submit" class="generate btn btn-primary" id="btnSubmitReport" value="Filter List">
+                          </div>
                         </div>
                       </div>
-                    </div><!-- /.input group -->
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <label for="exampleInputEmail1" id='detailHost1' style="visibility: hidden;">From Date</label>
-                      <div class="">
-                        <input type="Submit" class="generate btn btn-primary" id="btnSubmitReport" value="Filter List">
-                      </div>
+                    </form>
                     </div>
-                  </div>
-                </form>
-                </div>
 
                   <div class="row">
-                    <form id="listReport_form" method="POST" action="/download_detail_report_acquirer/zip_list_report">
-                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                    <form id="listReport_form" method="POST" action="/download_detail_report_merchant/zip_list_report">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <table class="table table-bordered" id="tableListReport">
                       <thead>
                         <tr>
@@ -205,31 +207,31 @@
                     </form>
                   </div>
 
-              </div>
           </div>
-
       </div>
+
     </div>
   </div>
+</div>
 
 
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('javascript'); ?>
-    <script src="<?php echo e(asset('assets/plugins/charts-highstock/js/highstock.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/plugins/maps-amcharts/ammap/ammap.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/plugins/countup/countUp.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/plugins/chartjs/Chart.min.js')); ?>"></script>
-    <!-- <script src="<?php echo e(asset('assets/js/pages/dashboard.js')); ?>"></script> -->
-    <script src="<?php echo e(asset('assets/plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('assets/plugins/datatables/dataTables.bootstrap.min.js')); ?>"></script>
+@section('javascript')
+    <script src="{{ asset('assets/plugins/charts-highstock/js/highstock.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
+    <!-- <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script> -->
+    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 
 
 <script>
 $(function ()
 {
-      $(".selectMerchant").select2({
-          placeholder: "Select Merchant Code",
+      $(".selectBranch").select2({
+          placeholder: "Select Branch Code",
           allowClear: true
       });
 
@@ -309,7 +311,7 @@ $(document).ready(function(){
   $.ajax({
     dataType: 'JSON',
     type: 'GET',
-    url: '/download_detail_report_acquirer/get_list_report',
+    url: '/download_detail_report_merchant/get_list_report',
 
     success: function (data) {
       tableListReport.clear().draw();
@@ -399,12 +401,12 @@ $("#ListReportTable_form").submit(function(e) {
 
     $.ajax({
       type: 'POST',
-      data: { merchant_code : $('#merchant_code option:selected').val(),
+      data: { branch_code : $('#branch_code option:selected').val(),
               range : $('#range option:selected').val(),
               detailDate : $('#detailDate').val()
             },
-      url: '/download_detail_report_acquirer/filter_report_table',
-      headers: {'X-CSRF_TOKEN': "<?php echo e(csrf_token()); ?>" },
+      url: '/download_detail_report_corporate/filter_report_table',
+      headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
         success: function(data){
 
         // var data = JSON.parse(msg);
@@ -440,16 +442,16 @@ $("#ListReportTable_form").submit(function(e) {
 
 });
 
-//select merchant
+//select host
 $(function(){
     $.ajax({
       dataType: 'JSON',
       type: 'GET',
-      url: '/merchant_data',
+      url: '/branch_data',
       success: function (data) {
         for(var i = 0; i < data.length; i++)
         {
-          $("#merchant_code").append('<option value="' + data[i]['FID'] + '">' + data[i]['FMERCHNAME'] + '</option>');
+          $("#branch_code").append('<option value="' + data[i]['BranchCode'] + '">' + data[i]['BranchCode'] + '</option>');
         }
       }
     });
@@ -459,6 +461,4 @@ $(function(){
 
 </script>
 
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection

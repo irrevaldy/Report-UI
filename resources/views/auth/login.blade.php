@@ -362,15 +362,15 @@
                   {
                     setTimeout(function(){ window.location = '/monitoring'  }, delay);
                   }
-                  else if( data.data.name == 'fadhli'|| data.data.name == 'Acquirer One')
+                  else if( data.data.name == 'fadhli')
                   {
-                    setTimeout(function(){ window.location = '/dashbank'  }, delay);
+                    setTimeout(function(){ window.location = '/dashmerchant'  }, delay);
                   }
-                  else if( data.data.name == 'Service Provider' )
+                  else if( data.data.name == 'Provider One' )
                   {
                     setTimeout(function(){ window.location = '/dashprovider'  }, delay);
                   }
-                  else if( data.data.name == 'valdy' || data.data.name == 'Merchant One' || data.data.name == 'Branch One' )
+                  else if( data.data.name == 'valdy' || data.data.name == 'Merchant One' || data.data.name == 'Branch One' || data.data.name == 'Acquirer One' || data.data.name == 'Corporate One' || data.data.name == 'Store One')
                   {
                     setTimeout(function(){ window.location = '/dashmerchant'  }, delay);
                   }
