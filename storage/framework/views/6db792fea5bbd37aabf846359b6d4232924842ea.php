@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <?php
    //dd(session()->all());
  ?>
@@ -191,13 +189,12 @@
 </style>
 
     <div class="header panel-header" style="border-bottom: none;">
-        <h2><i class="fas fa-home"></i> <strong>Store</strong></h3>
+        <h2><i class="fas fa-home"></i> <strong>Acquirer</strong></h3>
     </div>
-
     <div class="row tile_count">
       <div class="panel transparent" style="margin-bottom: 0px">
         <div class="panel-header" style="border-bottom: none;">
-          <h3><strong>Store </strong> Summary</h3>
+          <h3><strong>Acquirer </strong> Summary</h3>
         </div>
         <div class="panel-content row" style="padding-top: 0; padding-bottom: 0;">
           <div style="width: 3%; padding: 0px; background-color: #ab1313; color: white; border-bottom: 1px solid white" class="col-md-1">
@@ -252,6 +249,7 @@
                 <span class="count_top"><i class="fa fa-database blue"></i> Transaction Volume</span>
 
 
+
                 <div id="totalTV" class="count blue number f-30"><span class="totaltrxvolume"><marquee>...</marquee></span></div>
                 <span class="count_bottom"><i class="">Rupiah </i> </span>
               </div>
@@ -260,7 +258,6 @@
               <div class="left"></div>
               <div class="right">
                 <span class="count_top"><i class="fa fa-retweet orange"></i> Transaction Count</span>
-
 
                 <div id="totalTC" class="count orange number f-30" data-from="0" data-to="0"><span class="totaltrxcount"><marquee>...</marquee></span></div>
                 <span class="count_bottom"><i class=""><span class="total_trx_percent_count"><marquee>...</marquee></span>% </i> from Total</span>
@@ -280,6 +277,7 @@
               <div class="right">
                 <span class="count_top"><i class="fa fa-times-circle red"></i> Transaction Failed</span>
 
+
                 <div id="totalTF" class="count red number f-30" data-from="0" data-to="0"><span class="totaltrxfailed"><marquee>...</marquee></span></div>
                 <span class="count_bottom"><i class=""><span class="total_trx_percent_failed"><marquee>...</marquee></span>% </i> from Total </span>
               </div>
@@ -287,7 +285,7 @@
           </div>
         </div>
         <div class="panel-header" style="border-bottom: none;">
-          <h3><strong>On-us off-us Transaction</strong> Percentage - Last Month</h3>
+          <h3><strong>On-us off-us Transaction Volume</strong> Percentage - Last Month</h3>
         </div>
 
 
@@ -299,20 +297,21 @@
           </div>
         </div>
 
+
       </div>
     </div>
 
     <div class="row tile_count">
 
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Store Transaction Volume</strong> Charts</h3>
+        <h3><strong>Acquirer Transaction Volume</strong> Charts</h3>
         <div>
           <canvas id="trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
 
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Store Transaction Count</strong> Charts</h3>
+        <h3><strong>Acquirer Transaction Count</strong> Charts</h3>
         <div>
           <canvas id="trxcount_chart" class="full" height="100"></canvas>
         </div>
@@ -321,20 +320,20 @@
     </div>
 
 
-    <!-- TOP 5 ACQUIRER -->
+    <!-- TOP 5 MERCHANT -->
     <div class="row tile_count">
 
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Top 5 Acquirer Highest Transaction Volume</strong> Charts</h3>
+        <h3><strong>Top 5 Merchant Highest Transaction Volume</strong> Charts</h3>
         <div>
-          <canvas id="acq_top5trxvolume_chart"  class="full" height="100"/>
+          <canvas id="mer_top5trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
 
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
-        <h3><strong>Top 5 Acquirer Highest Transaction Count</strong> Charts</h3>
+        <h3><strong>Top 5 Merchant Highest Transaction Count</strong> Charts</h3>
         <div>
-          <canvas id="acq_top5trxcount_chart" class="full" height="100"></canvas>
+          <canvas id="mer_top5trxcount_chart" class="full" height="100"></canvas>
         </div>
       </div>
 
@@ -380,14 +379,12 @@
 
     </div>
 
+<?php $__env->stopSection(); ?>
 
-
-@endsection
-
-@section('javascript')
-    <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
+<?php $__env->startSection('javascript'); ?>
+      <script src="<?php echo e(asset('assets/plugins/maps-amcharts/ammap/ammap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/countup/countUp.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/chartjs/Chart.min.js')); ?>"></script>
 
     <script type="text/javascript">
 
@@ -414,7 +411,7 @@
     $(document).ready(function()
     {
       $.ajax({
-        url: "/dashboard_store/data_dashboard_store",
+        url: "/dashboard_acquirer/data_dashboard_acquirer",
         method: "GET",
         success: function(data)
         {
@@ -449,6 +446,10 @@
           var total_terminal_percent = Math.round((totalterminal / totalterminal) * 100);
           var total_active_transaction_percent = 100;
           var total_active_terminal_percent = Math.round((terminalactive / totalterminal) * 100);
+          console.log(terminalactive);
+          console.log(totalterminal);
+
+          console.log(total_active_terminal_percent);
           var total_inactive_terminal_percent = Math.round(total_terminal_percent - total_active_terminal_percent);
 
           if(totaltrxcount != 0)
@@ -499,6 +500,7 @@
             var style_onus = "padding-right: 80px";
           }
 
+
           $(".totalterminal").text(totalterminal);
           $(".totalactivetrx").text(totalactivetrx);
           $(".terminalactive").text(terminalactive);
@@ -537,7 +539,7 @@
         });
 
         $.ajax({
-          url: "/dashboard_store/trxvolume",
+          url: "/dashboard_acquirer/trxvolume",
           method: "GET",
           success: function(data)
           {
@@ -644,7 +646,7 @@
           });
 
         $.ajax({
-          url: "/dashboard_store/trxcount",
+          url: "/dashboard_acquirer/trxcount",
           method: "GET",
           success: function(data)
           {
@@ -750,139 +752,138 @@
           }
           });
 
-      $.ajax({
-        url: "/dashboard_store/top5acq_trxvolume",
-        method: "GET",
-        success: function(data)
-        {
-          var acq_top5trxvolume_data = {
-            labels: data.label,
-            datasets: data.dataset_list
-          };
+          $.ajax({
+            url: "/dashboard_acquirer/top5mer_trxvolume",
+            method: "GET",
+            success: function(data)
+            {
 
-          var acq_top5trxvolume = document.getElementById('acq_top5trxvolume_chart').getContext('2d');
-          window.myBar = new Chart(acq_top5trxvolume, {
-            type: 'bar',
-            data: acq_top5trxvolume_data,
-            options: {
-              responsive: true,
-              legend: {
-                position: 'top',
-              },
-              title: {
-                display: false,
-                text: 'Chart.js Bar Chart'
-              },
-              scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      callback: function(label, index, labels) {
-                        if(label > 1000000000){
-                          return label/1000000000+'B';
-                        }else if(label > 1000000){
-                          return label/1000000+'M';
-                        }else if(label > 1000){
-                          return label/1000+'K';
-                        }else{
-                          return label;
+              var mer_top5trxvolume_data = {
+                labels: data.label,
+                datasets: data.dataset_list
+              };
+
+              var mer_top5trxvolume = document.getElementById('mer_top5trxvolume_chart').getContext('2d');
+              window.myBar = new Chart(mer_top5trxvolume, {
+                type: 'bar',
+                data: mer_top5trxvolume_data,
+                options: {
+                  responsive: true,
+                  legend: {
+                    position: 'top',
+                  },
+                  title: {
+                    display: false,
+                    text: 'Chart.js Bar Chart'
+                  },
+                  scales: {
+                    yAxes: [
+                      {
+                        ticks: {
+                          callback: function(label, index, labels) {
+                            if(label > 1000000000){
+                              return label/1000000000+'B';
+                            }else if(label > 1000000){
+                              return label/1000000+'M';
+                            }else if(label > 1000){
+                              return label/1000+'K';
+                            }else{
+                              return label;
+                            }
+
+                          }
+                        },
+                        scaleLabel: {
+                          display: true,
+                          labelString: 'Value'
                         }
-
                       }
-                    },
-                    scaleLabel: {
-                      display: true,
-                      labelString: 'Value'
+                    ]
+                  },
+                  tooltips: {
+                    callbacks: {
+                      label: function(tooltipItem, data) {
+                        return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                          return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+                        });
+                      }
                     }
                   }
-                ]
-              },
-              tooltips: {
-                callbacks: {
-                  label: function(tooltipItem, data) {
-                    return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
-                      return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-                    });
+                }
+              });
+            },
+            error: function(data) {
+              console.log(data);
+            }
+            });
+
+    $.ajax({
+      url: "/dashboard_acquirer/top5mer_trxcount",
+      method: "GET",
+      success: function(data)
+      {
+        var mer_top5trxcount_data = {
+          labels: data.label,
+          datasets: data.dataset_list
+        };
+
+        var mer_top5trxcount = document.getElementById('mer_top5trxcount_chart').getContext('2d');
+        window.myBar = new Chart(mer_top5trxcount, {
+          type: 'bar',
+          data: mer_top5trxcount_data,
+          options: {
+            responsive: true,
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: false,
+              text: 'Chart.js Bar Chart'
+            },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    callback: function(label, index, labels) {
+                      if(label > 1000000000){
+                        return label/1000000000+'B';
+                      }else if(label > 1000000){
+                        return label/1000000+'M';
+                      }else if(label > 1000){
+                        return label/1000+'K';
+                      }else{
+                        return label;
+                      }
+
+                    }
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Value'
                   }
+                }
+              ]
+            },
+            tooltips: {
+              callbacks: {
+                label: function(tooltipItem, data) {
+                  return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                    return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+                  });
                 }
               }
             }
-          });
-
-
-
-        },
-        error: function(data) {
-        	console.log(data);
-        }
+          }
         });
 
-        $.ajax({
-          url: "/dashboard_store/top5acq_trxcount",
-          method: "GET",
-          success: function(data)
-          {
-            var acq_top5trxcount_data = {
-              labels: data.label,
-              datasets: data.dataset_list
-            };
-
-            var acq_top5trxcount = document.getElementById('acq_top5trxcount_chart').getContext('2d');
-            window.myBar = new Chart(acq_top5trxcount, {
-              type: 'bar',
-              data: acq_top5trxcount_data,
-              options: {
-                responsive: true,
-                legend: {
-                  position: 'top',
-                },
-                title: {
-                  display: false,
-                  text: 'Chart.js Bar Chart'
-                },
-                scales: {
-                  yAxes: [
-                    {
-                      ticks: {
-                        callback: function(label, index, labels) {
-                          if(label > 1000000000){
-                            return label/1000000000+'B';
-                          }else if(label > 1000000){
-                            return label/1000000+'M';
-                          }else if(label > 1000){
-                            return label/1000+'K';
-                          }else{
-                            return label;
-                          }
-
-                        }
-                      },
-                      scaleLabel: {
-                        display: true,
-                        labelString: 'Value'
-                      }
-                    }
-                  ]
-                },
-                tooltips: {
-                  callbacks: {
-                    label: function(tooltipItem, data) {
-                      return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
-                        return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-                      });
-                    }
-                  }
-                }
-              }
-            });
-          },
-          error: function(data) {
-          	console.log(data);
-          }
-          });
+      },
+      error: function(data) {
+        console.log(data);
+      }
+      });
 
           $.ajax({
-            url: "/dashboard_store/top5ctp_trxvolume",
+            url: "/dashboard_acquirer/top5ctp_trxvolume",
             method: "GET",
             success: function(data)
             {
@@ -946,7 +947,7 @@
             });
 
           $.ajax({
-            url: "/dashboard_store/top5ctp_trxcount",
+            url: "/dashboard_acquirer/top5ctp_trxcount",
             method: "GET",
             success: function(data)
             {
@@ -1010,7 +1011,7 @@
             });
 
           $.ajax({
-            url: "/dashboard_store/top5ttp_trxvolume",
+            url: "/dashboard_acquirer/top5ttp_trxvolume",
             method: "GET",
             success: function(data)
             {
@@ -1074,7 +1075,7 @@
             });
 
           $.ajax({
-            url: "/dashboard_store/top5ttp_trxcount",
+            url: "/dashboard_acquirer/top5ttp_trxcount",
             method: "GET",
             success: function(data)
             {
@@ -1135,8 +1136,11 @@
             error: function(data) {
               console.log(data);
             }
-          });
+            });
+
     });
 
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

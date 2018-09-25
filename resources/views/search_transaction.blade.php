@@ -261,23 +261,23 @@
                     <table class="table table-bordered display nowrap" id="tableSearch">
                       <thead>
                         <tr>
-                          <th>Host</th>
-                          <th>MID</th>
-                          <th>TID</th>
-                          <th>Branch</th>
-                          <th>Store</th>
-                          <th>Transaction</th>
-                          <th>Card Num</th>
-                          <th>Prepaid Card Num</th>
-                          <th>Inv Num</th>
-                          <th>Date</th>
-                          <th>Time</th>
-                          <th>RC</th>
-                          <th>Status</th>
-                          <th>APPR Code</th>
-                          <th>Amount</th>
-                          <th>Redeem</th>
-                          <th>Net</th>
+                          <th style='width: 5%'>Host</th>
+                          <th style='width: 10%'>MID</th>
+                          <th style='width: 5%'>TID</th>
+                          <th style='width: 5%'>Branch</th>
+                          <th style='width: 5%'>Store</th>
+                          <th style='width: 10%'>Transaction</th>
+                          <th style='width: 10%'>Card Num</th>
+                          <th style='width: 5%'>Prepaid Card Num</th>
+                          <th style='width: 5%'>Inv Num</th>
+                          <th style='width: 5%'>Date</th>
+                          <th style='width: 5%'>Time</th>
+                          <th style='width: 5%'>RC</th>
+                          <th style='width: 5%'>Status</th>
+                          <th style='width: 5%'>APPR Code</th>
+                          <th style='width: 5%'>Amount</th>
+                          <th style='width: 5%'>Redeem</th>
+                          <th style='width: 5%'>Net</th>
                         </tr>
                       </thead>
                     </table>

@@ -231,8 +231,6 @@
               <div class="right">
                 <span class="count_top"><i class="glyphicon glyphicon-transfer orange"></i> Active Transaction</span>
 
-
-
                 <div id="totalAT" class="count orange number f-30" data-from="0" data-to="0"><span class="totalactivetrx"><marquee>...</marquee></span></div>
                 <span class="count_bottom"><i class=""><span class="total_trx_percent_active_trx"><marquee>...</marquee></span>% </i> from Total</span>
               </div>
@@ -531,12 +529,17 @@
             var total_trx_failed_percent = 100;
           }
 
-          var offus_trxcount = data.offus_trxcount;
-          var onus_trxcount = data.onus_trxcount;
-          var offus_trxvolume = data.offus_trxvolume;
-          var onus_trxvolume = data.onus_trxvolume;
+          // var offus_trxcount = data.offus_trxcount;
+          // var onus_trxcount = data.onus_trxcount;
+          // var offus_trxvolume = data.offus_trxvolume;
+          // var onus_trxvolume = data.onus_trxvolume;
 
-          var total_offus_onus = offus_trxcount + onus_trxcount;
+          var offus_trxcount = 643563;
+          var onus_trxcount = 64354;
+          var offus_trxvolume = 3245676846;
+          var onus_trxvolume = 643254233;
+
+          var total_offus_onus = offus_trxvolume + onus_trxvolume;
 
           if(total_offus_onus == 0)
           {
@@ -551,9 +554,9 @@
           }
           else
           {
-            var total_offus_onus_percent = math.round((total_offus_onus / total_offus_onus) * 100);
-            var total_offus_percent = math.round((offus_trxcount / total_offus_onus) * 100);
-            var total_onus_percent = math.round((onus_trxcount / total_offus_onus) * 100);
+            var total_offus_onus_percent = Math.round((total_offus_onus / total_offus_onus) * 100);
+            var total_offus_percent = Math.round((offus_trxvolume / total_offus_onus) * 100);
+            var total_onus_percent = Math.round((onus_trxvolume / total_offus_onus) * 100);
 
             var class_offus = "col-sm-6 p-r-0";
             var class_onus = "col-sm-6 p-l-0";
@@ -587,11 +590,11 @@
           var html_onus_offuschart = "";
           if(total_offus_onus == 0)
           {
-            htmlonus_offus_chart = "<div class="+ class_offus + "style=width:100%; padding-left: 80px; padding-right: 80px><div style='border-radius: 0px; height: 28px'><div id='offus_onus_nodata' class='back-gray t-center f-16' role='progressbar' aria-valuenow='0' aria-valuemin='0' aria-valuemax='100' style='width:100%'>0%</div></div></div>"
+            htmlonus_offus_chart = '<div class="' + class_offus +'" style="width:100%; padding-left: 80px; padding-right: 80px">' + '<div style="border-radius: 0px; height: 28px">' + '<div id="offus_onus_nodata" class="back-gray t-center f-16" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:100%">'+ '0%' + '</div>' + '</div>' + '</div>'
           }
           else
           {
-            htmlonus_offus_chart = "<div class="+ $class_offus +" style='width: "+ total_offus_percent + "%;" + style_offus + "'><div style='border-radius: 0px; height: 28px'><div id='offus_data' class='back-green t-center f-16' role='progressbar' aria-valuenow=" + $total_offus_percent + " aria-valuemin='0' aria-valuemax='100' style='width:100%'>"+ total_offus_percent + "%</div></div></div><div class='" + class_onus +"' style='width:" + total_onus_percent + "%;" + style_onus + "'><div style='border-radius: 0px; height: 28px'><div id='onus_data' class='back-red t-center f-16' role='progressbar' aria-valuenow='" + total_onus_percent +"' aria-valuemin='0' aria-valuemax='100' style='width:100%'>" + total_onus_percent + "%</div></div></div>"
+            htmlonus_offus_chart = '<div class="'+ class_offus +'" style="width:' + total_offus_percent + '%;' + style_offus +'">' + '<div style="border-radius: 0px; height: 28px">' + '<div id="offus_data" class="back-green t-center f-16" role="progressbar" aria-valuenow="' + total_offus_percent + '" aria-valuemin="0" aria-valuemax="100" style="width:100%">' + total_offus_percent + '%' + '</div>' + '</div>' + '</div>' + '<div class="' + class_onus + '" style="width:' + total_onus_percent +'%;' + style_onus + '">'+ '<div style="border-radius: 0px; height: 28px">' + '<div id="onus_data" class="back-red t-center f-16" role="progressbar" aria-valuenow="' + total_onus_percent +'" aria-valuemin="0" aria-valuemax="100" style="width:100%">' + total_onus_percent + '%' +'</div>' + '</div>' + '</div>';
           }
           $(".onus_offus_chart").html(htmlonus_offus_chart);
         },

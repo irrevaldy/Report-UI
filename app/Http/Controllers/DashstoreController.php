@@ -16,86 +16,151 @@ class DashstoreController extends Controller
 
     public function index(Request $request)
     {
-
-        $client = new \GuzzleHttp\Client();
-
-        $user_id = Session::get('user_id');
-
-        $form_post = $client->request('GET', config('constants.api_serverv').'data_dashboard_store/'.$user_id);
-
-        $from_be = json_decode($form_post->getBody(), true);
-
-        // $from_be['last_month'] = "August"; 
-        // $from_be['total_amount'] = "1241345240";
-        // $from_be['total_trx'] = "21567";
-        // $from_be['total_trx_success'] = "21066";
-        // $from_be['total_trx_failed'] = "501";
-
-        return view('dashboard_store')->with([
-            'total_terminal'      => $from_be['total_terminal'],
-            'terminal_active'     => $from_be['terminal_active'],
-            'terminal_inactive'   => $from_be['terminal_inactive'],
-            'total_active_trx'    => $from_be['total_active_trx'],
-            'total_trx_volume'    => $from_be['total_trx_volume'],
-            'total_trx_count'     => $from_be['total_trx_count'],
-            'total_trx_success'   => $from_be['total_trx_success'],
-            'total_trx_failed'    => $from_be['total_trx_failed'],
-            'offus_trxcount'      => $from_be['offus_trxcount'],
-            'offus_trxvolume'     => $from_be['offus_trxvolume'],
-            'onus_trxcount'       => $from_be['onus_trxcount'],
-            'onus_trxvolume'      => $from_be['onus_trxvolume'],
-            //'chart_trx_volume'    => $from_be['chart_trx_volume'],
-            //'chart_trx_count'     => $from_be['chart_trx_count'],
-            'top5acq_trx_volume'  => $from_be['top5acq_trx_volume'],
-            'top5acq_trx_count'   => $from_be['top5acq_trx_count'],
-            'top5ctp_trx_volume'  => $from_be['top5ctp_trx_volume'],
-            'top5ctp_trx_count'   => $from_be['top5ctp_trx_count'],
-            'top5ttp_trx_volume'  => $from_be['top5ttp_trx_volume'],
-            'top5ttp_trx_count'   => $from_be['top5ttp_trx_count']
-        ]);
+        return view('dashboard_store');
     }
 
-    public function GetMonthlyBranchTransactionTop5(Request $request)
+    public function GetDataDashboardStore(Request $request)
     {
       $client = new \GuzzleHttp\Client();
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'/monthly_branchtop');
+      $user_id = Session::get('user_id');
 
-    	$var = json_decode($form_post->getBody()->getContents());
+      $form_post = $client->request('GET', config('constants.api_serverv').'store/data_dashboard_store/'.$user_id);
 
-      return $var;
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be;
+
     }
 
-    public function GetMonthlyBranchTransactionLow5(Request $request)
+    public function GetTransactionVolume(Request $request)
     {
       $client = new \GuzzleHttp\Client();
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'/monthly_branchlow');
+      $user_id = Session::get('user_id');
 
-      $var = json_decode($form_post->getBody()->getContents());
+      $form_post = $client->request('GET', config('constants.api_serverv').'store/transaction_volume/'.$user_id);
 
-      return $var;
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be;
+
     }
 
-    public function GetMonthlyStoreTransactionTop5(Request $request)
+    public function GetTransactionCount(Request $request)
     {
       $client = new \GuzzleHttp\Client();
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'/monthly_storetop');
+      $user_id = Session::get('user_id');
 
-      $var = json_decode($form_post->getBody()->getContents());
+      $form_post = $client->request('GET', config('constants.api_serverv').'store/transaction_count/'.$user_id);
 
-      return $var;
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be;
+
     }
 
-    public function GetMonthlyStoreTransactionLow5(Request $request)
+    public function GetTop5AcquirerTransactionVolume(Request $request)
     {
       $client = new \GuzzleHttp\Client();
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'/monthly_storelow');
+      $user_id = Session::get('user_id');
 
-      $var = json_decode($form_post->getBody()->getContents());
+      $form_post = $client->request('GET', config('constants.api_serverv').'store/top5acq_trxvolume/'.$user_id);
 
-      return $var;
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be['top5acq_trx_volume'];
+
     }
+
+    public function GetTop5AcquirerTransactionCount(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+
+      $user_id = Session::get('user_id');
+
+      $form_post = $client->request('GET', config('constants.api_serverv').'store/top5acq_trxcount/'.$user_id);
+
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be['top5acq_trx_count'];
+
+    }
+
+    public function GetTop5CardTypeTransactionVolume(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+
+      $user_id = Session::get('user_id');
+
+      $form_post = $client->request('GET', config('constants.api_serverv').'store/top5ctp_trxvolume/'.$user_id);
+
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be['top5ctp_trx_volume'];
+
+    }
+
+    public function GetTop5CardTypeTransactionCount(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+
+      $user_id = Session::get('user_id');
+
+      $form_post = $client->request('GET', config('constants.api_serverv').'store/top5ctp_trxcount/'.$user_id);
+
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be['top5ctp_trx_count'];
+
+    }
+
+    public function GetTop5TransactionTypeTransactionVolume(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+
+      $user_id = Session::get('user_id');
+
+      $form_post = $client->request('GET', config('constants.api_serverv').'store/top5ttp_trxvolume/'.$user_id);
+
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be['top5ttp_trx_volume'];
+
+    }
+
+    public function GetTop5TransactionTypeTransactionCount(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+
+      $user_id = Session::get('user_id');
+
+      $form_post = $client->request('GET', config('constants.api_serverv').'store/top5ttp_trxcount/'.$user_id);
+
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be['top5ttp_trx_count'];
+
+    }
+
 }

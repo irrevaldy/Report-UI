@@ -49,11 +49,6 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::post('/apply_config_trx_total', 									['uses' => 'monitoringController@applyConfigTrxTotal']);
 	Route::get('/update_trx_total_data', 									['uses' => 'monitoringController@getTrxTotalData']);
 
-	Route::get('/dashboard_merchant/monthly_branch',  						['uses' => 'DashmerchantController@GetMonthlyBranchTransactionTop5']);
-	Route::get('/dashboard_merchant/monthly_branchlow',  					['uses' => 'DashmerchantController@GetMonthlyBranchTransactionLow5']);
-	Route::get('/dashboard_merchant/monthly_storehigh',  					['uses' => 'DashmerchantController@GetMonthlyStoreTransactionTop5']);
-	Route::get('/dashboard_merchant/monthly_storelow',  					['uses' => 'DashmerchantController@GetMonthlyStoreTransactionLow5']);
-
 	Route::get('/dashboard_merchant/data_dashboard_merchant',  		['uses' => 'DashmerchantController@GetDataDashboardMerchant']);
 	Route::get('/dashboard_merchant/trxvolume',  		['uses' => 'DashmerchantController@GetTransactionVolume']);
 	Route::get('/dashboard_merchant/trxcount',  		['uses' => 'DashmerchantController@GetTransactionCount']);
@@ -67,6 +62,68 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::get('/dashboard_merchant/top5ctp_trxcount',  					['uses' => 'DashmerchantController@GetTop5CardTypeTransactionCount']);
 	Route::get('/dashboard_merchant/top5ttp_trxvolume',  					['uses' => 'DashmerchantController@GetTop5TransactionTypeTransactionVolume']);
 	Route::get('/dashboard_merchant/top5ttp_trxcount',  					['uses' => 'DashmerchantController@GetTop5TransactionTypeTransactionCount']);
+
+	Route::get('/dashboard_provider/data_dashboard_provider',  		['uses' => 'DashproviderController@GetDataDashboardProvider']);
+	Route::get('/dashboard_provider/trxvolume',  		['uses' => 'DashproviderController@GetTransactionVolume']);
+	Route::get('/dashboard_provider/trxcount',  		['uses' => 'DashproviderController@GetTransactionCount']);
+	Route::get('/dashboard_provider/top5acq_trxvolume',  					['uses' => 'DashproviderController@GetTop5AcquirerTransactionVolume']);
+	Route::get('/dashboard_provider/top5acq_trxcount',  					['uses' => 'DashproviderController@GetTop5AcquirerTransactionCount']);
+	Route::get('/dashboard_provider/top5mer_trxvolume',  					['uses' => 'DashproviderController@GetTop5MerchantTransactionVolume']);
+	Route::get('/dashboard_provider/top5mer_trxcount',  					['uses' => 'DashproviderController@GetTop5MerchantTransactionCount']);
+	Route::get('/dashboard_provider/top5sto_trxvolume',  					['uses' => 'DashproviderController@GetTop5StoreTransactionVolume']);
+	Route::get('/dashboard_provider/top5sto_trxcount',  					['uses' => 'DashproviderController@GetTop5StoreTransactionCount']);
+	Route::get('/dashboard_provider/top5ctp_trxvolume',  					['uses' => 'DashproviderController@GetTop5CardTypeTransactionVolume']);
+	Route::get('/dashboard_provider/top5ctp_trxcount',  					['uses' => 'DashproviderController@GetTop5CardTypeTransactionCount']);
+	Route::get('/dashboard_provider/top5ttp_trxvolume',  					['uses' => 'DashproviderController@GetTop5TransactionTypeTransactionVolume']);
+	Route::get('/dashboard_provider/top5ttp_trxcount',  					['uses' => 'DashproviderController@GetTop5TransactionTypeTransactionCount']);
+
+	Route::get('/dashboard_acquirer/data_dashboard_acquirer',  		['uses' => 'DashacquirerController@GetDataDashboardAcquirer']);
+	Route::get('/dashboard_acquirer/trxvolume',  		['uses' => 'DashacquirerController@GetTransactionVolume']);
+	Route::get('/dashboard_acquirer/trxcount',  		['uses' => 'DashacquirerController@GetTransactionCount']);
+	Route::get('/dashboard_acquirer/top5acq_trxvolume',  					['uses' => 'DashacquirerController@GetTop5AcquirerTransactionVolume']);
+	Route::get('/dashboard_acquirer/top5acq_trxcount',  					['uses' => 'DashacquirerController@GetTop5AcquirerTransactionCount']);
+	Route::get('/dashboard_acquirer/top5mer_trxvolume',  					['uses' => 'DashacquirerController@GetTop5MerchantTransactionVolume']);
+	Route::get('/dashboard_acquirer/top5mer_trxcount',  					['uses' => 'DashacquirerController@GetTop5MerchantTransactionCount']);
+	Route::get('/dashboard_acquirer/top5ctp_trxvolume',  					['uses' => 'DashacquirerController@GetTop5CardTypeTransactionVolume']);
+	Route::get('/dashboard_acquirer/top5ctp_trxcount',  					['uses' => 'DashacquirerController@GetTop5CardTypeTransactionCount']);
+	Route::get('/dashboard_acquirer/top5ttp_trxvolume',  					['uses' => 'DashacquirerController@GetTop5TransactionTypeTransactionVolume']);
+	Route::get('/dashboard_acquirer/top5ttp_trxcount',  					['uses' => 'DashacquirerController@GetTop5TransactionTypeTransactionCount']);
+
+
+	Route::get('/dashboard_corporate/data_dashboard_corporate',  		['uses' => 'DashcorporateController@GetDataDashboardCorporate']);
+	Route::get('/dashboard_corporate/trxvolume',  		['uses' => 'DashcorporateController@GetTransactionVolume']);
+	Route::get('/dashboard_corporate/trxcount',  		['uses' => 'DashcorporateController@GetTransactionCount']);
+	Route::get('/dashboard_corporate/top5acq_trxvolume',  					['uses' => 'DashcorporateController@GetTop5AcquirerTransactionVolume']);
+	Route::get('/dashboard_corporate/top5acq_trxcount',  					['uses' => 'DashcorporateController@GetTop5AcquirerTransactionCount']);
+	Route::get('/dashboard_corporate/top5mer_trxvolume',  					['uses' => 'DashcorporateController@GetTop5MerchantTransactionVolume']);
+	Route::get('/dashboard_corporate/top5mer_trxcount',  					['uses' => 'DashcorporateController@GetTop5MerchantTransactionCount']);
+	Route::get('/dashboard_corporate/top5ctp_trxvolume',  					['uses' => 'DashcorporateController@GetTop5CardTypeTransactionVolume']);
+	Route::get('/dashboard_corporate/top5ctp_trxcount',  					['uses' => 'DashcorporateController@GetTop5CardTypeTransactionCount']);
+	Route::get('/dashboard_corporate/top5ttp_trxvolume',  					['uses' => 'DashcorporateController@GetTop5TransactionTypeTransactionVolume']);
+	Route::get('/dashboard_corporate/top5ttp_trxcount',  					['uses' => 'DashcorporateController@GetTop5TransactionTypeTransactionCount']);
+
+	Route::get('/dashboard_branch/data_dashboard_branch',  		['uses' => 'DashbranchController@GetDataDashboardBranch']);
+	Route::get('/dashboard_branch/trxvolume',  		['uses' => 'DashbranchController@GetTransactionVolume']);
+	Route::get('/dashboard_branch/trxcount',  		['uses' => 'DashbranchController@GetTransactionCount']);
+	Route::get('/dashboard_branch/top5acq_trxvolume',  					['uses' => 'DashbranchController@GetTop5AcquirerTransactionVolume']);
+	Route::get('/dashboard_branch/top5acq_trxcount',  					['uses' => 'DashbranchController@GetTop5AcquirerTransactionCount']);
+	Route::get('/dashboard_branch/top5sto_trxvolume',  					['uses' => 'DashbranchController@GetTop5StoreTransactionVolume']);
+	Route::get('/dashboard_branch/top5sto_trxcount',  					['uses' => 'DashbranchController@GetTop5StoreTransactionCount']);
+	Route::get('/dashboard_branch/top5ctp_trxvolume',  					['uses' => 'DashbranchController@GetTop5CardTypeTransactionVolume']);
+	Route::get('/dashboard_branch/top5ctp_trxcount',  					['uses' => 'DashbranchController@GetTop5CardTypeTransactionCount']);
+	Route::get('/dashboard_branch/top5ttp_trxvolume',  					['uses' => 'DashbranchController@GetTop5TransactionTypeTransactionVolume']);
+	Route::get('/dashboard_branch/top5ttp_trxcount',  					['uses' => 'DashbranchController@GetTop5TransactionTypeTransactionCount']);
+
+	Route::get('/dashboard_store/data_dashboard_store',  		['uses' => 'DashstoreController@GetDataDashboardStore']);
+	Route::get('/dashboard_store/trxvolume',  		['uses' => 'DashstoreController@GetTransactionVolume']);
+	Route::get('/dashboard_store/trxcount',  		['uses' => 'DashstoreController@GetTransactionCount']);
+	Route::get('/dashboard_store/top5acq_trxvolume',  					['uses' => 'DashstoreController@GetTop5AcquirerTransactionVolume']);
+	Route::get('/dashboard_store/top5acq_trxcount',  					['uses' => 'DashstoreController@GetTop5AcquirerTransactionCount']);
+	Route::get('/dashboard_store/top5ctp_trxvolume',  					['uses' => 'DashstoreController@GetTop5CardTypeTransactionVolume']);
+	Route::get('/dashboard_store/top5ctp_trxcount',  					['uses' => 'DashstoreController@GetTop5CardTypeTransactionCount']);
+	Route::get('/dashboard_store/top5ttp_trxvolume',  					['uses' => 'DashstoreController@GetTop5TransactionTypeTransactionVolume']);
+	Route::get('/dashboard_store/top5ttp_trxcount',  					['uses' => 'DashstoreController@GetTop5TransactionTypeTransactionCount']);
+
 
 	//Search Transaction
 	Route::get('/search_transaction', 													['uses' => 'SearchController@index']);

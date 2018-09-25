@@ -19,13 +19,29 @@ class DashmerchantController extends Controller
         return view('dashboard_merchant');
     }
 
+    public function GetDataDashboardMerchant(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+
+      $user_id = Session::get('user_id');
+
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/data_dashboard_merchant/'.$user_id);
+
+      //$var = json_decode($form_post->getBody()->getContents());
+
+      $from_be = json_decode($form_post->getBody(), true);
+
+      return $from_be;
+
+    }
+
     public function GetTransactionVolume(Request $request)
     {
       $client = new \GuzzleHttp\Client();
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'transaction_volume/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/transaction_volume/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -41,25 +57,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'transaction_count/'.$user_id);
-
-      //$var = json_decode($form_post->getBody()->getContents());
-
-      $from_be = json_decode($form_post->getBody(), true);
-
-      return $from_be;
-
-    }
-
-
-
-    public function GetDataDashboardMerchant(Request $request)
-    {
-      $client = new \GuzzleHttp\Client();
-
-      $user_id = Session::get('user_id');
-
-      $form_post = $client->request('GET', config('constants.api_serverv').'data_dashboard_merchant/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/transaction_count/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -75,7 +73,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5acq_trxvolume/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5acq_trxvolume/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -91,7 +89,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5acq_trxcount/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5acq_trxcount/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -107,7 +105,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5bra_trxvolume/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5bra_trxvolume/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -123,7 +121,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5bra_trxcount/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5bra_trxcount/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -139,7 +137,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5sto_trxvolume/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5sto_trxvolume/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -155,7 +153,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5sto_trxcount/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5sto_trxcount/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -171,7 +169,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5ctp_trxvolume/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5ctp_trxvolume/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -187,7 +185,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5ctp_trxcount/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5ctp_trxcount/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -203,7 +201,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5ttp_trxvolume/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5ttp_trxvolume/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
@@ -219,7 +217,7 @@ class DashmerchantController extends Controller
 
       $user_id = Session::get('user_id');
 
-      $form_post = $client->request('GET', config('constants.api_serverv').'top5ttp_trxcount/'.$user_id);
+      $form_post = $client->request('GET', config('constants.api_serverv').'merchant/top5ttp_trxcount/'.$user_id);
 
       //$var = json_decode($form_post->getBody()->getContents());
 
