@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Promise;
 use Session;
 
-class DashmerchantController extends Controller
+class DashbranchController extends Controller
 {
    	public function __construct(){
 
@@ -21,7 +21,7 @@ class DashmerchantController extends Controller
 
         $user_id = Session::get('user_id');
 
-        $form_post = $client->request('GET', config('constants.api_serverv').'data_dashboard_merchant/'.$user_id);
+        $form_post = $client->request('GET', config('constants.api_serverv').'data_dashboard_branch/'.$user_id);
 
         $from_be = json_decode($form_post->getBody(), true);
 
@@ -31,8 +31,7 @@ class DashmerchantController extends Controller
         // $from_be['total_trx_success'] = "21066";
         // $from_be['total_trx_failed'] = "501";
 
-        return view('dashboard_merchant')->with([
-            'total_branch'        => $from_be['total_branch'],
+        return view('dashboard_branch')->with([
             'total_store'         => $from_be['total_store'],
             'total_terminal'      => $from_be['total_terminal'],
             'terminal_active'     => $from_be['terminal_active'],
@@ -50,8 +49,6 @@ class DashmerchantController extends Controller
             //'chart_trx_count'     => $from_be['chart_trx_count'],
             'top5acq_trx_volume'  => $from_be['top5acq_trx_volume'],
             'top5acq_trx_count'   => $from_be['top5acq_trx_count'],
-            'top5bra_trx_volume'  => $from_be['top5bra_trx_volume'],
-            'top5bra_trx_count'   => $from_be['top5bra_trx_count'],
             'top5sto_trx_volume'  => $from_be['top5sto_trx_volume'],
             'top5sto_trx_count'   => $from_be['top5sto_trx_count'],
             'top5ctp_trx_volume'  => $from_be['top5ctp_trx_volume'],
