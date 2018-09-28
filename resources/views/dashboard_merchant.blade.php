@@ -505,10 +505,20 @@
           var totaltrxsuccess = data.total_trx_success;
           var totaltrxfailed = data.total_trx_failed;
 
-          var total_terminal_percent = Math.round((totalterminal / totalterminal) * 100);
-          var total_active_transaction_percent = 100;
-          var total_active_terminal_percent = Math.round((terminalactive / totalterminal) * 100);
-          var total_inactive_terminal_percent = Math.round(total_terminal_percent - total_active_terminal_percent);
+          if(totalterminal != 0)
+          {
+            var total_terminal_percent = Math.round((totalterminal / totalterminal) * 100);
+            var total_active_transaction_percent = 100;
+            var total_active_terminal_percent = Math.round((terminalactive / totalterminal) * 100);
+            var total_inactive_terminal_percent = Math.round((terminalinactive / totalterminal) * 100);
+          }
+          else
+          {
+            var total_terminal_percent = 100;
+            var total_active_transaction_percent = 100;
+            var total_active_terminal_percent = 100;
+            var total_inactive_terminal_percent = 100;
+          }
 
           var totalB = document.getElementById('totalB');
           var totalBdataTo = totalB.getAttribute('data-to'); // fruitCount = '12'

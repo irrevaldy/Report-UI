@@ -1,9 +1,7 @@
-@extends('layout')
+<?php $__env->startSection('content'); ?>
 
-@section('content')
-
-    <link href="{{ asset('assets/plugins/AmaranJS/dist/css/amaran.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/plugins/DataTables-1.10.16/dataTables.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/plugins/AmaranJS/dist/css/amaran.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('assets/plugins/DataTables-1.10.16/dataTables.css')); ?>" rel="stylesheet">
 
     <style type="text/css">
 
@@ -47,7 +45,7 @@
             color: #319db5;
         }
 
-        @media screen and (max-width: 767px) {
+        @media  screen and (max-width: 767px) {
             button.add-cluster {
               float: left;
             }
@@ -111,35 +109,35 @@
                         </thead>
                         <tbody>
 
-                        @foreach ($data['user_data'] as $key => $value)
+                        <?php $__currentLoopData = $data['user_data']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
-                                <td> {{ $key + 1 }} </td>
-                                <td> {{ $value['user_name'] }} </td>
-                                <td> {{ $value['name'] }} </td>
-                                <td> {{ $value['subgroup_name'] }} </td>
+                                <td> <?php echo e($key + 1); ?> </td>
+                                <td> <?php echo e($value['user_name']); ?> </td>
+                                <td> <?php echo e($value['name']); ?> </td>
+                                <td> <?php echo e($value['subgroup_name']); ?> </td>
 
-                                @if ( $value['user_active'] == '1' )
+                                <?php if( $value['user_active'] == '1' ): ?>
                                     <td> <span class="label label-success">Yes</span> </td>
-                                @else
+                                <?php else: ?>
                                     <td> <span class="label label-danger">No</span> </td>
-                                @endif
+                                <?php endif; ?>
 
                                 <td>
 
-                                        <a data-toggle="modal" data-target="#editModal" style="cursor: pointer;" onClick="edit('{{ $value['user_id'] }}', '{{ $value['user_name'] }}', '{{ $value['name'] }}', '{{ $value['user_subgroup_id'] }}', '{{ $value['description'] }}', '{{ $value['user_active'] }}')" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>
+                                        <a data-toggle="modal" data-target="#editModal" style="cursor: pointer;" onClick="edit('<?php echo e($value['user_id']); ?>', '<?php echo e($value['user_name']); ?>', '<?php echo e($value['name']); ?>', '<?php echo e($value['user_subgroup_id']); ?>', '<?php echo e($value['description']); ?>', '<?php echo e($value['user_active']); ?>')" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>
 
                                         <!-- <a data-toggle="modal" data-target="#editModal" style="cursor: pointer;" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a>  -->
 
                                     |
 
 
-                                        <a data-toggle="modal" data-target="#deleteModal" style="cursor: pointer;" onClick="delete_user('{{ $value['user_id'] }}', '{{ $value['user_name'] }}')" ><i class="fa fa-times" aria-hidden="true"></i>Delete</a>
+                                        <a data-toggle="modal" data-target="#deleteModal" style="cursor: pointer;" onClick="delete_user('<?php echo e($value['user_id']); ?>', '<?php echo e($value['user_name']); ?>')" ><i class="fa fa-times" aria-hidden="true"></i>Delete</a>
 
                                         <!-- <a data-toggle="modal" data-target="#deleteModal" style="cursor: pointer;" ><i class="fa fa-times" aria-hidden="true"></i>Delete</a>  -->
 
                                 </td>
                             </tr>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                         </tbody>
                     </table>
@@ -198,9 +196,9 @@
                                 <label>Group</label>
                                 <select class="form-control form-white selectGroup" name="new_groupId" id="new_groupId" data-search="true" required >
                                     <option value=''></option>
-                                    @foreach ($data['group_data'] as $key => $value)
-                                        <option value="{{ $value['id'] }}"> {{ $value['group_fullname'] }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $data['group_data']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($value['id']); ?>"> <?php echo e($value['group_fullname']); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -302,9 +300,9 @@
                                 <label>Group</label>
                                 <select class="form-control form-white edit_selectGroup" name="edit_groupId" id="edit_groupId" data-search="true" required >
                                     <option value=''></option>
-                                    @foreach ($data['group_data'] as $key => $value)
-                                        <option value="{{ $value['id'] }}"> {{ $value['group_fullname'] }}</option>
-                                    @endforeach
+                                    <?php $__currentLoopData = $data['group_data']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $value): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($value['id']); ?>"> <?php echo e($value['group_fullname']); ?></option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </select>
                             </div>
                         </div>
@@ -396,14 +394,14 @@
       </div>
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('javascript')
+<?php $__env->startSection('javascript'); ?>
 <!-- BEGIN PAGE SCRIPTS -->
-<script src="{{ asset('assets/plugins/DataTables-1.10.16/datatables.js') }}"></script> <!-- Tables Filtering, Sorting & Editing -->
-<script src="{{ asset('assets/js/pages/table_dynamic.js') }}"></script>
-<script src="{{ asset('assets/plugins/AmaranJS/dist/js/jquery.amaran.js') }}"></script>
-<script src="{{ asset('assets/plugins/js-sha256/src/sha256.js') }}"></script>
+<script src="<?php echo e(asset('assets/plugins/DataTables-1.10.16/datatables.js')); ?>"></script> <!-- Tables Filtering, Sorting & Editing -->
+<script src="<?php echo e(asset('assets/js/pages/table_dynamic.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/plugins/AmaranJS/dist/js/jquery.amaran.js')); ?>"></script>
+<script src="<?php echo e(asset('assets/plugins/js-sha256/src/sha256.js')); ?>"></script>
 <!-- END PAGE SCRIPTS -->
 
 <script type="text/javascript">
@@ -726,7 +724,7 @@
 
                     element += "<td>";
 
-                    //if( contains.call(priv_list, 'USER_E') == true || {{ Session::get('user_subgroup_id') }} == '1' ) {
+                    //if( contains.call(priv_list, 'USER_E') == true || <?php echo e(Session::get('user_subgroup_id')); ?> == '1' ) {
 
                         element += '<a data-toggle="modal" data-target="#editModal" style="cursor: pointer;" onClick="edit(\''+ user_id +'\', \''+user_name+'\', \''+name+'\', \''+user_subgroup_id+'\', \''+description+'\', \''+user_active+'\')" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a> ';
 
@@ -734,7 +732,7 @@
                         //element += '<a style="color: #888" ><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit</a> | ';
                     //}
 
-                    //if( contains.call(priv_list, 'USER_D') == true || {{ Session::get('user_subgroup_id') }} == '1' ) {
+                    //if( contains.call(priv_list, 'USER_D') == true || <?php echo e(Session::get('user_subgroup_id')); ?> == '1' ) {
 
                         element += '<a data-toggle="modal" data-target="#deleteModal" style="cursor: pointer;" onClick="delete_user(\''+ user_id +'\', \''+user_name+'\')" ><i class="fa fa-times" aria-hidden="true"></i>Delete</a>';
 
@@ -962,7 +960,7 @@
                     dataType: 'JSON',
                     type: 'POST',
                     url: '/user_data_insert',
-                    headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+                    headers: { 'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>" },
                     data : {
                         username            : username,
                         name                : name,
@@ -1096,7 +1094,7 @@
                     dataType: 'JSON',
                     type: 'POST',
                     url: '/user_data_update',
-                    headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+                    headers: { 'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>" },
                     data : {
                         user_id             : user_id,
                         username            : username,
@@ -1183,7 +1181,7 @@
             dataType: 'JSON',
             type: 'POST',
             url: '/user_data_delete',
-            headers: { 'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+            headers: { 'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>" },
             data : {
                 user_id     : user_id
             },
@@ -1235,4 +1233,6 @@
     });
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

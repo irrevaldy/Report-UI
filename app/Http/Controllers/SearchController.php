@@ -22,6 +22,7 @@ class SearchController extends Controller
     public function getDataSearchTransaction(Request $request)
     {
       $client = new \GuzzleHttp\Client();
+      $username = $request->session()->get('username');
       $store_code = $request->input('store_code');
       $branch_code = $request->input('branch_code');
       $host = $request->input('host');
@@ -34,6 +35,7 @@ class SearchController extends Controller
 
     	$form_post = $client->request('POST', config('constants.api_serverv').'search_transaction', [
     		'json' => [
+          'username' => $username,
     			'store_code' => $store_code,
     			'branch_code' => $branch_code,
           'host' => $host,
