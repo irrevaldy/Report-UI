@@ -28,6 +28,8 @@
 Route::group(['middleware' => 'global_middleware' ], function()
 {
 	Route::get('/index', 													['uses' => 'indexController@index']);
+	Route::get('/get_logo', 													['uses' => 'GlobalController@GetLogo']);
+
 
 	Route::get('/get_total_summary', 										['uses' => 'DashproviderController@get_total_summary']);
 
@@ -253,6 +255,9 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::get('/branch_data',['uses' => 'GlobalController@GetBranchData']);
 	Route::get('/merchant_data',['uses' => 'GlobalController@GetMerchantData']);
 	Route::get('/host_data',['uses' => 'GlobalController@GetHostData']);
+	Route::get('/branch_data_filtered',['uses' => 'GlobalController@GetBranchDataFiltered']);
+	Route::get('/merchant_data_filtered',['uses' => 'GlobalController@GetMerchantDataFiltered']);
+	Route::get('/host_data_filtered',['uses' => 'GlobalController@GetHostDataFiltered']);
 
 
 });

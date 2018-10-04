@@ -245,6 +245,10 @@
               <div class="panel-footer">
 
                 <button type="button" class="btn btn-primary btn-embossed" id="btnSubmit" onClick="return empty()">Submit</button>
+                <a class="hide-loading" style="display: none">
+                  <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+                  <span> Loading...</span>
+                </a>
               </div>
 
 			     </div>
@@ -373,6 +377,8 @@ function submission()
   var x = document.getElementById("box-result");
     x.style.display = "block";
 
+    $(".hide-loading").css("display", "inline");
+
     var tableSearch = $('#tableSearch').DataTable({
       destroy: true,
         "scrollX": true,
@@ -446,9 +452,10 @@ function submission()
                         );
                     tableSearch.row.add(jRow).draw();
                   }
+          $(".hide-loading").css("display", "none");
           }
-        });
 
+        });
       $('.btn-primary').prop('disabled', false);
 }
 

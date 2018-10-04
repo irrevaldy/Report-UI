@@ -202,8 +202,8 @@
       <div class="hr hr2"></div>
 
       <div class="login-box-footer text-center">
-        <strong>Copyright &copy; 2017 Wirecard | PT Prima Vista Solusi.</strong><br> All rights reserved.
-        <br>Version 1.0.0 - Mar 2017
+        <strong>Copyright &copy; 2018 Wirecard | PT Prima Vista Solusi.</strong><br> All rights reserved.
+        <br>Version 2.0.0 - October 2018
       </div>
     </div><!-- /.login-box -->
 

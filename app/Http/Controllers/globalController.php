@@ -72,4 +72,88 @@ class GlobalController extends Controller
       return Redirect::back()->withInput()->withErrors($var->message);
     }
   }
+
+  public function GetBranchDataFiltered(Request $request)
+  {
+    $client = new \GuzzleHttp\Client();
+    $form_post = $client->request('POST', config('constants.api_serverv').'branch_data_filtered', [
+      'json' => [
+        'username' => Session::get('username')
+      ]
+    ]);
+
+    $var = json_decode($form_post->getBody()->getContents());
+
+    if($var->success == true)
+    {
+      $this->attrib = $var->result;
+
+      return $this->attrib;
+    }
+    else
+    {
+      return Redirect::back()->withInput()->withErrors($var->message);
+    }
+  }
+
+  public function GetMerchantDataFiltered(Request $request)
+  {
+    $client = new \GuzzleHttp\Client();
+    $form_post = $client->request('POST', config('constants.api_serverv').'merchant_data_filtered', [
+      'json' => [
+        'username' => Session::get('username')
+      ]
+    ]);
+
+    $var = json_decode($form_post->getBody()->getContents());
+
+    if($var->success == true)
+    {
+      $this->attrib = $var->result;
+
+      return $this->attrib;
+    }
+    else
+    {
+      return Redirect::back()->withInput()->withErrors($var->message);
+    }
+  }
+
+  public function GetHostDataFiltered(Request $request)
+  {
+    $client = new \GuzzleHttp\Client();
+
+    $form_post = $client->request('POST', config('constants.api_serverv').'host_data_filtered', [
+      'json' => [
+        'username' => Session::get('username')
+      ]
+    ]);
+
+		$var = json_decode($form_post->getBody()->getContents());
+
+    if($var->success == true)
+    {
+      $this->attrib = $var->result;
+
+      return $this->attrib;
+    }
+    else
+    {
+      return Redirect::back()->withInput()->withErrors($var->message);
+    }
+  }
+
+  public function GetLogo(Request $request)
+  {
+    $client = new \GuzzleHttp\Client();
+    $form_post = $client->request('POST', config('constants.api_serverv').'get_logo', [
+      'json' => [
+        'username' => Session::get('username')
+      ]
+    ]);
+
+    $from_be = json_decode($form_post->getBody(), true);
+
+    return $from_be;
+  }
 }

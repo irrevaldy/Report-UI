@@ -182,13 +182,17 @@
                           <label for="exampleInputEmail1" id='detailHost1' style="visibility: hidden;">From Date</label>
                           <div class="">
                             <input type="Submit" class="generate btn btn-primary" id="btnSubmitReport" value="Filter List">
+                            <a class="hide-loading" style="display: none">
+                              <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+                              <span> Loading...</span>
+                            </a>
                           </div>
                         </div>
                       </div>
                     </form>
                     </div>
 
-                  <div class="row">
+                  <div class="row" id="box-result" style="display:none">
                     <form id="listReport_form" method="POST" action="/download_recon_report_branch/zip_list_report">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <table class="table table-bordered" id="tableListReport">
@@ -301,6 +305,8 @@ function switchtoMonth(id, state, idLabel){
 
 $(document).ready(function(){
 
+  $('#example-select-all').prop('checked', true);
+
   var tableListReport = $('#tableListReport').DataTable({
     'columnDefs': [{
          'targets': 2,
@@ -308,7 +314,7 @@ $(document).ready(function(){
          'orderable':false
       }]
   });
-
+/*
   $.ajax({
     dataType: 'JSON',
     type: 'GET',
@@ -334,10 +340,12 @@ $(document).ready(function(){
               '<td><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
               );
           tableListReport.row.add(jRow).draw();
+
+          $('.chk').prop('checked', true);
       }
     }
     });
-
+*/
     // Handle click on "Select all" control
    $('#example-select-all').on('click', function(){
       // Check/uncheck all checkboxes in the table
@@ -362,12 +370,10 @@ $(document).ready(function(){
   $("#btnSubmit").click(function() {
     var chkArray = [];
 
-    /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
-    $(".chk:checked").each(function() {
+      $(".chk:checked").each(function() {
       chkArray.push($(this).val());
     });
 
-    /* we join the array separated by the comma */
     //var selected;
     //selected = chkArray.join(', ') ;
 
@@ -389,7 +395,12 @@ $(document).ready(function(){
 
 $("#ListReportTable_form").submit(function(e) {
 
-    e.preventDefault();
+  e.preventDefault();
+
+  $(".hide-loading").css("display", "inline");
+
+  var x = document.getElementById("box-result");
+    x.style.display = "block";
 
     var tableListReport = $('#tableListReport').DataTable({
     destroy: true,
@@ -399,6 +410,8 @@ $("#ListReportTable_form").submit(function(e) {
            'orderable':false,
         }]
     });
+
+      $('#example-select-all').prop('checked', true);
 
     $.ajax({
       type: 'POST',
@@ -427,19 +440,42 @@ $("#ListReportTable_form").submit(function(e) {
 
 
             var jRow = $('<tr>').append(
-                '<td>'+ no +'</td>',
-                '<td>'+ file +'</td>',
-                '<td>'+ datemodified +'</td>',
-                '<td>'+ size +'</td>',
-                '<td><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
+               '<td style="width: 5%">'+ no +'</td>',
+                '<td style="width: 50%">'+ file +'</td>',
+                '<td style="width: 20%">'+ datemodified +'</td>',
+                '<td style="width: 20%">'+ size +'</td>',
+                '<td style="width: 5%"><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
                 );
             tableListReport.row.add(jRow).draw();
-        }
 
+            $('.chk').prop('checked', true);
+        }
+        $(".hide-loading").css("display", "none");
 
       }
 
     });
+	
+	// Handle click on "Select all" control
+   $('#example-select-all').on('click', function(){
+      // Check/uncheck all checkboxes in the table
+      var rows = tableListReport.rows({ 'search': 'applied' }).nodes();
+      $('input[type="checkbox"]', rows).prop('checked', this.checked);
+   });
+
+   // Handle click on checkbox to set state of "Select all" control
+   $('#tableListReport tbody').on('change', 'input[type="checkbox"]', function(){
+   // If checkbox is not checked
+   if(!this.checked){
+      var el = $('#example-select-all').get(0);
+      // If "Select all" control is checked and has 'indeterminate' property
+      if(el && el.checked && ('indeterminate' in el)){
+         // Set visual state of "Select all" control
+         // as 'indeterminate'
+         el.indeterminate = true;
+      }
+   }
+  });
 
 });
 

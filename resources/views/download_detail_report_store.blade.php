@@ -300,6 +300,8 @@ function switchtoMonth(id, state, idLabel){
 
 $(document).ready(function(){
 
+  $('#example-select-all').prop('checked', true);
+
   var tableListReport = $('#tableListReport').DataTable({
     'columnDefs': [{
          'targets': 2,
@@ -333,6 +335,8 @@ $(document).ready(function(){
               '<td><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
               );
           tableListReport.row.add(jRow).draw();
+
+          $('.chk').prop('checked', true);
       }
     }
     });
@@ -399,6 +403,8 @@ $("#ListReportTable_form").submit(function(e) {
         }]
     });
 
+      $('#example-select-all').prop('checked', true);
+
     $.ajax({
       type: 'POST',
       data: { branch_code : $('#branch_code option:selected').val(),
@@ -433,6 +439,8 @@ $("#ListReportTable_form").submit(function(e) {
                 '<td><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
                 );
             tableListReport.row.add(jRow).draw();
+
+            $('.chk').prop('checked', true);
         }
 
 
@@ -447,11 +455,11 @@ $(function(){
     $.ajax({
       dataType: 'JSON',
       type: 'GET',
-      url: '/branch_data',
+      url: '/branch_data_filtered',
       success: function (data) {
         for(var i = 0; i < data.length; i++)
         {
-          $("#branch_code").append('<option value="' + data[i]['BranchCode'] + '">' + data[i]['BranchCode'] + '</option>');
+          $("#branch_code").append('<option value="' + data[i]['branch_code'] + '">' + data[i]['branch_code'] + '</option>');
         }
       }
     });

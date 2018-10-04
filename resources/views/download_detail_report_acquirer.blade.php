@@ -145,8 +145,8 @@
 
                   <div class="col-md-3">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Merchant</label>
-                      <select class="form-control select2 selectMerchant" name="merchant_code" id="merchant_code" style="width: 100%;" required>
+                      <label for="exampleInputEmail1">Acquirer</label>
+                      <select class="form-control select2 selectAcquirer" name="acquirer_code" id="acquirer_code" style="width: 100%;" required>
                         <option value=""></option>
                       </select>
                         </div><!-- /.input group -->
@@ -229,8 +229,8 @@
 <script>
 $(function ()
 {
-      $(".selectMerchant").select2({
-          placeholder: "Select Merchant Code",
+      $(".selectAcquirer").select2({
+          placeholder: "Select Acquirer Code",
           allowClear: true
       });
 
@@ -299,7 +299,14 @@ function switchtoMonth(id, state, idLabel){
 
 $(document).ready(function(){
 
+  $('#example-select-all').prop('checked', true);
+
   var tableListReport = $('#tableListReport').DataTable({
+    'language': {
+   'emptyTable': "No data available in table", //
+  'loadingRecords': "Please wait .. ", // default Loading...
+   'zeroRecords': "No matching records found"
+ },
     'columnDefs': [{
          'targets': 2,
          'searchable':false,
@@ -332,6 +339,8 @@ $(document).ready(function(){
               '<td><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
               );
           tableListReport.row.add(jRow).draw();
+
+          $('.chk').prop('checked', true);
       }
     }
     });
@@ -398,6 +407,8 @@ $("#ListReportTable_form").submit(function(e) {
         }]
     });
 
+    $('#example-select-all').prop('checked', true);
+
     $.ajax({
       type: 'POST',
       data: { merchant_code : $('#merchant_code option:selected').val(),
@@ -432,6 +443,8 @@ $("#ListReportTable_form").submit(function(e) {
                 '<td><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
                 );
             tableListReport.row.add(jRow).draw();
+
+            $('.chk').prop('checked', true);
         }
 
 
@@ -446,11 +459,11 @@ $(function(){
     $.ajax({
       dataType: 'JSON',
       type: 'GET',
-      url: '/merchant_data',
+      url: '/host_data_filtered',
       success: function (data) {
         for(var i = 0; i < data.length; i++)
         {
-          $("#merchant_code").append('<option value="' + data[i]['MerchantID'] + '">' + data[i]['MerchantName'] + '</option>');
+          $("#acquirer_code").append('<option value="' + data[i]['value'] + '">' + data[i]['FNAME'] + '</option>');
         }
       }
     });
