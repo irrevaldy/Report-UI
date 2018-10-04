@@ -342,6 +342,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Service Provider Transaction Volume</strong> Charts</h3>
         <div>
+          <a id="hide-loading1" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
@@ -349,6 +353,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Service Provider Transaction Count</strong> Charts</h3>
         <div>
+          <a id="hide-loading2" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="trxcount_chart" class="full" height="100"></canvas>
         </div>
       </div>
@@ -361,6 +369,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Acquirer Highest Transaction Volume</strong> Charts</h3>
         <div>
+          <a id="hide-loading3" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="acq_top5trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
@@ -368,6 +380,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Acquirer Highest Transaction Count</strong> Charts</h3>
         <div>
+          <a id="hide-loading4" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="acq_top5trxcount_chart" class="full" height="100"></canvas>
         </div>
       </div>
@@ -381,6 +397,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Merchant Highest Transaction Volume</strong> Charts</h3>
         <div>
+          <a id="hide-loading5" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="mer_top5trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
@@ -388,6 +408,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Merchant Highest Transaction Count</strong> Charts</h3>
         <div>
+          <a id="hide-loading6" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="mer_top5trxcount_chart" class="full" height="100"></canvas>
         </div>
       </div>
@@ -401,6 +425,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Transaction Volume By Card Type</strong> Charts</h3>
         <div>
+          <a id="hide-loading7" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="ctp_top5trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
@@ -408,6 +436,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Transaction Volume By Card Type</strong> Charts</h3>
         <div>
+          <a id="hide-loading8" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="ctp_top5trxcount_chart" class="full" height="100"></canvas>
         </div>
       </div>
@@ -420,6 +452,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Transaction Volume By Transaction Type</strong> Charts</h3>
         <div>
+          <a id="hide-loading9" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="ttp_top5trxvolume_chart"  class="full" height="100"/>
         </div>
       </div>
@@ -427,6 +463,10 @@
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Top 5 Transaction Count By Transaction Type</strong> Charts</h3>
         <div>
+          <a id="hide-loading10" style="display: none">
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+            <span> Loading...</span>
+          </a>
           <canvas id="ttp_top5trxcount_chart" class="full" height="100"></canvas>
         </div>
       </div>
@@ -464,6 +504,17 @@
 
     $(document).ready(function()
     {
+      $("#hide-loading1").css("display", "inline");
+      $("#hide-loading2").css("display", "inline");
+      $("#hide-loading3").css("display", "inline");
+      $("#hide-loading4").css("display", "inline");
+      $("#hide-loading5").css("display", "inline");
+      $("#hide-loading6").css("display", "inline");
+      $("#hide-loading7").css("display", "inline");
+      $("#hide-loading8").css("display", "inline");
+      $("#hide-loading9").css("display", "inline");
+      $("#hide-loading10").css("display", "inline");
+
       $.ajax({
         url: "/dashboard_provider/data_dashboard_provider",
         method: "GET",
@@ -714,7 +765,7 @@
                 }
               }
             });
-
+            $("#hide-loading1").css("display", "none");
           },
           error: function(data) {
           	console.log(data);
@@ -821,10 +872,11 @@
                 }
               }
             });
-
+            $("#hide-loading2").css("display", "none");
           },
           error: function(data) {
             console.log(data);
+
           }
           });
 
@@ -886,9 +938,7 @@
               }
             }
           });
-
-
-
+          $("#hide-loading3").css("display", "none");
         },
         error: function(data) {
         	console.log(data);
@@ -953,6 +1003,7 @@
                 }
               }
             });
+            $("#hide-loading4").css("display", "none");
           },
           error: function(data) {
           	console.log(data);
@@ -1018,6 +1069,7 @@
                   }
                 }
               });
+              $("#hide-loading5").css("display", "none");
             },
             error: function(data) {
             	console.log(data);
@@ -1082,7 +1134,7 @@
             }
           }
         });
-
+        $("#hide-loading6").css("display", "none");
       },
       error: function(data) {
       	console.log(data);
@@ -1147,6 +1199,7 @@
                   }
                 }
               });
+              $("#hide-loading7").css("display", "none");
             },
             error: function(data) {
               console.log(data);
@@ -1211,6 +1264,7 @@
                   }
                 }
               });
+              $("#hide-loading8").css("display", "none");
             },
             error: function(data) {
               console.log(data);
@@ -1275,6 +1329,7 @@
                   }
                 }
               });
+              $("#hide-loading9").css("display", "none");
             },
             error: function(data) {
               console.log(data);
@@ -1339,6 +1394,7 @@
                   }
                 }
               });
+              $("#hide-loading10").css("display", "none");
             },
             error: function(data) {
               console.log(data);
