@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <style type="text/css">
     .widget-info .left svg {
@@ -473,12 +471,12 @@
 
     </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('javascript')
-      <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
+<?php $__env->startSection('javascript'); ?>
+      <script src="<?php echo e(asset('assets/plugins/maps-amcharts/ammap/ammap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/countup/countUp.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/chartjs/Chart.min.js')); ?>"></script>
 
     <script type="text/javascript">
 
@@ -1425,4 +1423,6 @@
 
 
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

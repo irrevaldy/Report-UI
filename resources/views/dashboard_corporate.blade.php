@@ -568,17 +568,17 @@
             var total_trx_failed_percent = 100;
           }
 
-          // var offus_trxcount = data.offus_trxcount;
-          // var onus_trxcount = data.onus_trxcount;
-          // var offus_trxvolume = data.offus_trxvolume;
-          // var onus_trxvolume = data.onus_trxvolume;
+          var offus_trxcount = parseInt(data.offus_trxcount);
+          var onus_trxcount = parseInt(data.onus_trxcount);
+          var offus_trxvolume = parseInt(data.offus_trxvolume);
+          var onus_trxvolume = parseInt(data.onus_trxvolume);
 
-          var offus_trxcount = 643563;
-          var onus_trxcount = 64354;
-          var offus_trxvolume = 3245676846;
-          var onus_trxvolume = 643254233;
+          // var offus_trxcount = 643563;
+          // var onus_trxcount = 64354;
+          // var offus_trxvolume = 3245676846;
+          // var onus_trxvolume = 643254233;
 
-          var total_offus_onus = offus_trxvolume + onus_trxvolume;
+          var total_offus_onus = parseInt(offus_trxvolume) + parseInt(onus_trxvolume);
 
           if(total_offus_onus == 0)
           {
@@ -597,11 +597,29 @@
             var total_offus_percent = Math.round((offus_trxvolume / total_offus_onus) * 100);
             var total_onus_percent = Math.round((onus_trxvolume / total_offus_onus) * 100);
 
+            if (total_offus_percent == 100 && onus_trxvolume != 0)
+            {
+              total_offus_percent = 99;
+              total_onus_percent = 1;
+            }
+            if (total_onus_percent == 100 && offus_trxvolume != 0)
+            {
+              total_onus_percent = 99;
+              total_offus_percent = 1;
+            }
+
             var class_offus = "col-sm-6 p-r-0";
             var class_onus = "col-sm-6 p-l-0";
-            var style_offus = "padding-left: 80px";
-            var style_onus = "padding-right: 80px";
+            var style_offus = "padding-left: 0px";
+            var style_onus = "padding-right: 0px";
           }
+
+          // console.log(total_offus_onus);
+          // console.log(offus_trxvolume);
+          // console.log(onus_trxvolume);
+          // console.log(total_offus_onus_percent);
+          // console.log(total_offus_percent);
+          // console.log(total_onus_percent);
 
           $(".totalmerchant").text(totalmerchant);
           $(".totalbranch").text(totalbranch);
@@ -623,10 +641,6 @@
           $(".total_trx_percent_success").text(total_trx_success_percent);
           $(".total_trx_percent_failed").text(total_trx_failed_percent);
 
-          $('#offus_onus_nodata').tooltip({title: "No data", animation: true});
-          $('#offus_data').tooltip({title: "Count: "+ offus_trxcount +" | Volume: Rp. "+ numberWithCommas(offus_trxvolume) +", animation: true"});
-          $('#onus_data').tooltip({title: "Count: "+ onus_trxcount +" | Volume: Rp. "+ numberWithCommas(onus_trxvolume) +", animation: true"});
-
           var html_onus_offuschart = "";
           if(total_offus_onus == 0)
           {
@@ -637,6 +651,10 @@
             htmlonus_offus_chart = '<div class="'+ class_offus +'" style="width:' + total_offus_percent + '%;' + style_offus +'">' + '<div style="border-radius: 0px; height: 28px">' + '<div id="offus_data" class="back-green t-center f-16" role="progressbar" aria-valuenow="' + total_offus_percent + '" aria-valuemin="0" aria-valuemax="100" style="width:100%">' + total_offus_percent + '%' + '</div>' + '</div>' + '</div>' + '<div class="' + class_onus + '" style="width:' + total_onus_percent +'%;' + style_onus + '">'+ '<div style="border-radius: 0px; height: 28px">' + '<div id="onus_data" class="back-red t-center f-16" role="progressbar" aria-valuenow="' + total_onus_percent +'" aria-valuemin="0" aria-valuemax="100" style="width:100%">' + total_onus_percent + '%' +'</div>' + '</div>' + '</div>';
           }
           $(".onus_offus_chart").html(htmlonus_offus_chart);
+
+          $('#offus_onus_nodata').tooltip({title: "No data", animation: true});
+          $('#offus_data').tooltip({title: "Off Us | Count: "+ offus_trxcount +" | Volume: Rp. "+ numberWithCommas(offus_trxvolume), animation: true});
+          $('#onus_data').tooltip({title: "On Us | Count: "+ onus_trxcount +" | Volume: Rp. "+ numberWithCommas(onus_trxvolume), animation: true});
         },
         error: function(data) {
         	console.log(data);
@@ -666,7 +684,7 @@
             var curr_year       = time.getFullYear()-1;
             var str_year        = curr_year.toString().substr(2);
 
-            console.log(curr_year);
+            //console.log(curr_year);
 
             for (var i = 1; i < MONTHS.length; i++)
             {
@@ -713,11 +731,11 @@
                     {
                       ticks: {
                         callback: function(label, index, labels) {
-                          if(label > 1000000000){
+                          if(label >= 1000000000){
                             return label/1000000000+'B';
-                          }else if(label > 1000000){
+                          }else if(label >= 1000000){
                             return label/1000000+'M';
-                          }else if(label > 1000){
+                          }else if(label >= 1000){
                             return label/1000+'K';
                           }else{
                             return label;
@@ -773,7 +791,7 @@
             var curr_year       = time.getFullYear()-1;
             var str_year        = curr_year.toString().substr(2);
 
-            console.log(curr_year);
+            //console.log(curr_year);
 
             for (var i = 1; i < MONTHS.length; i++)
             {
@@ -820,11 +838,11 @@
                     {
                       ticks: {
                         callback: function(label, index, labels) {
-                          if(label > 1000000000){
+                          if(label >= 1000000000){
                             return label/1000000000+'B';
-                          }else if(label > 1000000){
+                          }else if(label >= 1000000){
                             return label/1000000+'M';
-                          }else if(label > 1000){
+                          }else if(label >= 1000){
                             return label/1000+'K';
                           }else{
                             return label;
@@ -842,7 +860,7 @@
                 tooltips: {
                   callbacks: {
                     label: function(tooltipItem, data) {
-                      return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                      return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
                         return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
                       });
                     }
@@ -885,11 +903,11 @@
                   {
                     ticks: {
                       callback: function(label, index, labels) {
-                        if(label > 1000000000){
+                        if(label >= 1000000000){
                           return label/1000000000+'B';
-                        }else if(label > 1000000){
+                        }else if(label >= 1000000){
                           return label/1000000+'M';
-                        }else if(label > 1000){
+                        }else if(label >= 1000){
                           return label/1000+'K';
                         }else{
                           return label;
@@ -950,11 +968,11 @@
                     {
                       ticks: {
                         callback: function(label, index, labels) {
-                          if(label > 1000000000){
+                          if(label >= 1000000000){
                             return label/1000000000+'B';
-                          }else if(label > 1000000){
+                          }else if(label >= 1000000){
                             return label/1000000+'M';
-                          }else if(label > 1000){
+                          }else if(label >= 1000){
                             return label/1000+'K';
                           }else{
                             return label;
@@ -972,7 +990,7 @@
                 tooltips: {
                   callbacks: {
                     label: function(tooltipItem, data) {
-                      return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                      return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
                         return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
                       });
                     }
@@ -1016,11 +1034,11 @@
                       {
                         ticks: {
                           callback: function(label, index, labels) {
-                            if(label > 1000000000){
+                            if(label >= 1000000000){
                               return label/1000000000+'B';
-                            }else if(label > 1000000){
+                            }else if(label >= 1000000){
                               return label/1000000+'M';
-                            }else if(label > 1000){
+                            }else if(label >= 1000){
                               return label/1000+'K';
                             }else{
                               return label;
@@ -1081,11 +1099,11 @@
                 {
                   ticks: {
                     callback: function(label, index, labels) {
-                      if(label > 1000000000){
+                      if(label >= 1000000000){
                         return label/1000000000+'B';
-                      }else if(label > 1000000){
+                      }else if(label >= 1000000){
                         return label/1000000+'M';
-                      }else if(label > 1000){
+                      }else if(label >= 1000){
                         return label/1000+'K';
                       }else{
                         return label;
@@ -1103,7 +1121,7 @@
             tooltips: {
               callbacks: {
                 label: function(tooltipItem, data) {
-                  return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                  return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
                     return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
                   });
                 }
@@ -1146,11 +1164,11 @@
                   {
                     ticks: {
                       callback: function(label, index, labels) {
-                        if(label > 1000000000){
+                        if(label >= 1000000000){
                           return label/1000000000+'B';
-                        }else if(label > 1000000){
+                        }else if(label >= 1000000){
                           return label/1000000+'M';
-                        }else if(label > 1000){
+                        }else if(label >= 1000){
                           return label/1000+'K';
                         }else{
                           return label;
@@ -1211,11 +1229,11 @@
                   {
                     ticks: {
                       callback: function(label, index, labels) {
-                        if(label > 1000000000){
+                        if(label >= 1000000000){
                           return label/1000000000+'B';
-                        }else if(label > 1000000){
+                        }else if(label >= 1000000){
                           return label/1000000+'M';
-                        }else if(label > 1000){
+                        }else if(label >= 1000){
                           return label/1000+'K';
                         }else{
                           return label;
@@ -1233,7 +1251,7 @@
               tooltips: {
                 callbacks: {
                   label: function(tooltipItem, data) {
-                    return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                    return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
                       return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
                     });
                   }
@@ -1276,11 +1294,11 @@
                   {
                     ticks: {
                       callback: function(label, index, labels) {
-                        if(label > 1000000000){
+                        if(label >= 1000000000){
                           return label/1000000000+'B';
-                        }else if(label > 1000000){
+                        }else if(label >= 1000000){
                           return label/1000000+'M';
-                        }else if(label > 1000){
+                        }else if(label >= 1000){
                           return label/1000+'K';
                         }else{
                           return label;
@@ -1341,11 +1359,11 @@
                   {
                     ticks: {
                       callback: function(label, index, labels) {
-                        if(label > 1000000000){
+                        if(label >= 1000000000){
                           return label/1000000000+'B';
-                        }else if(label > 1000000){
+                        }else if(label >= 1000000){
                           return label/1000000+'M';
-                        }else if(label > 1000){
+                        }else if(label >= 1000){
                           return label/1000+'K';
                         }else{
                           return label;
@@ -1363,7 +1381,7 @@
               tooltips: {
                 callbacks: {
                   label: function(tooltipItem, data) {
-                    return "Rp" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+                    return Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
                       return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
                     });
                   }
