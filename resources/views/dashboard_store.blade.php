@@ -113,6 +113,16 @@
         color: #eeeeee;
     }
 
+    .heavy-blue {
+      background-color: #000033;
+      color:  #fff;
+    }
+
+    .dark-gray {
+      background-color: #A9A9A9;
+      color: #fff;
+    }
+
 
     .tile_stats_count {
       padding-top: 10px;
@@ -216,17 +226,17 @@
             <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
               <div class="left"></div>
               <div class="right">
-                <span class="count_top"><i class="glyphicon glyphicon-transfer orange"></i> Active Transaction</span>
+                <span class="count_top"><i class="glyphicon glyphicon-transfer green"></i> Active Transaction</span>
 
-                <div id="totalAT" class="count orange number f-30" data-from="0" data-to="0"><span class="totalactivetrx"><marquee>...</marquee></span></div>
+                <div id="totalAT" class="count green number f-30" data-from="0" data-to="0"><span class="totalactivetrx"><marquee>...</marquee></span></div>
                 <span class="count_bottom"><i class=""><span class="total_trx_percent_active_trx"><marquee>...</marquee></span>% </i> from Total</span>
               </div>
             </div>
             <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
               <div class="left"></div>
               <div class="right">
-                <span class="count_top"><i class="fa fa-calculator green"></i> Active</span>
-                <div id="terminalA" class="count green number f-30" data-from="0" data-to="0"><span class="terminalactive"><marquee>...</marquee></span></div>
+                <span class="count_top"><i class="fa fa-calculator orange"></i> Active</span>
+                <div id="terminalA" class="count orange number f-30" data-from="0" data-to="0"><span class="terminalactive"><marquee>...</marquee></span></div>
                 <span class="count_bottom"><i class=""><span class="total_trx_percent_terminal_active"><marquee>...</marquee></span>% </i> from Total</span>
               </div>
             </div>
@@ -259,10 +269,10 @@
             <div class="col-md-3 col-sm-4 col-xs-4 tile_stats_count hov_effect">
               <div class="left"></div>
               <div class="right">
-                <span class="count_top"><i class="fa fa-retweet orange"></i> Transaction Count</span>
+                <span class="count_top"><i class="fa fa-retweet blue"></i> Transaction Count</span>
 
 
-                <div id="totalTC" class="count orange number f-30" data-from="0" data-to="0"><span class="totaltrxcount"><marquee>...</marquee></span></div>
+                <div id="totalTC" class="count blue number f-30" data-from="0" data-to="0"><span class="totaltrxcount"><marquee>...</marquee></span></div>
                 <span class="count_bottom"><i class=""><span class="total_trx_percent_count"><marquee>...</marquee></span>% </i> from Total</span>
               </div>
             </div>
@@ -302,7 +312,7 @@
       </div>
     </div>
 
-    <div class="row tile_count">
+    <!--<div class="row tile_count">
 
       <div class="col-md-6 hov_effect" style="padding-left: 20px">
         <h3><strong>Store Transaction Volume</strong> Charts</h3>
@@ -326,7 +336,7 @@
         </div>
       </div>
 
-    </div>
+    </div>-->
 
 
     <!-- TOP 5 ACQUIRER -->
@@ -461,11 +471,12 @@
         {
           var totalterminal = data.total_terminal;
           var totalactivetrx = data.total_active_trx;
+          var totalactivewotrx = data.total_active_wo_trx;
           var terminalactive = data.terminal_active;
           var terminalinactive = data.terminal_inactive;
           var totaltrxvolume = data.total_trx_volume;
 
-          if(totaltrxvolume.length > 10)
+          /*if(totaltrxvolume.length > 10)
           {
             totaltrxvolume = totaltrxvolume.slice(0, -6);
             var symbol = 'M';
@@ -481,7 +492,24 @@
           }
 
           totaltrxvolume = numberWithCommas(totaltrxvolume);
-          totaltrxvolume = totaltrxvolume.concat(symbol);
+          totaltrxvolume = totaltrxvolume.concat(symbol);*/
+
+          if(totaltrxvolume >= 1000000000)
+          {
+            totaltrxvolume = (Math.round((totaltrxvolume/1000000000) * 100) / 100) +' B';
+          }
+          else if(totaltrxvolume >= 1000000)
+          {
+            totaltrxvolume = totaltrxvolume/1000000+'M';
+          }
+          else if(totaltrxvolume >= 1000)
+          {
+            totaltrxvolume = totaltrxvolume/1000+'K';
+          }
+          else
+          {
+            totaltrxvolume = totaltrxvolume;
+          }
 
           var totaltrxcount = data.total_trx_count;
           var totaltrxsuccess = data.total_trx_success;
@@ -489,24 +517,26 @@
 
           if(totalterminal != 0)
           {
-            var total_terminal_percent = Math.round((totalterminal / totalterminal) * 100);
-            var total_active_transaction_percent = 100;
-            var total_active_terminal_percent = Math.round((terminalactive / totalterminal) * 100);
-            var total_inactive_terminal_percent = Math.round((terminalinactive / totalterminal) * 100);
+            var total_terminal_percent = Math.round(((totalterminal / totalterminal) * 100) * 100) / 100;
+            var total_active_transaction_percent = Math.round(((totalactivetrx / totalterminal) * 100) * 100) / 100;
+            var total_active_wo_transaction_percent = Math.round(((totalactivewotrx / totalterminal) * 100) * 100) / 100;
+            var total_active_terminal_percent = Math.round(((terminalactive / totalterminal) * 100) * 100) / 100;
+            var total_inactive_terminal_percent = Math.round(((terminalinactive / totalterminal) * 100) * 100) / 100;
           }
           else
           {
             var total_terminal_percent = 100;
             var total_active_transaction_percent = 100;
+            var total_active_wo_transaction_percent = 100;
             var total_active_terminal_percent = 100;
             var total_inactive_terminal_percent = 100;
           }
 
           if(totaltrxcount != 0)
           {
-              var total_trx_percent = Math.round((totaltrxcount / totaltrxcount) * 100);
-              var total_trx_success_percent = Math.round((totaltrxsuccess / totaltrxcount) * 100);
-              var total_trx_failed_percent = Math.round((totaltrxfailed / totaltrxcount) * 100);
+              var total_trx_percent = Math.round(((totaltrxcount / totaltrxcount) * 100) * 10) / 10;
+              var total_trx_success_percent = Math.round(((totaltrxsuccess / totaltrxcount) * 100) * 10) / 10;
+              var total_trx_failed_percent = Math.round(((totaltrxfailed / totaltrxcount) * 100) * 10) / 10;
           }
           else
           {
@@ -514,6 +544,17 @@
             var total_trx_success_percent = 100;
             var total_trx_failed_percent = 100;
           }
+
+          totaltrxvolume = numberWithCommas(totaltrxvolume);
+          totalstore = numberWithCommas(totalstore);
+          totalterminal = numberWithCommas(totalterminal);
+          totalactivetrx = numberWithCommas(totalactivetrx);
+          totalactivewotrx = numberWithCommas(totalactivewotrx);
+          terminalactive = numberWithCommas(terminalactive);
+          terminalinactive = numberWithCommas(terminalinactive);
+          totaltrxcount = numberWithCommas(totaltrxcount);
+          totaltrxsuccess = numberWithCommas(totaltrxsuccess);
+          totaltrxfailed = numberWithCommas(totaltrxfailed);
 
           var offus_trxcount = parseInt(data.offus_trxcount);
           var onus_trxcount = parseInt(data.onus_trxcount);
@@ -546,8 +587,8 @@
 
             var class_offus = "col-sm-6 p-r-0";
             var class_onus = "col-sm-6 p-l-0";
-            var style_offus = "padding-left: 80px";
-            var style_onus = "padding-right: 80px";
+            var style_offus = "padding-left: 0px";
+            var style_onus = "padding-left: 0px";
           }
 
           // console.log(total_offus_onus);
@@ -560,6 +601,7 @@
           $(".totalterminal").text(totalterminal);
           $(".totalactivetrx").text(totalactivetrx);
           $(".terminalactive").text(terminalactive);
+          $(".totalactivewotrx").text(totalactivewotrx);
           $(".terminalinactive").text(terminalinactive);
           $(".totaltrxvolume").text(totaltrxvolume);
           $(".totaltrxcount").text(totaltrxcount);
@@ -568,6 +610,7 @@
 
           $(".total_trx_percent_terminal").text(total_terminal_percent);
           $(".total_trx_percent_active_trx").text(total_active_transaction_percent);
+          $(".total_trx_percent_active_wo_trx").text(total_active_wo_transaction_percent);
           $(".total_trx_percent_terminal_active").text(total_active_terminal_percent);
           $(".total_trx_percent_terminal_inactive").text(total_inactive_terminal_percent);
           $(".total_trx_percent_count").text(total_trx_percent);
@@ -581,7 +624,7 @@
           }
           else
           {
-            htmlonus_offus_chart = '<div class="'+ class_offus +'" style="width:' + total_offus_percent + '%;' + style_offus +'">' + '<div style="border-radius: 0px; height: 28px">' + '<div id="offus_data" class="back-green t-center f-16" role="progressbar" aria-valuenow="' + total_offus_percent + '" aria-valuemin="0" aria-valuemax="100" style="width:100%">' + total_offus_percent + '%' + '</div>' + '</div>' + '</div>' + '<div class="' + class_onus + '" style="width:' + total_onus_percent +'%;' + style_onus + '">'+ '<div style="border-radius: 0px; height: 28px">' + '<div id="onus_data" class="back-red t-center f-16" role="progressbar" aria-valuenow="' + total_onus_percent +'" aria-valuemin="0" aria-valuemax="100" style="width:100%">' + total_onus_percent + '%' +'</div>' + '</div>' + '</div>';
+            htmlonus_offus_chart = '<div class="'+ class_offus +'" style="width:7%;height:22.85px;text-align: right;"><strong>On Us &nbsp;</strong></div><div class="'+ class_onus +'" style="width:' + (total_onus_percent * (86/100)) + '%;' + style_onus +'">' + '<div style="border-radius: 0px; height: 28px">' + '<div id="onus_data" class="heavy-blue t-center f-16" role="progressbar" aria-valuenow="' + total_onus_percent + '" aria-valuemin="0" aria-valuemax="100" style="width:100%">' + total_onus_percent + '%' + '</div>' + '</div>' + '</div>' + '<div class="' + class_offus + '" style="width:' + (total_offus_percent * (86/100)) +'%;' + style_offus + '">'+ '<div style="border-radius: 0px; height: 28px">' + '<div id="offus_data" class="dark-gray t-center f-16" role="progressbar" aria-valuenow="' + total_offus_percent +'" aria-valuemin="0" aria-valuemax="100" style="width:100%">' + total_offus_percent + '%' +'</div>' + '</div>' + '</div><div class="'+ class_onus +'" style="width:7%;height:22.85px;' + style_onus +'"><strong> &nbsp; Off Us</strong></div>';
           }
           $(".onus_offus_chart").html(htmlonus_offus_chart);
 
@@ -595,6 +638,7 @@
         }
         });
 
+/*
         $.ajax({
           url: "/dashboard_store/trxvolume",
           method: "GET",
@@ -808,6 +852,7 @@
             console.log(data);
           }
           });
+          */
 
       $.ajax({
         url: "/dashboard_store/top5acq_trxvolume",

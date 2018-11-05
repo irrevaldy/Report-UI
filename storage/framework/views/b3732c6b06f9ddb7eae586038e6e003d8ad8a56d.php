@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title>Wirecard</title>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/index.ico">
     <!--
@@ -11,18 +11,18 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="{{ asset('assets/login/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/login/bootstrap/css/bootstrap.min.css')); ?>">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('assets/login/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/login/font-awesome/css/font-awesome.min.css')); ?>">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="{{ asset('assets/login/ionicons/2.0.1/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/login/ionicons/2.0.1/css/ionicons.min.css')); ?>">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/login/AdminLTE.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/login/AdminLTE.min.css')); ?>">
 
     <!-- Important Owl stylesheet -->
-    <link rel="stylesheet" href="{{ asset('assets/login/owl.carousel.2/assets/owl.carousel.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/login/owl.carousel.2/assets/owl.carousel.css')); ?>">
 
-    <link type="text/css" rel="stylesheet" href="{{ asset('assets/login/jquery-notify/ui.notify.css') }}" />
+    <link type="text/css" rel="stylesheet" href="<?php echo e(asset('assets/login/jquery-notify/ui.notify.css')); ?>" />
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -166,8 +166,8 @@
         <section id="slider-1" class="slider-1">
           <div class="col-sm-12">
             <div id="owl-demo" class="owl-carousel owl-theme">
-              <div> <img src="{{ asset('assets/login/image/logo-white.png') }}" class="img-responsive"> </div>
-              <div> <img src="{{ asset('assets/login/image/logo-white.png') }}" class="img-responsive"> </div>
+              <div> <img src="<?php echo e(asset('assets/login/image/logo-white.png')); ?>" class="img-responsive"> </div>
+              <div> <img src="<?php echo e(asset('assets/login/image/logo-white.png')); ?>" class="img-responsive"> </div>
               <!-- <div> <img src="image/bank mandiri.png" class="img-responsive"> </div>
               <div> <img src="image/bni.png" class="img-responsive"> </div>
               <div> <img src="image/bri-logo.png" class="img-responsive"> </div> -->
@@ -180,7 +180,7 @@
         <h1 class="login-box-msg"><b>Log In</b> Form</h1>
         <div class="hr"></div>
         <form id="form" autocomplete="off">
-          <input type='hidden' name='tok' value='{{ csrf_token() }}'/>
+          <input type='hidden' name='tok' value='<?php echo e(csrf_token()); ?>'/>
           <div class="form-group has-feedback">
             <input type="text" class="form-control label_better" id="username" data-new-placeholder="Username" placeholder="Username" required="required">
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -208,13 +208,13 @@
     </div><!-- /.login-box -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="{{ asset('assets/login/jQuery/jQuery-2.1.4.min.js') }}"></script>
+    <script src="<?php echo e(asset('assets/login/jQuery/jQuery-2.1.4.min.js')); ?>"></script>
     <!-- Bootstrap 3.3.5 -->
-    <script src="{{ asset('assets/login/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="<?php echo e(asset('assets/login/bootstrap/js/bootstrap.min.js')); ?>"></script>
 
 
     <!-- label-bettter -->
-    <script src="{{ asset('assets/login/label_better/jquery.label_better.js') }}"></script>
+    <script src="<?php echo e(asset('assets/login/label_better/jquery.label_better.js')); ?>"></script>
 
     <script>
     $(document).ready( function() {
@@ -239,7 +239,7 @@
     </script>
 
     <!-- Include js plugin -->
-    <script src="{{ asset('assets/login/owl.carousel.2/owl.carousel.js') }}"></script>
+    <script src="<?php echo e(asset('assets/login/owl.carousel.2/owl.carousel.js')); ?>"></script>
 
     <script type="text/javascript">
 
@@ -277,8 +277,8 @@
 
     </script>
 
-    <script src="{{ asset('assets/login/jQueryUI/jquery-ui.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('assets/login/jquery-notify/src/jquery.notify.js') }}" type="text/javascript"></script>
+    <script src="<?php echo e(asset('assets/login/jQueryUI/jquery-ui.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('assets/login/jquery-notify/src/jquery.notify.js')); ?>" type="text/javascript"></script>
 
     <script type="text/javascript">
 
@@ -315,11 +315,11 @@
 
         $.ajax({
             type: 'POST',
-            headers: {'X-CSRF-TOKEN': "{{ csrf_token() }}" },
+            headers: {'X-CSRF-TOKEN': "<?php echo e(csrf_token()); ?>" },
             data: {
                     user : $('#username').val(),
                     pass : $('#password-inp').val()
-                    //_token : "{{ csrf_token() }}"
+                    //_token : "<?php echo e(csrf_token()); ?>"
                     //_token : $('input[name="tok"]').val()
                   },
             url: "/login_proc",

@@ -19,7 +19,7 @@ class DashbranchController extends Controller
         return view('dashboard_branch');
     }
 
-    public function GetDataDashboardMerchant(Request $request)
+    public function GetDataDashboardBranch(Request $request)
     {
       $client = new \GuzzleHttp\Client();
 

@@ -78,11 +78,8 @@ class DownloadDetailReportAcquirerController extends Controller
 
     public function FilterReportTable(Request $request)
     {
-      $this->main_menu = $request->get('main_menu');
-      $this->sub_menu = $request->get('sub_menu');
-
       $client = new \GuzzleHttp\Client();
-      $merchant = $request->input('merchant_code');
+      //$merchant = $request->input('merchant_code');
       $range = $request->input('range');
       $date = $request->input('detailDate');
       $username = $request->session()->get('username');
@@ -90,7 +87,7 @@ class DownloadDetailReportAcquirerController extends Controller
 
       $form_post = $client->request('POST', config('constants.api_serverv').'list_detail_report_filtered_acquirer', [
         'json' => [
-          'merchant' => $merchant,
+          /*'merchant' => $merchant,*/
           'range' => $range,
           'date' => $date,
           'username' => $username

@@ -10,7 +10,7 @@ use Session;
 class LoginController extends Controller
 {
    	public function __construct(){
-        
+
     }
 
     public function login_page(Request $request) {
@@ -20,11 +20,11 @@ class LoginController extends Controller
     public function login_proccess(Request $request) {
 
     	$client = new \GuzzleHttp\Client();
-		
+
 		//$var = json_decode($form_post->getBody()->getContents());
 
 		//$result = $var->result;
-		
+
 		//return json_encode($result);
 
     	$result['res'] = $request->all();
@@ -34,7 +34,7 @@ class LoginController extends Controller
         $username = strtolower($username);
         $password = $request->input('pass');
         $password = strtolower($password);
-        
+
         $old_password = hash('sha256', $password);
     	$new_password = hash('sha256', $username.$password);
 
@@ -57,17 +57,24 @@ class LoginController extends Controller
         // $name["service_prov"]   = "Service Provider";
 
         if($var['success'] == true) {
+
             Session::put('token', $var['data']['api_token']);
             Session::put('user_subgroup_id', $var['data']['user_subgroup_id']);
             Session::put('username', $username);
             Session::put('name', $var['data']['name']);
             Session::put('user_id', $var['data']['user_id']);
+            Session::put('dashboard', $var['dashboard'][0]);
+            Session::put('total_dashboard', count($var['dashboard']));
 
-            $var['success']         = true;
-            $var['message']         = 'Login success, '.$var['data']['name'].' !';
+
+            $vari['success']         = true;
+            $vari['message']         = 'Login success, '.$var['data']['name'].' !';
+            $vari['dashboard'] = $var['dashboard'];
+            $vari['total_dashboard'] = count($vari['dashboard']);
+            $vari['data'] = $var['data'];
             // $var['data']['name']    = $name[$username];
 
-            return $var;
+            return $vari;
         } else{
             return $var;
         }
@@ -84,7 +91,7 @@ class LoginController extends Controller
         // } else {
         //     return $var;
         // }
-        
+
     }
 
     public function logout_proccess(Request $request) {

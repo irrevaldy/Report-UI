@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <script>
   // FontAwesomeConfig = { searchPseudoElements: true };
@@ -126,7 +124,7 @@
 		// dd(session()->all());
 	?>
   <div class="header panel-header" style="border-bottom: none;">
-      <h2><i class="fas fa-home"></i> <strong>Download Reconciliation Report - Acquirer</strong></h3>
+      <h2><i class="fas fa-home"></i> <strong>Download Detail Report - Acquirer</strong></h3>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -141,17 +139,17 @@
               <div class="panel-content widget-info">
 
                 <div class="row">
-                  <form id="ListReportTable_form" method="POST" action="/download_recon_report_acquirer/filter_report_table">
+                  <form id="ListReportTable_form" method="POST" action="/download_detail_report_acquirer/filter_report_table">
 <!--
                   <div class="col-md-3">
                     <div class="form-group">
                       <label for="exampleInputEmail1">Acquirer</label>
                       <select class="form-control select2 selectAcquirer" name="acquirer_code" id="acquirer_code" style="width: 100%;" required>
                         <option value=""></option>
-                        </select>
+                      </select>
                         </div>
-                  </div>
--->
+                  </div>-->
+
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Range</label>
@@ -191,8 +189,8 @@
                 </div>
 
                   <div class="row" id="box-result" style="display:none">
-                    <form id="listReport_form" method="POST" action="/download_recon_report_acquirer/zip_list_report">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <form id="listReport_form" method="POST" action="/download_detail_report_acquirer/zip_list_report">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                     <table class="table table-bordered" id="tableListReport">
                       <thead>
                         <tr>
@@ -218,25 +216,25 @@
   </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('javascript')
-    <script src="{{ asset('assets/plugins/charts-highstock/js/highstock.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
-    <!-- <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script> -->
-    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+<?php $__env->startSection('javascript'); ?>
+    <script src="<?php echo e(asset('assets/plugins/charts-highstock/js/highstock.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/maps-amcharts/ammap/ammap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/countup/countUp.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/chartjs/Chart.min.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('assets/js/pages/dashboard.js')); ?>"></script> -->
+    <script src="<?php echo e(asset('assets/plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables/dataTables.bootstrap.min.js')); ?>"></script>
 
 
 <script>
 $(function ()
 {
-  /*  $(".selectAcquirer").select2({
-        placeholder: "Select Acquirer Code",
-        allowClear: true
-    });*/
+    /*  $(".selectAcquirer").select2({
+          placeholder: "Select Acquirer Code",
+          allowClear: true
+      });*/
 
        $(".selectRange").select2({
            placeholder: "Select Range",
@@ -300,11 +298,17 @@ function switchtoMonth(id, state, idLabel){
    }
 }
 
+
 $(document).ready(function(){
 
   $('#example-select-all').prop('checked', true);
 
   var tableListReport = $('#tableListReport').DataTable({
+    'language': {
+   'emptyTable': "No data available in table", //
+  'loadingRecords': "Please wait .. ", // default Loading...
+   'zeroRecords': "No matching records found"
+ },
     'columnDefs': [{
          'targets': 2,
          'searchable':false,
@@ -315,7 +319,7 @@ $(document).ready(function(){
   $.ajax({
     dataType: 'JSON',
     type: 'GET',
-    url: '/download_recon_report_acquirer/get_list_report',
+    url: '/download_detail_report_acquirer/get_list_report',
 
     success: function (data) {
       tableListReport.clear().draw();
@@ -410,7 +414,7 @@ $("#ListReportTable_form").submit(function(e) {
         }]
     });
 
-      $('#example-select-all').prop('checked', true);
+    $('#example-select-all').prop('checked', true);
 
     $.ajax({
       type: 'POST',
@@ -418,8 +422,8 @@ $("#ListReportTable_form").submit(function(e) {
               range : $('#range option:selected').val(),
               detailDate : $('#detailDate').val()
             },
-      url: '/download_recon_report_acquirer/filter_report_table',
-      headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
+      url: '/download_detail_report_acquirer/filter_report_table',
+      headers: {'X-CSRF_TOKEN': "<?php echo e(csrf_token()); ?>" },
         success: function(data){
 
         // var data = JSON.parse(msg);
@@ -439,11 +443,11 @@ $("#ListReportTable_form").submit(function(e) {
 
 
             var jRow = $('<tr>').append(
-              '<td style="width: 5%">'+ no +'</td>',
-              '<td style="width: 50%">'+ file +'</td>',
-              '<td style="width: 20%">'+ datemodified +'</td>',
-              '<td style="width: 20%">'+ size +'</td>',
-              '<td style="width: 5%"><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
+                '<td style="width: 5%">'+ no +'</td>',
+                '<td style="width: 50%">'+ file +'</td>',
+                '<td style="width: 20%">'+ datemodified +'</td>',
+                '<td style="width: 20%">'+ size +'</td>',
+                '<td style="width: 5%"><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
                 );
             tableListReport.row.add(jRow).draw();
 
@@ -497,4 +501,6 @@ $(function(){
 */
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

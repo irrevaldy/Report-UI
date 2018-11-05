@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <script>
   // FontAwesomeConfig = { searchPseudoElements: true };
@@ -126,7 +124,7 @@
 		// dd(session()->all());
 	?>
   <div class="header panel-header" style="border-bottom: none;">
-      <h2><i class="fas fa-home"></i> <strong>Download Reconciliation Report - Acquirer</strong></h3>
+      <h2><i class="fas fa-home"></i> <strong>Download Reconciliation Report - Merchant</strong></h3>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -141,17 +139,17 @@
               <div class="panel-content widget-info">
 
                 <div class="row">
-                  <form id="ListReportTable_form" method="POST" action="/download_recon_report_acquirer/filter_report_table">
-<!--
+                  <form id="ListReportTable_form" method="POST" action="/download_recon_report_merchant/filter_report_table">
+
                   <div class="col-md-3">
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Acquirer</label>
-                      <select class="form-control select2 selectAcquirer" name="acquirer_code" id="acquirer_code" style="width: 100%;" required>
+                      <label for="exampleInputEmail1">Branch</label>
+                      <select class="form-control select2 selectBranch" name="branch_code" id="branch_code" style="width: 100%;" required>
                         <option value=""></option>
                         </select>
-                        </div>
+                        </div><!-- /.input group -->
                   </div>
--->
+
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Range</label>
@@ -191,8 +189,8 @@
                 </div>
 
                   <div class="row" id="box-result" style="display:none">
-                    <form id="listReport_form" method="POST" action="/download_recon_report_acquirer/zip_list_report">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <form id="listReport_form" method="POST" action="/download_recon_report_merchant/zip_list_report">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                     <table class="table table-bordered" id="tableListReport">
                       <thead>
                         <tr>
@@ -218,25 +216,25 @@
   </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('javascript')
-    <script src="{{ asset('assets/plugins/charts-highstock/js/highstock.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
-    <!-- <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script> -->
-    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+<?php $__env->startSection('javascript'); ?>
+    <script src="<?php echo e(asset('assets/plugins/charts-highstock/js/highstock.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/maps-amcharts/ammap/ammap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/countup/countUp.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/chartjs/Chart.min.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('assets/js/pages/dashboard.js')); ?>"></script> -->
+    <script src="<?php echo e(asset('assets/plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables/dataTables.bootstrap.min.js')); ?>"></script>
 
 
 <script>
 $(function ()
 {
-  /*  $(".selectAcquirer").select2({
-        placeholder: "Select Acquirer Code",
-        allowClear: true
-    });*/
+      $(".selectBranch").select2({
+          placeholder: "Select Branch Code",
+          allowClear: true
+      });
 
        $(".selectRange").select2({
            placeholder: "Select Range",
@@ -315,7 +313,7 @@ $(document).ready(function(){
   $.ajax({
     dataType: 'JSON',
     type: 'GET',
-    url: '/download_recon_report_acquirer/get_list_report',
+    url: '/download_recon_report_merchant/get_list_report',
 
     success: function (data) {
       tableListReport.clear().draw();
@@ -367,12 +365,10 @@ $(document).ready(function(){
   $("#btnSubmit").click(function() {
     var chkArray = [];
 
-    /* look for all checkboes that have a class 'chk' attached to it and check if it was checked */
     $(".chk:checked").each(function() {
       chkArray.push($(this).val());
     });
 
-    /* we join the array separated by the comma */
     //var selected;
     //selected = chkArray.join(', ') ;
 
@@ -394,7 +390,7 @@ $(document).ready(function(){
 
 $("#ListReportTable_form").submit(function(e) {
 
-    e.preventDefault();
+  e.preventDefault();
 
     $(".hide-loading").css("display", "inline");
 
@@ -410,16 +406,16 @@ $("#ListReportTable_form").submit(function(e) {
         }]
     });
 
-      $('#example-select-all').prop('checked', true);
+    $('#example-select-all').prop('checked', true);
 
     $.ajax({
       type: 'POST',
-      data: { merchant_code : $('#merchant_code option:selected').val(),
+      data: { branch_code : $('#branch_code option:selected').val(),
               range : $('#range option:selected').val(),
               detailDate : $('#detailDate').val()
             },
-      url: '/download_recon_report_acquirer/filter_report_table',
-      headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
+      url: '/download_recon_report_merchant/filter_report_table',
+      headers: {'X-CSRF_TOKEN': "<?php echo e(csrf_token()); ?>" },
         success: function(data){
 
         // var data = JSON.parse(msg);
@@ -444,7 +440,7 @@ $("#ListReportTable_form").submit(function(e) {
               '<td style="width: 20%">'+ datemodified +'</td>',
               '<td style="width: 20%">'+ size +'</td>',
               '<td style="width: 5%"><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
-                );
+                  );
             tableListReport.row.add(jRow).draw();
 
             $('.chk').prop('checked', true);
@@ -477,24 +473,26 @@ $("#ListReportTable_form").submit(function(e) {
     });
 
 });
-/*
-//select merchant
+
+//select host
 $(function(){
     $.ajax({
       dataType: 'JSON',
       type: 'GET',
-      url: '/host_data_filtered',
+      url: '/branch_data_filtered',
       success: function (data) {
         for(var i = 0; i < data.length; i++)
         {
-          $("#acquirer_code").append('<option value="' + data[i]['value'] + '">' + data[i]['FNAME'] + '</option>');
+          $("#branch_code").append('<option value="' + data[i]['branch_code'] + '">' + data[i]['branch_code'] + '</option>');
         }
       }
     });
 
 
   });
-*/
+
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

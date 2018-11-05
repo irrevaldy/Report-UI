@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <script>
   // FontAwesomeConfig = { searchPseudoElements: true };
@@ -192,7 +190,7 @@
 
                   <div class="row" id="box-result" style="display:none">
                     <form id="listReport_form" method="POST" action="/download_recon_report_acquirer/zip_list_report">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                     <table class="table table-bordered" id="tableListReport">
                       <thead>
                         <tr>
@@ -218,16 +216,16 @@
   </div>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('javascript')
-    <script src="{{ asset('assets/plugins/charts-highstock/js/highstock.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
-    <!-- <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script> -->
-    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+<?php $__env->startSection('javascript'); ?>
+    <script src="<?php echo e(asset('assets/plugins/charts-highstock/js/highstock.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/maps-amcharts/ammap/ammap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/countup/countUp.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/chartjs/Chart.min.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('assets/js/pages/dashboard.js')); ?>"></script> -->
+    <script src="<?php echo e(asset('assets/plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables/dataTables.bootstrap.min.js')); ?>"></script>
 
 
 <script>
@@ -419,7 +417,7 @@ $("#ListReportTable_form").submit(function(e) {
               detailDate : $('#detailDate').val()
             },
       url: '/download_recon_report_acquirer/filter_report_table',
-      headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
+      headers: {'X-CSRF_TOKEN': "<?php echo e(csrf_token()); ?>" },
         success: function(data){
 
         // var data = JSON.parse(msg);
@@ -497,4 +495,6 @@ $(function(){
 */
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

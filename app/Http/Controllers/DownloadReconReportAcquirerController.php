@@ -78,15 +78,15 @@ class DownloadReconReportAcquirerController extends Controller
     public function FilterReportTable(Request $request)
     {
       $client = new \GuzzleHttp\Client();
-      $merchant = $request->input('merchant_code');
+      //$merchant = $request->input('merchant_code');
       $range = $request->input('range');
       $date = $request->input('detailDate');
       $username = $request->session()->get('username');
       //$merchant = $request->session()->get('merch_id');
 
-      $form_post = $client->request('POST', config('constants.api_serverv').'list_detail_report_filtered_acquirer', [
+      $form_post = $client->request('POST', config('constants.api_serverv').'list_recon_report_filtered_acquirer', [
         'json' => [
-          'merchant' => $merchant,
+          /*'merchant' => $merchant,*/
           'range' => $range,
           'date' => $date,
           'username' => $username

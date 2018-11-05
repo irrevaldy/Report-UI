@@ -208,6 +208,10 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::post('/user_data_delete', 										['uses' => 'UserController@deleteUserData']);
 	Route::get('/user_filter_type_data/{id_user}', 							['uses' => 'UserController@getUserFilterTypeData']);
 	Route::get('/filter_value_option/{filter_type}', 						['uses' => 'UserController@getFilterValueOption']);
+	Route::get('/filter_value_option_selected/{filter_type}/{user_id}', 						['uses' => 'UserController@getFilterValueOptionSelected']);
+	Route::post('/filter_value_option_augmented', 						['uses' => 'UserController@getFilterValueOptionAugmented']);
+	Route::post('/filter_value_option_selected_augmented', 						['uses' => 'UserController@getFilterValueOptionSelectedAugmented']);
+	Route::get('/filter_type_option', 						['uses' => 'UserController@getFilterTypeOption']);
 
 
 	/* Subgroup Setup */
