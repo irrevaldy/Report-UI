@@ -195,6 +195,9 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::post('/download_recon_report_store/zip_list_report',			['uses' => 'DownloadReconReportStoreController@ZipListReport']);
 	Route::post('/download_recon_report_store/filter_report_table',			['uses' => 'DownloadReconReportStoreController@FilterReportTable']);
 
+	Route::get('/active_inactive_terminal',							['uses' => 'ActiveTerminalController@index']);
+	Route::get('/inactive_tid',							['uses' => 'InactiveTIDController@index']);
+
 	/* Change Password */
 	Route::get('/change_password', 											['uses' => 'PasswordController@index']);
 	Route::post('/change_password_data', 									['uses' => 'PasswordController@ChangePasswordData']);
