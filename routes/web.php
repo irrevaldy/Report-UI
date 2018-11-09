@@ -197,6 +197,7 @@ Route::group(['middleware' => 'global_middleware' ], function()
 
 	Route::get('/active_inactive_terminal',							['uses' => 'ActiveTerminalController@index']);
 	Route::get('/inactive_tid',							['uses' => 'InactiveTIDController@index']);
+	Route::get('/terminal_location',							['uses' => 'TerminalLocationController@index']);
 
 	/* Change Password */
 	Route::get('/change_password', 											['uses' => 'PasswordController@index']);
@@ -265,6 +266,8 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::get('/branch_data_filtered',['uses' => 'GlobalController@GetBranchDataFiltered']);
 	Route::get('/merchant_data_filtered',['uses' => 'GlobalController@GetMerchantDataFiltered']);
 	Route::get('/host_data_filtered',['uses' => 'GlobalController@GetHostDataFiltered']);
+
+	Route::get('/get_terminal_location',['uses' => 'TerminalLocationController@GetTerminalLocationData']);
 
 
 });
