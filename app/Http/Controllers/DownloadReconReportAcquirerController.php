@@ -110,4 +110,40 @@ class DownloadReconReportAcquirerController extends Controller
       }
 
     }
+
+    public function FilterReportTableSettlement(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+      //$merchant = $request->input('merchant_code');
+      $range = $request->input('range');
+      $date = $request->input('detailDate');
+      $username = $request->session()->get('username');
+      //$merchant = $request->session()->get('merch_id');
+
+      $form_post = $client->request('POST', config('constants.api_serverv').'list_recon_report_filtered_acquirer_settlement', [
+        'json' => [
+          /*'merchant' => $merchant,*/
+          'range' => $range,
+          'date' => $date,
+          'username' => $username
+        ]
+      ]);
+      $var = json_decode($form_post->getBody()->getContents());
+      //return $var;
+
+      if($var->success == true)
+      {
+        // Session::put('id', $var->data->Id);
+        $this->attrib = $var->result;
+
+        return $this->attrib;
+
+        //return redirect()->action('HomeController@index');
+        //return $username;
+      }
+      else{
+        return Redirect::back()->withInput()->withErrors($var->message);
+      }
+
+    }
 }

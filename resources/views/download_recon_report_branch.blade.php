@@ -129,10 +129,31 @@
       <h2><i class="fas fa-home"></i> <strong>Download Reconciliation Report - Branch</strong></h3>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
+      <div class="panel no-bd bd-3 panel-stat">
+        <a href='#' onClick="callTransactionDateFilter()">
+          <div class="panel-header">
+            <h3><i class="icon-graph"></i> <strong>Filter By Transaction Date &ensp;</strong></h3>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel no-bd bd-3 panel-stat">
+        <a href='#' onClick="callSettlementDateFilter()">
+          <div class="panel-header">
+            <h3><i class="icon-graph"></i> <strong>Filter By Settlement Date &ensp;</strong></h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12" id="filterTransactionDate" style="display:none">
       <div class="panel no-bd bd-3 panel-stat">
           <div class="panel-header">
-              <h3><i class="icon-graph"></i> <strong>List of Report &ensp;</strong></h3>
+              <h3><i class="icon-graph"></i> <strong>Filter by Transaction Date &ensp;</strong></h3>
               <div class="control-btn">
                   <a href="#" class="panel-reload hidden"><i class="icon-reload"></i></a>
               </div>
@@ -212,12 +233,103 @@
                     </form>
                   </div>
 
-          </div>
-      </div>
+            </div>
+        </div>
 
+      </div>
     </div>
   </div>
-</div>
+
+  <div class="row">
+    <div class="col-md-12" id="filterSettlementDate" style="display:none">
+      <div class="panel no-bd bd-3 panel-stat">
+          <div class="panel-header">
+              <h3><i class="icon-graph"></i> <strong>Filter by Settlement Date &ensp;</strong></h3>
+              <div class="control-btn">
+                  <a href="#" class="panel-reload hidden"><i class="icon-reload"></i></a>
+              </div>
+          </div>
+          <div class="panel-body p-15 p-b-0">
+              <div class="panel-content widget-info">
+
+
+                    <div class="row">
+                      <form id="ListReportSettlementTable_form" method="POST" action="/download_recon_report_branch/filter_report_table_settlement">
+                      <!--
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Branch</label>
+                          <select class="form-control select2 selectBranch" name="branch_code" id="branch_code" style="width: 100%;" required>
+                            <option value=""></option>
+                              <option value='AllBranch'> All Branch </option>
+                          </select>
+                        </div><!-- /.input group --><!--
+                      </div>-->
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label>Range</label>
+                          <select class="form-control select2 selectRange" name="settlement_range" id="settlement_range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'settlementDetailHost')">
+                            <option></option>
+                            <option value="d"> 1 Day </option>
+                            <option value="w"> 1 Week </option>
+                            <option value="m"> 1 Month </option>
+                          </select>
+                        </div><!-- /.form-group -->
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1" id='settlementDetailHost'>From Date</label>
+                          <div class="input-group date">
+                            <input type="text" name="settlementDate" id="settlementDetailDate" class="form-control readonly" placeholder="Select Date" required="required" />
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                          </div>
+                        </div><!-- /.input group -->
+                      </div>
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1" id='detailHost1' style="visibility: hidden;">From Date</label>
+                          <div class="">
+                            <input type="Submit" class="generate btn btn-primary" id="btnSubmitReportSettlement" value="Filter List">
+                            <a class="hide-loading" style="display: none">
+                              <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+                              <span> Loading...</span>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                    </div>
+
+                  <div class="row" id="box-result2" style="display:none">
+                    <form id="listReportSettlement_form" method="POST" action="/download_recon_report_branch/zip_list_report">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <table class="table table-bordered" id="tableListReportSettlement">
+                      <thead>
+                        <tr>
+                          <th style='width: 5%'>No</th>
+                          <th style='width: 50%'>File Name</th>
+                          <th style='width: 20%'>Date Modified</th>
+                          <th style='width: 20%'>Size</th>
+                          <th style='width: 5%'><input name="select_all" value="1" id="example-select-all2" type="checkbox" /></th>
+                        </tr>
+                      </thead>
+                    </table>
+                    <div>
+                      <button type="button" id="btnSubmitSettlement">Submit</button>
+                    </div>
+                    </form>
+                  </div>
+
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 
 
 @endsection
@@ -233,6 +345,52 @@
 
 
 <script>
+function callTransactionDateFilter() {
+    var x = document.getElementById("filterTransactionDate");
+    var y = document.getElementById("filterSettlementDate");
+    if (x.style.display === "none" ) {
+        x.style.display = "block";
+        y.style.display = "none";
+    } else {
+        x.style.display = "none";
+        y.style.display = "none";
+    }
+}
+function callSettlementDateFilter() {
+    var y = document.getElementById("filterSettlementDate");
+    var x = document.getElementById("filterTransactionDate");
+    if (y.style.display === "none") {
+        y.style.display = "block";
+        x.style.display = "none";
+    } else {
+        y.style.display = "none";
+        x.style.display = "none";
+    }
+}
+
+function callTransactionDateFilter() {
+    var x = document.getElementById("filterTransactionDate");
+    var y = document.getElementById("filterSettlementDate");
+    if (x.style.display === "none" ) {
+        x.style.display = "block";
+        y.style.display = "none";
+    } else {
+        x.style.display = "none";
+        y.style.display = "none";
+    }
+}
+function callSettlementDateFilter() {
+    var y = document.getElementById("filterSettlementDate");
+    var x = document.getElementById("filterTransactionDate");
+    if (y.style.display === "none") {
+        y.style.display = "block";
+        x.style.display = "none";
+    } else {
+        y.style.display = "none";
+        x.style.display = "none";
+    }
+}
+
 $(function ()
 {
       $(".selectBranch").select2({
@@ -306,8 +464,17 @@ function switchtoMonth(id, state, idLabel){
 $(document).ready(function(){
 
   $('#example-select-all').prop('checked', true);
+  $('#example-select-all2').prop('checked', true);
 
   var tableListReport = $('#tableListReport').DataTable({
+    'columnDefs': [{
+         'targets': 2,
+         'searchable':false,
+         'orderable':false
+      }]
+  });
+
+  var tableListReportSettlement = $('#tableListReportSettlement').DataTable({
     'columnDefs': [{
          'targets': 2,
          'searchable':false,
@@ -353,6 +520,13 @@ $(document).ready(function(){
       $('input[type="checkbox"]', rows).prop('checked', this.checked);
    });
 
+   // Handle click on "Select all" control
+  $('#example-select-all2').on('click', function(){
+     // Check/uncheck all checkboxes in the table
+     var rows = tableListReportSettlement.rows({ 'search': 'applied' }).nodes();
+     $('input[type="checkbox"]', rows).prop('checked', this.checked);
+  });
+
    // Handle click on checkbox to set state of "Select all" control
    $('#tableListReport tbody').on('change', 'input[type="checkbox"]', function(){
    // If checkbox is not checked
@@ -366,6 +540,20 @@ $(document).ready(function(){
       }
    }
   });
+
+  // Handle click on checkbox to set state of "Select all" control
+  $('#tableListReportSettlement tbody').on('change', 'input[type="checkbox"]', function(){
+  // If checkbox is not checked
+  if(!this.checked){
+     var el = $('#example-select-all2').get(0);
+     // If "Select all" control is checked and has 'indeterminate' property
+     if(el && el.checked && ('indeterminate' in el)){
+        // Set visual state of "Select all" control
+        // as 'indeterminate'
+        el.indeterminate = true;
+     }
+  }
+ });
 
   $("#btnSubmit").click(function() {
     var chkArray = [];
@@ -387,9 +575,33 @@ $(document).ready(function(){
           .val(JSON.stringify(chkArray))
     );
 
-    $( "#listReport_form" ).submit();
+    $( "listReport_form" ).submit();
 
 	});
+
+});
+
+$("#btnSubmitSettlement").click(function() {
+  var chkArray = [];
+
+    $(".chk:checked").each(function() {
+    chkArray.push($(this).val());
+  });
+
+  //var selected;
+  //selected = chkArray.join(', ') ;
+
+  console.log(chkArray);
+  console.log(chkArray[1]);
+
+  $( "#listReportSettlement_form" ).append(
+     $('<input>')
+        .attr('type', 'hidden')
+        .attr('name', 'checkedArray')
+        .val(JSON.stringify(chkArray))
+  );
+
+  $( "#listReportSettlement_form" ).submit();
 
 });
 
@@ -455,7 +667,7 @@ $("#ListReportTable_form").submit(function(e) {
       }
 
     });
-	
+
 	// Handle click on "Select all" control
    $('#example-select-all').on('click', function(){
       // Check/uncheck all checkboxes in the table
@@ -468,6 +680,92 @@ $("#ListReportTable_form").submit(function(e) {
    // If checkbox is not checked
    if(!this.checked){
       var el = $('#example-select-all').get(0);
+      // If "Select all" control is checked and has 'indeterminate' property
+      if(el && el.checked && ('indeterminate' in el)){
+         // Set visual state of "Select all" control
+         // as 'indeterminate'
+         el.indeterminate = true;
+      }
+   }
+  });
+
+});
+
+$("#ListReportSettlementTable_form").submit(function(e) {
+
+  e.preventDefault();
+
+  $(".hide-loading").css("display", "inline");
+
+  var x = document.getElementById("box-result2");
+    x.style.display = "block";
+
+    var tableListReportSettlement = $('#tableListReportSettlement').DataTable({
+    destroy: true,
+      'columnDefs': [{
+           'targets': 2,
+           'searchable':false,
+           'orderable':false,
+        }]
+    });
+
+      $('#example-select-all2').prop('checked', true);
+
+    $.ajax({
+      type: 'POST',
+      data: { //branch_code : $('#settlement_branch_code option:selected').val(),
+              range : $('#settlement_range option:selected').val(),
+              detailDate : $('#settlementDetailDate').val()
+            },
+      url: '/download_recon_report_branch/filter_report_table_settlement',
+      headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
+        success: function(data){
+
+        // var data = JSON.parse(msg);
+
+        //$('#summaryTrx_div').html(msg);
+
+        //$('#summaryTrx_div').html(data.FNAME + '-' + data.totalTrx + '-' + data.totalAmount);
+        tableListReportSettlement.clear().draw();
+
+        for (var i = 0; i < data.length; i++)
+        {
+
+          var no = i+1;
+          var file = data[i].val;
+          var datemodified = data[i].datemodified;
+          var size = data[i].size;
+
+
+            var jRow = $('<tr>').append(
+               '<td style="width: 5%">'+ no +'</td>',
+                '<td style="width: 50%">'+ file +'</td>',
+                '<td style="width: 20%">'+ datemodified +'</td>',
+                '<td style="width: 20%">'+ size +'</td>',
+                '<td style="width: 5%"><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
+                );
+            tableListReportSettlement.row.add(jRow).draw();
+
+            $('.chk').prop('checked', true);
+        }
+        $(".hide-loading").css("display", "none");
+
+      }
+
+    });
+
+	// Handle click on "Select all" control
+   $('#example-select-all2').on('click', function(){
+      // Check/uncheck all checkboxes in the table
+      var rows = tableListReportSettlement.rows({ 'search': 'applied' }).nodes();
+      $('input[type="checkbox"]', rows).prop('checked', this.checked);
+   });
+
+   // Handle click on checkbox to set state of "Select all" control
+   $('#tableListReportSettlement tbody').on('change', 'input[type="checkbox"]', function(){
+   // If checkbox is not checked
+   if(!this.checked){
+      var el = $('#example-select-all2').get(0);
       // If "Select all" control is checked and has 'indeterminate' property
       if(el && el.checked && ('indeterminate' in el)){
          // Set visual state of "Select all" control

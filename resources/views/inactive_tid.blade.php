@@ -146,26 +146,26 @@
 
 
                     <div class="row">
-                      <form id="ListReportTable_form" method="POST" action="/download_detail_report_branch/filter_report_table">
-                      <!--
+                      <form id="ListReportTable_form" method="POST" action="/inactive_tid/filter_report_table">
+
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Branch</label>
-                          <select class="form-control select2 selectBranch" name="branch_code" id="branch_code" style="width: 100%;" required>
+                          <label for="exampleInputEmail1">Bank</label>
+                          <select class="form-control select2 selectBank" name="bank_code" id="bank_code" style="width: 100%;" required>
                             <option value=""></option>
-                              <option value='AllBranch'> All Branch </option>
+                            <!--  <option value='AllBranch'> All Branch </option>-->
                           </select>
-                        </div><!-- /.input group --><!--
-                      </div>-->
+                        </div><!-- /.input group -->
+                      </div>
 
                       <div class="col-md-3">
                         <div class="form-group">
                           <label>Range</label>
-                          <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')">
+                          <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')" disabled>
                             <option></option>
                             <option value="d"> 1 Day </option>
                             <option value="w"> 1 Week </option>
-                            <option value="m"> 1 Month </option>
+                            <option value="m" selected> 1 Month </option>
                           </select>
                         </div><!-- /.form-group -->
                       </div>
@@ -197,7 +197,7 @@
                     </div>
 
                   <div class="row" id="box-result" style="display:none">
-                    <form id="listReport_form" method="POST" action="/download_detail_report_branch/zip_list_report">
+                    <form id="listReport_form" method="POST" action="/inactive_tid/zip_list_report">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <table class="table table-bordered" id="tableListReport">
                       <thead>
@@ -215,7 +215,6 @@
                     </div>
                     </form>
                   </div>
-
           </div>
       </div>
 
@@ -239,14 +238,22 @@
 <script>
 $(function ()
 {
-      $(".selectBranch").select2({
-          placeholder: "Select Branch Code",
+      $(".selectBank").select2({
+          placeholder: "Select Bank",
           allowClear: true
       });
 
        $(".selectRange").select2({
            placeholder: "Select Range",
            allowClear: true
+       });
+
+       $('.input-group.date').datepicker({
+           autoclose: true,
+           todayHighlight: true,
+           format: "mm/yyyy",
+           minViewMode: 1,
+         orientation: 'auto'
        });
 });
 
@@ -305,5 +312,168 @@ function switchtoMonth(id, state, idLabel){
     document.getElementById(idLabel).innerHTML = 'From Date';
    }
 }
+
+$(document).ready(function(){
+
+  $('#example-select-all').prop('checked', true);
+
+  var tableListReport = $('#tableListReport').DataTable({
+    'columnDefs': [{
+         'targets': 2,
+         'searchable':false,
+         'orderable':false
+      }]
+  });
+
+    // Handle click on "Select all" control
+   $('#example-select-all').on('click', function(){
+      // Check/uncheck all checkboxes in the table
+      var rows = tableListReport.rows({ 'search': 'applied' }).nodes();
+      $('input[type="checkbox"]', rows).prop('checked', this.checked);
+   });
+
+   // Handle click on checkbox to set state of "Select all" control
+   $('#tableListReport tbody').on('change', 'input[type="checkbox"]', function(){
+   // If checkbox is not checked
+   if(!this.checked){
+      var el = $('#example-select-all').get(0);
+      // If "Select all" control is checked and has 'indeterminate' property
+      if(el && el.checked && ('indeterminate' in el)){
+         // Set visual state of "Select all" control
+         // as 'indeterminate'
+         el.indeterminate = true;
+      }
+   }
+  });
+
+  $("#btnSubmit").click(function() {
+    var chkArray = [];
+
+    $(".chk:checked").each(function() {
+      chkArray.push($(this).val());
+    });
+
+    //var selected;
+    //selected = chkArray.join(', ') ;
+
+    console.log(chkArray);
+    console.log(chkArray[1]);
+
+    $( "#listReport_form" ).append(
+       $('<input>')
+          .attr('type', 'hidden')
+          .attr('name', 'checkedArray')
+          .val(JSON.stringify(chkArray))
+    );
+
+    $( "#listReport_form" ).submit();
+
+	});
+
+});
+
+$("#ListReportTable_form").submit(function(e) {
+
+  e.preventDefault();
+
+  $(".hide-loading").css("display", "inline");
+
+  var x = document.getElementById("box-result");
+    x.style.display = "block";
+
+    var tableListReport = $('#tableListReport').DataTable({
+    destroy: true,
+      'columnDefs': [{
+           'targets': 2,
+           'searchable':false,
+           'orderable':false,
+        }]
+    });
+
+    $('#example-select-all').prop('checked', true);
+
+    $.ajax({
+      type: 'POST',
+      data: { bank_code : $('#bank_code option:selected').val(),
+              range : $('#range option:selected').val(),
+              detailDate : $('#detailDate').val()
+            },
+      url: '/inactive_tid/filter_report_table',
+      headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
+        success: function(data){
+
+        // var data = JSON.parse(msg);
+
+        //$('#summaryTrx_div').html(msg);
+
+        //$('#summaryTrx_div').html(data.FNAME + '-' + data.totalTrx + '-' + data.totalAmount);
+        tableListReport.clear().draw();
+
+        for (var i = 0; i < data.length; i++)
+        {
+
+          var no = i+1;
+          var file = data[i].val;
+          var datemodified = data[i].datemodified;
+          var size = data[i].size;
+
+            var jRow = $('<tr>').append(
+                '<td style="width: 5%">'+ no +'</td>',
+                '<td style="width: 50%">'+ file +'</td>',
+                '<td style="width: 20%">'+ datemodified +'</td>',
+                '<td style="width: 20%">'+ size +'</td>',
+                '<td style="width: 5%"><input type="checkbox" name="id[]" value="'+ file + '" class="chk"></td>'
+                );
+            tableListReport.row.add(jRow).draw();
+
+            $('.chk').prop('checked', true);
+        }
+        $(".hide-loading").css("display", "none");
+
+      }
+
+    });
+
+	// Handle click on "Select all" control
+   $('#example-select-all').on('click', function(){
+      // Check/uncheck all checkboxes in the table
+      var rows = tableListReport.rows({ 'search': 'applied' }).nodes();
+      $('input[type="checkbox"]', rows).prop('checked', this.checked);
+   });
+
+   // Handle click on checkbox to set state of "Select all" control
+   $('#tableListReport tbody').on('change', 'input[type="checkbox"]', function(){
+   // If checkbox is not checked
+   if(!this.checked){
+      var el = $('#example-select-all').get(0);
+      // If "Select all" control is checked and has 'indeterminate' property
+      if(el && el.checked && ('indeterminate' in el)){
+         // Set visual state of "Select all" control
+         // as 'indeterminate'
+         el.indeterminate = true;
+      }
+   }
+  });
+
+});
+
+$(function(){
+    $.ajax({
+      dataType: 'JSON',
+      type: 'GET',
+      url: '/bank_data',
+      success: function (data) {
+        for(var i = 0; i < data.length; i++)
+        {
+          $("#bank_code").append('<option value="' + data[i]['FNAME'] + '">' + data[i]['FNAME'] + '</option>');
+        }
+      }
+    });
+
+
+  });
+
+
+
 </script>
 @endsection

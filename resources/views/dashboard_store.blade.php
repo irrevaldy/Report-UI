@@ -546,7 +546,7 @@
           }
 
           totaltrxvolume = numberWithCommas(totaltrxvolume);
-          totalstore = numberWithCommas(totalstore);
+          //totalstore = numberWithCommas(totalstore);
           totalterminal = numberWithCommas(totalterminal);
           totalactivetrx = numberWithCommas(totalactivetrx);
           totalactivewotrx = numberWithCommas(totalactivewotrx);

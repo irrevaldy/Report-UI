@@ -137,14 +137,18 @@ class UserController extends Controller
     public function insertUserData(Request $request) {
         //return $request->all();
 
+        $username = $request->input('new_username');
+        $password = $request->input('new_password');
+        //$password = hash('sha256', $password);
+
         $client = new \GuzzleHttp\Client();
 
         $form_post = $client->request('POST', config('constants.api_serverv').'user_data_insert?api_token='.session()->get('token').'&username='.session()->get('username'),
             [
                 "json" => [
-                    "username_"             => $request->input('new_username'),
+                    "username_"             => $username,
                     "name_"                 => $request->input('new_name'),
-                    "password_"             => $request->input('new_password'),
+                    "password_"             => $password,
                     "groupId_"              => $request->input('new_groupId'),
                     "subgroupId_"           => $request->input('new_subgroupId'),
                     "description_"          => $request->input('new_description'),
@@ -164,7 +168,15 @@ class UserController extends Controller
     }
 
     public function updateUserData(Request $request) {
+
         //return $request->all();
+        $edit_username = $request->input('edit_username');
+        $edit_password = $request->input('edit_password');
+        if($edit_password != '')
+        {
+          $edit_password = hash('sha256', $edit_username.$edit_password);
+        }
+
 
         $client = new \GuzzleHttp\Client();
 
@@ -172,9 +184,9 @@ class UserController extends Controller
             [
                 "json" => [
                     "user_id_"              => $request->input('edit_user_id'),
-                    "username_"             => $request->input('edit_username'),
+                    "username_"             => $edit_username,
                     "name_"                 => $request->input('edit_name'),
-                    "password_"             => $request->input('edit_password'),
+                    "password_"             => $edit_password,
                     "groupId_"              => $request->input('edit_groupId'),
                     "subgroupId_"           => $request->input('edit_subgroupId'),
                     "description_"          => $request->input('edit_description'),

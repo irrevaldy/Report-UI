@@ -86,6 +86,42 @@ class DownloadDetailReportCorporateController extends Controller
 
     }
 
+    public function FilterReportTableSettlement(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+      $branch = $request->input('branch_code');
+      $range = $request->input('range');
+      $date = $request->input('detailDate');
+      $username = $request->session()->get('username');
+      //$merchant = $request->session()->get('merch_id');
+
+      $form_post = $client->request('POST', config('constants.api_serverv').'list_detail_report_filtered_settlement', [
+        'json' => [
+          'branch' => $branch,
+          'range' => $range,
+          'date' => $date,
+          'username' => $username
+        ]
+      ]);
+      $var = json_decode($form_post->getBody()->getContents());
+      //return $var;
+
+      if($var->success == true)
+      {
+        // Session::put('id', $var->data->Id);
+        $this->attrib = $var->result;
+
+        return $this->attrib;
+
+        //return redirect()->action('HomeController@index');
+        //return $username;
+      }
+      else{
+        return Redirect::back()->withInput()->withErrors($var->message);
+      }
+
+    }
+
     public function ZipListReport(Request $request)
     {
       $client = new \GuzzleHttp\Client();

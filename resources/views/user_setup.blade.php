@@ -403,7 +403,9 @@ ini_set('max_input_vars', 1000000);
                         <div class="col-md-12">
                             <div class="form-group">
                               <label class="control-label">Username</label>
-                              <input class="form-control form-white" name="edit_username" id="edit_username" maxlength="30" type="text" placeholder="username" required disabled>
+                              <input class="form-control form-white" name="edit_username1" id="edit_username1" maxlength="30" type="text" placeholder="username" required disabled>
+                              <input class="form-control form-white" name="edit_username" id="edit_username" maxlength="30" type="hidden" placeholder="username">
+
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -437,6 +439,11 @@ ini_set('max_input_vars', 1000000);
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Subgroup</label>
+                                <a id="hide-load" style="display: none">
+                                  &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                  <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
+                                   <span> Loading...</span>
+                                </a>
                                 <select class="form-control form-white edit_selectSubgroup" name="edit_subgroupId" id="edit_subgroupId" data-search="true" required >
                                     <option value=''></option>
                                 </select>
@@ -683,6 +690,8 @@ var checkedStore = [];
 
 var load = [];
 load[1] = 0;
+
+var status_select_edit = 0;
 
 	$(document).ready(function () {
 
@@ -1252,11 +1261,14 @@ load[1] = 0;
 
         });
 
+
         $(".edit_selectGroup").select2({
             placeholder: "select group",
             allowClear: true
         }).on('change', function(event){
-            edit_get_subgroup( this.value );
+            console.log(status_select_edit);
+            edit_get_subgroup( this.value, status_select_edit );
+            status_select_edit = 1;
         });
 
         $(".selectSubgroup").select2({
@@ -1532,6 +1544,8 @@ load[1] = 0;
 
         $('#editfilterTypeList').on('change', function() {
 
+          $(".hide-loading").css("display", "inline");
+
           var menu;
           var user_id = document.getElementById("edit_user_id").value;
           console.log("user id = " +user_id);
@@ -1655,7 +1669,7 @@ load[1] = 0;
                             $(menu).append('<option value="'+data[i].ID+'">'+data[i].FNAME+'</option>');
                         }
                     }
-
+                    $(".hide-loading").css("display", "none");
                 }
             });
 
@@ -1677,6 +1691,8 @@ load[1] = 0;
             // console.log('Data already sent!');
             // console.log("load[" + this.value + "] = " + load[this.value]);
             // console.log("load[" + (parseInt(this.value) + 1) + "] = " + load[(parseInt(this.value) + 1)]);
+
+            $(".hide-loading").css("display", "none");
           }
 
 
@@ -2005,8 +2021,10 @@ load[1] = 0;
         });
     }
 
-    function edit_get_subgroup( group_id )
+    function edit_get_subgroup( group_id, status_select_edit )
     {
+        $("#hide-load").css("display", "inline");
+
         $.ajax({
             dataType: 'JSON',
             type: 'GET',
@@ -2014,13 +2032,30 @@ load[1] = 0;
             async: false,
             success: function (data) {
 
+
+
                 $('#edit_subgroupId option').remove();
                 $('#edit_subgroupId').append('<option value=""></option>');
 
                 for( var i=0; i<data.length; i++ )
                 {
+                  if(status_select_edit == 0)
+                  {
+                    if(data[i].user_group_id == group_id)
+                    {
+                      $('#edit_subgroupId').append('<option value="'+ data[i].id +'" selected>'+ data[i].subgroup_name +'</option>');
+                    }
+                    else
+                    {
+                      $('#edit_subgroupId').append('<option value="'+ data[i].id +'">'+ data[i].subgroup_name +'</option>');
+                    }
+                  }
+                  else
+                  {
                     $('#edit_subgroupId').append('<option value="'+ data[i].id +'">'+ data[i].subgroup_name +'</option>');
+                  }
                 }
+                $("#hide-load").css("display", "none");
             }
         });
     }
@@ -2028,14 +2063,18 @@ load[1] = 0;
     function edit( user_id, user_name, name, user_subgroup_id, description, user_active )
     {
       //$(".edit-filter-acquirer").css('display', '');
+      status_select_edit = 0
 
-      $("#editfilterTypeList option").remove;
-
-
+      $(".edit-filter-acquirer").css('display', 'none');
+      $(".edit-filter-corporate").css('display', 'none');
+      $(".edit-filter-merchant").css('display', 'none');
+      $(".edit-filter-branch").css('display', 'none');
+      $(".edit-filter-store").css('display', 'none');
 
         $('#edit_user_id').val(user_id);
         $('#edit_name').val(name);
         $('#edit_username').val(user_name);
+        $('#edit_username1').val(user_name);
         $('#edit_description').val(description);
 
          $.ajax({
@@ -2049,6 +2088,7 @@ load[1] = 0;
 
                 var group_id = result[0].user_group_id;
                 $('#edit_groupId').val(group_id).trigger('change');
+
             }
         });
 
@@ -2067,11 +2107,15 @@ load[1] = 0;
             dataType: 'JSON',
             type: 'GET',
             url: '/filter_type_option',
+            //async: false,
             success: function (data) {
 
                 data_list = data;
 
                 var total_data = data.length;
+
+                  $('#editfilterTypeList option').remove();
+                  $('#editfilterTypeList').append('<option value=""></option>');
 
                 for (var i = 0; i < total_data ; i++) {
                     if(data[i].id < 6)
@@ -2084,6 +2128,7 @@ load[1] = 0;
                       }
                       else {*/
                       //  $('#filterTypeList').append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
+
                         $('#editfilterTypeList').append('<option value="'+data[i].id+'">'+data[i].name+'</option>');
 
                         // disini
@@ -2282,12 +2327,13 @@ load[1] = 0;
                     'content'   :{
                        bgcolor:'#666',
                        color:'#fff',
-                       message:'Please wait...'
+                       message:'Please wait...',
                     },
-                    'position'  :'top right'
+                    'position'  :'top right',
+                    'delay': 6000
                 });
 
-                password = sha256(username+password);
+                //password = sha256(username+password);
 
                 /*
                 var filter_type_id = new Array();
@@ -2306,6 +2352,13 @@ load[1] = 0;
                 // var multiple_select = $('select[name="filter_acquirer_selected"]').map(function(){
                 //     return this.value
                 // }).get();
+
+                //password = sha256(username+password);
+                password = sha256(password);
+
+
+                formData.set('new_password', password);
+                formData.set('new_confirmPassword', password);
 
             		var filter_acquirer_list = [];
             		var filter_corporate_list = [];
@@ -2342,6 +2395,8 @@ load[1] = 0;
                  formData.append('filter_branch_list', filter_branch_list);
                  formData.append('filter_store_list', filter_store_list);
 
+                 console.log(filter_store_list);
+
 
                 for(var pair of formData.entries())
                 {
@@ -2365,6 +2420,7 @@ load[1] = 0;
                                 'content'   :{
                                    bgcolor:'#d6d6d6',
                                    color:'#666',
+
                                    message:'<span style="color: #70c934;"><i class="fa fa-check" aria-hidden="true"></i> </span> Insert data success !'
                                 },
                                 'position'  :'top right'
@@ -2484,9 +2540,11 @@ load[1] = 0;
                   'content'   :{
                      bgcolor:'#666',
                      color:'#fff',
-                     message:'Please wait...'
+                     message:'Please wait...',
+
                   },
-                  'position'  :'top right'
+                  'position'  :'top right',
+                  'delay': 6000
               });
 
               if( password != '' ) {
@@ -2564,6 +2622,8 @@ load[1] = 0;
                   success: function (data) {
 
                       if(data.success == true) {
+
+
                           $.amaran({
                               'theme'     :'colorful',
                               'content'   :{

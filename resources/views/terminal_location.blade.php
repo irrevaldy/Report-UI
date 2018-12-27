@@ -1,4 +1,6 @@
-<?php $__env->startSection('content'); ?>
+@extends('layout')
+
+@section('content')
 
 <script>
   // FontAwesomeConfig = { searchPseudoElements: true };
@@ -160,7 +162,7 @@
           </div>
           <div class="panel-body p-15 p-b-0">
               <div class="panel-content widget-info">
-                  <div id="map" style="width: 975px;height: 425px"></div>
+                  <div id="map" style="width: 100%;height: 425px"></div>
                   <br>
 
           </div>
@@ -172,46 +174,45 @@
 
 
 
-<?php $__env->stopSection(); ?>
+@endsection
 
-<?php $__env->startSection('javascript'); ?>
+@section('javascript')
 
 
-<script src="<?php echo e(asset('assets/plugins/gmaps/markerclusterer.js')); ?>"></script>
+<script src="{{ asset('assets/plugins/gmaps/markerclusterer.js') }}"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0_yidovdfBKc6l6MwgpvS3Aa01aIEzZc&callback=initMap"></script>
 
 <script>
   var map;
 
-
-  var wirecard = {lat: -6.242322, lng: 106.851162};
-  var tis = {lat: -6.242557, lng: 106.848346};
-  var idm_kal_lapan = {lat: -6.341285, lng: 106.862094};
-  var idm_empang = {lat: -6.158332, lng: 106.787602};
-  var rusun_bandar = {lat: -6.136452, lng: 106.846024};
-  var kebon_kacang = {lat: -6.193516, lng: 106.820623};
-  var batan = {lat: -6.289938, lng: 106.771066};
-  var fatmawati = {lat: -6.280891, lng: 106.796218};
-  var kayu_tinggi = {lat: -6.182935, lng: 106.945717};
-  var warung_kasmat = {lat: -6.252546, lng: 106.773272};
-  var praja_dalam = {lat: -6.250864, lng: 106.783530};
-  var green_palace = {lat: -6.257407, lng: 106.849841};
-  var latumenten = {lat: -6.150099, lng: 106.794603};
-  var buaran = {lat: -6.220041, lng: 106.920212};
-  var kramat_jaya = {lat: -6.117529, lng: 106.916892};
-  var tanjung_duren = {lat: -6.180034, lng: 106.783371};
-  var plumpang = {lat: -6.129669, lng: 106.901153};
-  var kstubun = {lat: -6.192682, lng: 106.805506};
-  var lebak_bulus = {lat: -6.296443, lng: 106.786833};
-  var marina_raya = {lat: -6.112005, lng: 106.746233};
+  // var wirecard = {lat: -6.242322, lng: 106.851162};
+  // var tis = {lat: -6.242557, lng: 106.848346};
+  // var idm_kal_lapan = {lat: -6.341285, lng: 106.862094};
+  // var idm_empang = {lat: -6.158332, lng: 106.787602};
+  // var rusun_bandar = {lat: -6.136452, lng: 106.846024};
+  // var kebon_kacang = {lat: -6.193516, lng: 106.820623};
+  // var batan = {lat: -6.289938, lng: 106.771066};
+  // var fatmawati = {lat: -6.280891, lng: 106.796218};
+  // var kayu_tinggi = {lat: -6.182935, lng: 106.945717};
+  // var warung_kasmat = {lat: -6.252546, lng: 106.773272};
+  // var praja_dalam = {lat: -6.250864, lng: 106.783530};
+  // var green_palace = {lat: -6.257407, lng: 106.849841};
+  // var latumenten = {lat: -6.150099, lng: 106.794603};
+  // var buaran = {lat: -6.220041, lng: 106.920212};
+  // var kramat_jaya = {lat: -6.117529, lng: 106.916892};
+  // var tanjung_duren = {lat: -6.180034, lng: 106.783371};
+  // var plumpang = {lat: -6.129669, lng: 106.901153};
+  // var kstubun = {lat: -6.192682, lng: 106.805506};
+  // var lebak_bulus = {lat: -6.296443, lng: 106.786833};
+  // var marina_raya = {lat: -6.112005, lng: 106.746233};
 
   function initMap()
   {
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: -6.175436, lng: 106.827210},
-      zoom: 10,
-      /* nightmode map
-      styles: [
+      zoom: 11,
+      //nightmode map
+      /*styles: [
            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
@@ -339,11 +340,13 @@
             var markers = locations.map(function(location, i) {
 
               var contentString = '<div id="content">'+
-              '<bold><h4 id="firstHeading" class="firstHeading">'+ locations[i]['name'] +'</h4></bold>'+
+              '<bold><h2 id="firstHeading" class="firstHeading">'+ locations[i]['name'] +'</h2></bold>'+
               '<div id="bodyContent">'+
               'Address: ' + locations[i]['taddress'] +'<br>'+
+              'Last Transaction: ' + locations[i]['last_transaction'] +'<br>'+
               'SN: ' + locations[i]['sn'] +'<br>'+
-              'Last Transaction: ' + locations[i]['last_transaction'] +
+              'EDC Type: ' + locations[i]['edctype'] +'<br>'+
+              'App Version: ' + locations[i]['appver'] +'<br>'+
               '</div>'+
               '</div>';
 
@@ -351,12 +354,36 @@
                 content: contentString
               });
 
-              var marker = new google.maps.Marker({
-                position: location,
-                //label: labels[i % labels.length],
-                map: map,
-                icon: 'storage/m/green.png'
-              });
+              if(locations[i]['date_diff_active'] <= 7)
+              {
+                if(locations[i]['date_diff_active_trx'] <= 7)
+                {
+                  var marker = new google.maps.Marker({
+                    position: location,
+                    //label: labels[i % labels.length],
+                    map: map,
+                    icon: 'storage/m/green.png'
+                  });
+                }
+                else
+                {
+                  var marker = new google.maps.Marker({
+                    position: location,
+                    //label: labels[i % labels.length],
+                    map: map,
+                    icon: 'storage/m/yellow.png'
+                  });
+                }
+              }
+              else
+              {
+                var marker = new google.maps.Marker({
+                  position: location,
+                  //label: labels[i % labels.length],
+                  map: map,
+                  icon: 'storage/m/red.png'
+                });
+              }
 
               marker.addListener('mouseover', function() {
                 infowindow.open(map, marker);
@@ -382,8 +409,8 @@
 
 
 </script>
-   <!--<script src="<?php echo e(asset('assets/plugins/gmaps/gmaps.js')); ?>"></script>
-     <script src="<?php echo e(asset('assets/plugins/gmaps/api.js')); ?>"></script>
+   <!--<script src="{{ asset('assets/plugins/gmaps/gmaps.js') }}"></script>
+     <script src="{{ asset('assets/plugins/gmaps/api.js') }}"></script>
     <script>
 
 
@@ -405,6 +432,4 @@
         });
       }
     </script>-->
-         <?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+         @endsection

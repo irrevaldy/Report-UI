@@ -129,7 +129,27 @@
       <h2><i class="fas fa-home"></i> <strong>Download Detail Report - Store</strong></h3>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-4">
+      <div class="panel no-bd bd-3 panel-stat">
+        <a href='#' onClick="callTransactionDateFilter()">
+          <div class="panel-header">
+            <h3><i class="icon-graph"></i> <strong>Filter By Transaction Date &ensp;</strong></h3>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="panel no-bd bd-3 panel-stat">
+        <a href='#' onClick="callSettlementDateFilter()">
+          <div class="panel-header">
+            <h3><i class="icon-graph"></i> <strong>Filter By Settlement Date &ensp;</strong></h3>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" id="filterTransactionDate" style="display:none">
       <div class="panel no-bd bd-3 panel-stat">
           <div class="panel-header">
               <h3><i class="icon-graph"></i> <strong>List of Report &ensp;</strong></h3>
@@ -228,6 +248,31 @@
 
 
 <script>
+/*
+function callTransactionDateFilter() {
+    var x = document.getElementById("filterTransactionDate");
+    var y = document.getElementById("filterSettlementDate");
+    if (x.style.display === "none" ) {
+        x.style.display = "block";
+        y.style.display = "none";
+    } else {
+        x.style.display = "none";
+        y.style.display = "none";
+    }
+}
+function callSettlementDateFilter() {
+    var y = document.getElementById("filterSettlementDate");
+    var x = document.getElementById("filterTransactionDate");
+    if (y.style.display === "none") {
+        y.style.display = "block";
+        x.style.display = "none";
+    } else {
+        y.style.display = "none";
+        x.style.display = "none";
+    }
+}
+*/
+
 $(function ()
 {
       $(".selectBranch").select2({
@@ -309,7 +354,7 @@ $(document).ready(function(){
          'orderable':false
       }]
   });
-
+/*
   $.ajax({
     dataType: 'JSON',
     type: 'GET',
@@ -340,7 +385,7 @@ $(document).ready(function(){
       }
     }
     });
-
+*/
     // Handle click on "Select all" control
    $('#example-select-all').on('click', function(){
       // Check/uncheck all checkboxes in the table

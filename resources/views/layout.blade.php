@@ -801,9 +801,12 @@
               <ul class="children collapse">
                 @if ( in_array('STO_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
                 @if ( in_array('STO_ACQ_V', $priv)  ) <li><a href="#"> By Acquirer </a></li> @endif
+                @if ( in_array('STO_DREP_V', $priv)  ) <li><a href="#"> Download Detail Report </a></li> @endif
+                @if ( in_array('STO_DREC_V', $priv)  ) <li><a href="#"> Download Reconciliation Report </a></li> @endif
+              <!--
                 @if ( in_array('STO_DREP_V', $priv)  ) <li><a href="/download_detail_report_store"> Download Detail Report </a></li> @endif
                 @if ( in_array('STO_DREC_V', $priv)  ) <li><a href="/download_recon_report_store"> Download Reconciliation Report </a></li> @endif
-
+              -->
               </ul>
             </li>
             @endif
@@ -1064,7 +1067,12 @@
     <script src="{{ asset('assets/plugins/font-awesome/js/fontawesome-all.js') }}"></script>
     <script src="{{ asset('assets/plugins/font-awesome/js/fa-v4-shims.js') }}"></script>
     <script src="{{ asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
-
+    <script>
+    $.ajaxPrefilter(function( options, originalOptions, jqXHR )
+    {
+      options.async = true;
+    });
+  </script>
 <script>
 
 

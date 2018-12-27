@@ -581,6 +581,11 @@
           var totaltrxsuccess = data.total_trx_success;
           var totaltrxfailed = data.total_trx_failed;
 
+          if (totaltrxfailed == null)
+          {
+            totaltrxfailed = 0;
+          }
+
           if(totalterminal != 0)
           {
             var total_terminal_percent = Math.round(((totalterminal / totalterminal) * 100) * 100) / 100;
@@ -628,7 +633,7 @@
           terminalinactive = numberWithCommas(terminalinactive);
           totaltrxcount = numberWithCommas(totaltrxcount);
           totaltrxsuccess = numberWithCommas(totaltrxsuccess);
-          totaltrxfailed = numberWithCommas(totaltrxfailed);
+          //totaltrxfailed = numberWithCommas(totaltrxfailed);
 
           var offus_trxcount = parseInt(data.offus_trxcount);
           var onus_trxcount = parseInt(data.onus_trxcount);

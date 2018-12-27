@@ -12,6 +12,8 @@
 */
 
 
+
+
 	Route::get('/terminal_management', function () { return view('terminal_management'); });
 
 	/* ajax dummy */
@@ -27,6 +29,11 @@
 
 Route::group(['middleware' => 'global_middleware' ], function()
 {
+
+	Route::get('/ftpFile',['uses' => 'FtpFileController@index']);
+	Route::post('/ftpFile/filter_report_table',['uses' => 'FtpFileController@FilterReportTable']);
+	Route::post('/ftpFile/downloadFile','FtpFileController@downloadFile');
+
 	Route::get('/index', 													['uses' => 'indexController@index']);
 	Route::get('/get_logo', 													['uses' => 'GlobalController@GetLogo']);
 
@@ -136,54 +143,64 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::get('/download_detail_report_acquirer/get_list_report',			['uses' => 'DownloadDetailReportAcquirerController@GetListReport']);
 	Route::post('/download_detail_report_acquirer/zip_list_report',			['uses' => 'DownloadDetailReportAcquirerController@ZipListReport']);
 	Route::post('/download_detail_report_acquirer/filter_report_table',			['uses' => 'DownloadDetailReportAcquirerController@FilterReportTable']);
+	Route::post('/download_detail_report_acquirer/filter_report_table_settlement',			['uses' => 'DownloadDetailReportAcquirerController@FilterReportTableSettlement']);
 
 
 	Route::get('/download_recon_report_acquirer',							['uses' => 'DownloadReconReportAcquirerController@index']);
 	Route::get('/download_recon_report_acquirer/get_list_report',			['uses' => 'DownloadReconReportAcquirerController@GetListReport']);
 	Route::post('/download_recon_report_acquirer/zip_list_report',			['uses' => 'DownloadReconReportAcquirerController@ZipListReport']);
 	Route::post('/download_recon_report_acquirer/filter_report_table',			['uses' => 'DownloadReconReportAcquirerController@FilterReportTable']);
+	Route::post('/download_recon_report_acquirer/filter_report_table_settlement',			['uses' => 'DownloadReconReportAcquirerController@FilterReportTableSettlement']);
 
 
 	Route::get('/download_detail_report_merchant',							['uses' => 'DownloadDetailReportMerchantController@index']);
 	Route::get('/download_detail_report_merchant/get_list_report',			['uses' => 'DownloadDetailReportMerchantController@GetListReport']);
 	Route::post('/download_detail_report_merchant/zip_list_report',			['uses' => 'DownloadDetailReportMerchantController@ZipListReport']);
 	Route::post('/download_detail_report_merchant/filter_report_table',			['uses' => 'DownloadDetailReportMerchantController@FilterReportTable']);
-
+	Route::post('/download_detail_report_merchant/filter_report_table_settlement',			['uses' => 'DownloadDetailReportMerchantController@FilterReportTableSettlement']);
 
 	Route::get('/download_recon_report_merchant',							['uses' => 'DownloadReconReportMerchantController@index']);
 	Route::get('/download_recon_report_merchant/get_list_report',			['uses' => 'DownloadReconReportMerchantController@GetListReport']);
 	Route::post('/download_recon_report_merchant/zip_list_report',			['uses' => 'DownloadReconReportMerchantController@ZipListReport']);
 	Route::post('/download_recon_report_merchant/filter_report_table',			['uses' => 'DownloadReconReportMerchantController@FilterReportTable']);
+	Route::post('/download_recon_report_merchant/filter_report_table_settlement',			['uses' => 'DownloadReconReportMerchantController@FilterReportTableSettlement']);
+
 
 	Route::get('/download_detail_report_branch',							['uses' => 'DownloadDetailReportBranchController@index']);
 	Route::get('/download_detail_report_branch/get_list_report',			['uses' => 'DownloadDetailReportBranchController@GetListReport']);
 	Route::post('/download_detail_report_branch/zip_list_report',			['uses' => 'DownloadDetailReportBranchController@ZipListReport']);
 	Route::post('/download_detail_report_branch/filter_report_table',			['uses' => 'DownloadDetailReportBranchController@FilterReportTable']);
+	Route::post('/download_detail_report_branch/filter_report_table_settlement',			['uses' => 'DownloadDetailReportBranchController@FilterReportTableSettlement']);
 
 	Route::get('/download_recon_report_branch',							['uses' => 'DownloadReconReportBranchController@index']);
 	Route::get('/download_recon_report_branch/get_list_report',			['uses' => 'DownloadReconReportBranchController@GetListReport']);
 	Route::post('/download_recon_report_branch/zip_list_report',			['uses' => 'DownloadReconReportBranchController@ZipListReport']);
 	Route::post('/download_recon_report_branch/filter_report_table',			['uses' => 'DownloadReconReportBranchController@FilterReportTable']);
+	Route::post('/download_recon_report_branch/filter_report_table_settlement',			['uses' => 'DownloadReconReportBranchController@FilterReportTableSettlement']);
 
 	Route::get('/download_detail_report_provider',							['uses' => 'DownloadDetailReportProviderController@index']);
 	Route::get('/download_detail_report_provider/get_list_report',			['uses' => 'DownloadDetailReportProviderController@GetListReport']);
 	Route::post('/download_detail_report_provider/zip_list_report',			['uses' => 'DownloadDetailReportProviderController@ZipListReport']);
 	Route::post('/download_detail_report_provider/filter_report_table',			['uses' => 'DownloadDetailReportProviderController@FilterReportTable']);
+	Route::post('/download_detail_report_provider/filter_report_table_settlement',			['uses' => 'DownloadDetailReportProviderController@FilterReportTableSettlement']);
 
 	Route::get('/download_recon_report_provider',							['uses' => 'DownloadReconReportProviderController@index']);
 	Route::get('/download_recon_report_provider/get_list_report',			['uses' => 'DownloadReconReportProviderController@GetListReport']);
 	Route::post('/download_recon_report_provider/zip_list_report',			['uses' => 'DownloadReconReportProviderController@ZipListReport']);
 	Route::post('/download_recon_report_provider/filter_report_table',			['uses' => 'DownloadReconReportProviderController@FilterReportTable']);
+	Route::post('/download_recon_report_provider/filter_report_table_settlement',			['uses' => 'DownloadReconReportProviderController@FilterReportTableSettlement']);
 
 	Route::get('/download_detail_report_corporate',							['uses' => 'DownloadDetailReportCorporateController@index']);
 	Route::get('/download_detail_report_corporate/get_list_report',			['uses' => 'DownloadDetailReportCorporateController@GetListReport']);
 	Route::post('/download_detail_report_provide/zip_list_report',			['uses' => 'DownloadDetailReportCorporateController@ZipListReport']);
 	Route::post('/download_detail_report_corporate/filter_report_table',			['uses' => 'DownloadDetailReportCorporateController@FilterReportTable']);
+	Route::post('/download_detail_report_corporate/filter_report_table_settlement',			['uses' => 'DownloadDetailReportCorporateController@FilterReportTableSettlement']);
 
 	Route::get('/download_recon_report_corporate',							['uses' => 'DownloadReconReportCorporateController@index']);
 	Route::get('/download_recon_report_corporate/get_list_report',			['uses' => 'DownloadReconReportCorporateController@GetListReport']);
 	Route::post('/download_recon_report_corporate/zip_list_report',			['uses' => 'DownloadReconReportCorporateController@ZipListReport']);
 	Route::post('/download_recon_report_corporate/filter_report_table',			['uses' => 'DownloadReconReportCorporateController@FilterReportTable']);
+	Route::post('/download_recon_report_corporate/filter_report_table_settlement',			['uses' => 'DownloadReconReportCorporateController@FilterReportTableSettlement']);
 
 	Route::get('/download_detail_report_store',							['uses' => 'DownloadDetailReportStoreController@index']);
 	Route::get('/download_detail_report_store/get_list_report',			['uses' => 'DownloadDetailReportStoreController@GetListReport']);
@@ -196,7 +213,14 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::post('/download_recon_report_store/filter_report_table',			['uses' => 'DownloadReconReportStoreController@FilterReportTable']);
 
 	Route::get('/active_inactive_terminal',							['uses' => 'ActiveTerminalController@index']);
+	Route::post('/active_inactive_terminal/zip_list_report',			['uses' => 'ActiveTerminalController@ZipListReport']);
+	Route::post('/active_inactive_terminal/filter_report_table',			['uses' => 'ActiveTerminalController@FilterReportTable']);
+
 	Route::get('/inactive_tid',							['uses' => 'InactiveTIDController@index']);
+	//Route::get('/inactive_tid/get_list_report',			['uses' => 'InactiveTIDController@GetListReport']);
+	Route::post('/inactive_tid/zip_list_report',			['uses' => 'InactiveTIDController@ZipListReport']);
+	Route::post('/inactive_tid/filter_report_table',			['uses' => 'InactiveTIDController@FilterReportTable']);
+
 	Route::get('/terminal_location',							['uses' => 'TerminalLocationController@index']);
 
 	/* Change Password */
@@ -263,6 +287,7 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::get('/branch_data',['uses' => 'GlobalController@GetBranchData']);
 	Route::get('/merchant_data',['uses' => 'GlobalController@GetMerchantData']);
 	Route::get('/host_data',['uses' => 'GlobalController@GetHostData']);
+	Route::get('/bank_data',['uses' => 'GlobalController@GetBankData']);
 	Route::get('/branch_data_filtered',['uses' => 'GlobalController@GetBranchDataFiltered']);
 	Route::get('/merchant_data_filtered',['uses' => 'GlobalController@GetMerchantDataFiltered']);
 	Route::get('/host_data_filtered',['uses' => 'GlobalController@GetHostDataFiltered']);
