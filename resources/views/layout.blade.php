@@ -694,8 +694,8 @@
                 @if ( in_array('SERPRO_T5CORP_V', $priv)  ) <li><a href="#"> Top Five Corporate </a></li> @endif
                 @if ( in_array('SERPRO_T5MER_V', $priv)  ) <li><a href="#"> Top Five Merchant </a></li> @endif
                 @if ( in_array('SERPRO_ONOFF_V', $priv)  ) <li><a href="#"> On Us & Off Us </a></li> @endif
-                @if ( in_array('SERPRO_DREP_V', $priv)  ) <li><a href="/download_detail_report_provider"> Download Detail Report </a></li> @endif
-                @if ( in_array('SERPRO_DREC_V', $priv)  ) <li><a href="/download_recon_report_provider"> Download Reconciliation Report </a></li> @endif
+                @if ( in_array('SERPRO_DREP_V', $priv)  ) <li><a href="/download_detail_report_provider" title="Download Detail Report"> Download Detail Report </a></li> @endif
+                @if ( in_array('SERPRO_DREC_V', $priv)  ) <li><a href="/download_recon_report_provider" title="Download Reconciliation Report"> Download Reconciliation Report </a></li> @endif
 
               </ul>
             </li>
@@ -711,15 +711,15 @@
               in_array('ACQ_DREC_V', $priv)
             )
             <li class="nav-parent ">
-              <a><i class="fa fa-building" aria-hidden="true"></i><span data-translate="Service Provider"> Acquirer</span><span class="fas fa-angle-down arrow"></span></a>
+              <a><i class="fa fa-building" aria-hidden="true"></i><span data-translate="Acquirer"> Acquirer</span><span class="fas fa-angle-down arrow"></span></a>
               <ul class="children collapse">
                 @if ( in_array('ACQ_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
                 @if ( in_array('ACQ_CTP_V', $priv)  ) <li><a href="#"> By Card Type </a></li> @endif
                 @if ( in_array('ACQ_CORP_V', $priv)  ) <li><a href="#"> By Corporate </a></li> @endif
-                @if ( in_array('ACQ_MER_V', $priv)  ) <li><a href="#"> By Merchant </a></li> @endif
+                @if ( in_array('ACQ_MER_V', $priv)  ) <li><a href="/download_acquirer_monthly_by_merchant"> Monthly Revenue By Merchant </a></li> @endif
                 @if ( in_array('ACQ_ONOFF_V', $priv)  ) <li><a href="#"> On Us & Off Us </a></li> @endif
-                @if ( in_array('ACQ_DREP_V', $priv)  ) <li><a href="/download_detail_report_acquirer"> Download Detail Report </a></li> @endif
-                @if ( in_array('ACQ_DREC_V', $priv)  ) <li><a href="/download_recon_report_acquirer"> Download Reconciliation Report </a></li> @endif
+                @if ( in_array('ACQ_DREP_V', $priv)  ) <li><a href="/download_detail_report_acquirer" title="Download Detail Report"> Download Detail Report </a></li> @endif
+                @if ( in_array('ACQ_DREC_V', $priv)  ) <li><a href="/download_recon_report_acquirer" title="Download Reconciliation Report"> Download Reconciliation Report </a></li> @endif
               </ul>
             </li>
             @endif
@@ -759,12 +759,12 @@
               <a><svg aria-hidden="true" data-prefix="fas" data-icon="school" class="svg-inline--fa fa-school fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M0 224v272c0 8.84 7.16 16 16 16h80V192H32c-17.67 0-32 14.33-32 32zm360-48h-24v-40c0-4.42-3.58-8-8-8h-16c-4.42 0-8 3.58-8 8v64c0 4.42 3.58 8 8 8h48c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zm137.75-63.96l-160-106.67a32.02 32.02 0 0 0-35.5 0l-160 106.67A32.002 32.002 0 0 0 128 138.66V512h128V368c0-8.84 7.16-16 16-16h96c8.84 0 16 7.16 16 16v144h128V138.67c0-10.7-5.35-20.7-14.25-26.63zM320 256c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80zm288-64h-64v320h80c8.84 0 16-7.16 16-16V224c0-17.67-14.33-32-32-32z"></path></svg><span data-translate="Service Provider"> Merchant</span><span class="fas fa-angle-down arrow"></span></a>
               <ul class="children collapse">
                 @if ( in_array('MER_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
-                @if ( in_array('MER_ACQ_V', $priv)  ) <li><a href="#"> By Acquirer </a></li> @endif
-                @if ( in_array('MER_BRA_V', $priv)  ) <li><a href="#"> By Branch </a></li> @endif
+                @if ( in_array('MER_ACQ_V', $priv)  ) <li><a href="/download_merchant_monthly_by_acquirer" title="Monthly Revenue By Acquirer"> Monthly Revenue By Acquirer </a></li> @endif
+                @if ( in_array('MER_BRA_V', $priv)  ) <li><a href="/download_merchant_monthly_by_branch"> By Branch </a></li> @endif
                 @if ( in_array('MER_STO_V', $priv)  ) <li><a href="#"> By Store </a></li> @endif
                 @if ( in_array('MER_T5BRA_V', $priv)  ) <li><a href="#"> Top Ten Branch </a></li> @endif
-                @if ( in_array('MER_DREP_V', $priv)  ) <li><a href="/download_detail_report_merchant"> Download Detail Report </a></li> @endif
-                @if ( in_array('MER_DREC_V', $priv)  ) <li><a href="/download_recon_report_merchant"> Download Reconciliation Report </a></li> @endif
+                @if ( in_array('MER_DREP_V', $priv)  ) <li><a href="/download_detail_report_merchant" title="Download Detail Report"> Download Detail Report </a></li> @endif
+                @if ( in_array('MER_DREC_V', $priv)  ) <li><a href="/download_recon_report_merchant" title="Daily Reconciliation Report"> Download Reconciliation Report </a></li> @endif
               </ul>
             </li>
             @endif

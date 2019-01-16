@@ -152,6 +152,10 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::post('/download_recon_report_acquirer/filter_report_table',			['uses' => 'DownloadReconReportAcquirerController@FilterReportTable']);
 	Route::post('/download_recon_report_acquirer/filter_report_table_settlement',			['uses' => 'DownloadReconReportAcquirerController@FilterReportTableSettlement']);
 
+	Route::get('/download_acquirer_monthly_by_merchant', ['uses' => 'DownloadAcquirerMonthlyByMerchant@index']);
+	Route::post('/download_acquirer_monthly_by_merchant/zip_list_report', ['uses' => 'DownloadAcquirerMonthlyByMerchant@ZipListReport']);
+	Route::post('/download_acquirer_monthly_by_merchant/filter_report_table', ['uses' => 'DownloadAcquirerMonthlyByMerchant@FilterReportTable']);
+
 
 	Route::get('/download_detail_report_merchant',							['uses' => 'DownloadDetailReportMerchantController@index']);
 	Route::get('/download_detail_report_merchant/get_list_report',			['uses' => 'DownloadDetailReportMerchantController@GetListReport']);
@@ -165,6 +169,11 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::post('/download_recon_report_merchant/filter_report_table',			['uses' => 'DownloadReconReportMerchantController@FilterReportTable']);
 	Route::post('/download_recon_report_merchant/filter_report_table_settlement',			['uses' => 'DownloadReconReportMerchantController@FilterReportTableSettlement']);
 
+	Route::get('/download_merchant_monthly_by_acquirer', ['uses' => 'DownloadMerchantMonthlyByAcquirer@index']);
+	Route::post('/download_merchant_monthly_by_acquirer/zip_list_report', ['uses' => 'DownloadMerchantMonthlyByAcquirer@ZipListReport']);
+	Route::post('/download_merchant_monthly_by_acquirer/filter_report_table', ['uses' => 'DownloadMerchantMonthlyByAcquirer@FilterReportTable']);
+
+	Route::get('/download_merchant_monthly_by_branch', ['uses' => 'DownloadMerchantMonthlyByBranch@index']);
 
 	Route::get('/download_detail_report_branch',							['uses' => 'DownloadDetailReportBranchController@index']);
 	Route::get('/download_detail_report_branch/get_list_report',			['uses' => 'DownloadDetailReportBranchController@GetListReport']);

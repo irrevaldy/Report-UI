@@ -21,9 +21,7 @@
 
     <!-- Important Owl stylesheet -->
     <link rel="stylesheet" href="{{ asset('assets/login/owl.carousel.2/assets/owl.carousel.css') }}">
-
     <link type="text/css" rel="stylesheet" href="{{ asset('assets/login/jquery-notify/ui.notify.css') }}" />
-
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,12 +31,13 @@
     <![endif]-->
 
     <style type="text/css">
-    .login-page, .register-page {
-    background-color: #f7f7f7;
+      .login-page, .register-page
+      {
+        background-color: #f7f7f7;
 
-      background-image: url(css/cream-dust.png);
-      /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-    }
+        background-image: url(css/cream-dust.png);
+        /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+      }
 
       .login-box-body,
       .register-box-body {
@@ -143,16 +142,19 @@
         font: normal Helvetica, Arial, sans-serif;
       }
 
-      #owl-demo img {
-    margin: auto;
-    width: 340px;
-}
-
-      .login-box-footer {
-          color: white;
+      #owl-demo img
+      {
+        margin: auto;
+        width: 340px;
       }
 
-      .lb_label {
+      .login-box-footer
+      {
+        color: white;
+      }
+
+      .lb_label
+      {
         color: white !important;
       }
 
@@ -203,7 +205,7 @@
 
       <div class="login-box-footer text-center">
         <strong>Copyright &copy; 2018 Wirecard | PT Prima Vista Solusi.</strong><br> All rights reserved.
-        <br>Version 2.0.0 - October 2018
+        <br>Version 2.0.3 - January 2019
       </div>
     </div><!-- /.login-box -->
 
@@ -211,13 +213,12 @@
     <script src="{{ asset('assets/login/jQuery/jQuery-2.1.4.min.js') }}"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{ asset('assets/login/bootstrap/js/bootstrap.min.js') }}"></script>
-
-
     <!-- label-bettter -->
     <script src="{{ asset('assets/login/label_better/jquery.label_better.js') }}"></script>
 
     <script>
-    $(document).ready( function() {
+    $(document).ready( function()
+    {
       $(".label_better").label_better({
         easing: "bounce"
       });
@@ -225,16 +226,18 @@
     </script>
 
     <script type="text/javascript">
-      function check(){
-        var pass = document.getElementById('password-inp');
-        if(pass.value != "") {
-          $("#password-box").addClass("pass-push");
-
-        } else {
-          $("#password-box").removeClass("pass-push");
-
-        }
+    function check()
+    {
+      var pass = document.getElementById('password-inp');
+      if(pass.value != "")
+      {
+        $("#password-box").addClass("pass-push");
       }
+      else
+      {
+        $("#password-box").removeClass("pass-push");
+      }
+    }
 
     </script>
 
@@ -243,35 +246,14 @@
 
     <script type="text/javascript">
 
-    $(document).ready(function() {
-
+    $(document).ready(function()
+    {
       $("#owl-demo").owlCarousel({
-
-          /*loop: true,
-          items: 1,
-          startPosition: 1,
-          autoplay: true,
-          autoplayTimeout: 3000*/
-
           items: 1,
           startPosition: 1,
           touchDrag  : false,
           mouseDrag  : false
-
-
-          //animateOut: 'fadeOut',
-          //animateIn: 'fadeIn'
-
-
-          // "singleItem:true" is a shortcut for:
-          // items : 1,
-          // itemsDesktop : false,
-          // itemsDesktopSmall : false,
-          // itemsTablet: false,
-          // itemsMobile : false
-
       });
-
     });
 
 
@@ -287,28 +269,20 @@
       }
 
       $(function(){
-        // initialize widget on a container, passing in all the defaults.
-        // the defaults will apply to any notification created within this
-        // container, but can be overwritten on notification-by-notification
-        // basis.
         $container = $("#container").notify();
 
         buttonLogin.disabled = false;
 
-        $(window).keydown(function(event){
-          if(event.keyCode == 13) {
-            //event.preventDefault();
-            /*return false;*/
-            //procLogin();
-          }
+        $(window).keydown(function(event)
+        {
+          if(event.keyCode == 13) {}
         });
-
       });
 
-      $("#form").submit(function(e){
+      $("#form").submit(function(e)
+      {
         e.preventDefault();
 
-        //alert('test');
         $('#spinner').css('display', '');
         $('#buttonLogin').prop('disabled', true);
         create("default", { title:'', text:'<i class="fa fa-cog fa-spin" style="font-size: 16px;"></i> Please Wait ...'},{ expires:4000 });
@@ -319,105 +293,54 @@
             data: {
                     user : $('#username').val(),
                     pass : $('#password-inp').val()
-                    //_token : "{{ csrf_token() }}"
-                    //_token : $('input[name="tok"]').val()
                   },
             url: "/login_proc",
             cache: false,
-            success: function(msg){
-
-              //var data = JSON.parse(msg);
+            success: function(msg)
+            {
               var data = msg;
               console.log(msg);
 
-              if(data.success == false) {
-
+              if(data.success == false)
+              {
                 $('#spinner').css('display', 'none');
                 create("default", { title:'<span style="color: #FF6D6D;"><i class="fa fa-times" style="font-size: 16px;"></i> Login Failed</span>', text: data.message },{ expires:4000 });
                 $('#buttonLogin').prop('disabled', false);
-
-              } else if(data.success == 'csrf_expired') {
-
+              }
+              else if(data.success == 'csrf_expired')
+              {
                 // nanti dibuat, push ke controller lalu di arrahkan se akan2 sesssion timeout
 
                 $('#spinner').css('display', 'none');
                 create("default", { title:'<span style="color: #FF6D6D;"><i class="fa fa-times" style="font-size: 16px;"></i> Login Failed</span>', text: data.message },{ expires:4000 });
                 $('#buttonLogin').prop('disabled', false);
-
-              } else if (data.success == true) {
-
+              }
+              else if (data.success == true)
+              {
                 create("default", { title:'<span style="color: #00DD76;"><i class="fa fa-check"></i> Login Success</span>', text: data.message, icon:'alert.png' });
 
                 var delay = 2000;
 
-                // setTimeout(function(){ window.location = '/dashbank_copy' }, delay);
-
-                if (data.data.flag_old_password == "1") {
-
+                if (data.data.flag_old_password == "1")
+                {
                   setTimeout(function(){ window.location = '/change_password'  }, delay);
-
-                } else {
+                }
+                else
+                {
                   if(data.total_dashboard != 1)
                   {
                       setTimeout(function(){ window.location = '/index'  }, delay);
-
                   }
                   else
                   {
                     setTimeout(function(){ window.location = '/' + data.dashboard  }, delay);
-
                   }
-
-
                 }
-
               }
-
             }
           });
-
       });
 
-      //setTimeout(function(){ window.location = '/re-token';  }, '7000');
-
     </script>
-
   </body>
-
-  <div id="container" style="display:none">
-
-    <div id="default">
-      <h1>#{title}</h1>
-      <p>#{text}</p>
-    </div>
-
-    <div id="sticky">
-      <a class="ui-notify-close ui-notify-cross" href="#">x</a>
-      <h1>#{title}</h1>
-      <p>#{text}</p>
-    </div>
-
-    <div id="themeroller" class="ui-state-error" style="padding:10px; -moz-box-shadow:0 0 6px #980000; -webkit-box-shadow:0 0 6px #980000; box-shadow:0 0 6px #980000;">
-      <a class="ui-notify-close" href="#"><span class="ui-icon ui-icon-close" style="float:right"></span></a>
-      <span style="float:left; margin:0 5px 0 0;" class="ui-icon ui-icon-alert"></span>
-      <h1>#{title}</h1>
-      <p>#{text}</p>
-      <p style="text-align:center"><a class="ui-notify-close" href="#">Close Me</a></p>
-    </div>
-
-    <div id="withIcon">
-      <a class="ui-notify-close ui-notify-cross" href="#">x</a>
-      <div style="float:left;margin:0 10px 0 0"><img src="#{icon}" alt="warning" /></div>
-      <h1>#{title}</h1>
-      <p>#{text}</p>
-    </div>
-
-    <div id="buttons">
-      <h1>#{title}</h1>
-      <p>#{text}</p>
-      <p style="margin-top:10px;text-align:center">
-        <input type="button" class="confirm" value="Close Dialog" />
-      </p>
-    </div>
-  </div>
 </html>

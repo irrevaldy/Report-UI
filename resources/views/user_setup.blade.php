@@ -692,6 +692,7 @@ var load = [];
 load[1] = 0;
 
 var status_select_edit = 0;
+var user_subgroup_id = 0;
 
 	$(document).ready(function () {
 
@@ -1267,7 +1268,7 @@ var status_select_edit = 0;
             allowClear: true
         }).on('change', function(event){
             console.log(status_select_edit);
-            edit_get_subgroup( this.value, status_select_edit );
+            edit_get_subgroup( this.value, user_subgroup_id, status_select_edit );
             status_select_edit = 1;
         });
 
@@ -2021,7 +2022,7 @@ var status_select_edit = 0;
         });
     }
 
-    function edit_get_subgroup( group_id, status_select_edit )
+    function edit_get_subgroup( group_id, subgroup_id, status_select_edit )
     {
         $("#hide-load").css("display", "inline");
 
@@ -2032,8 +2033,6 @@ var status_select_edit = 0;
             async: false,
             success: function (data) {
 
-
-
                 $('#edit_subgroupId option').remove();
                 $('#edit_subgroupId').append('<option value=""></option>');
 
@@ -2041,7 +2040,7 @@ var status_select_edit = 0;
                 {
                   if(status_select_edit == 0)
                   {
-                    if(data[i].user_group_id == group_id)
+                    if(data[i].id == subgroup_id)
                     {
                       $('#edit_subgroupId').append('<option value="'+ data[i].id +'" selected>'+ data[i].subgroup_name +'</option>');
                     }
@@ -2063,7 +2062,8 @@ var status_select_edit = 0;
     function edit( user_id, user_name, name, user_subgroup_id, description, user_active )
     {
       //$(".edit-filter-acquirer").css('display', '');
-      status_select_edit = 0
+      status_select_edit = 0;
+      this.user_subgroup_id = user_subgroup_id;
 
       $(".edit-filter-acquirer").css('display', 'none');
       $(".edit-filter-corporate").css('display', 'none');

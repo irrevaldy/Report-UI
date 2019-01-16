@@ -235,7 +235,7 @@
               <div class="left"></div>
               <div class="right">
                 <span class="count_top"><i class="fa fa-calculator orange"></i> Active Without Transaction</span>
-                <div id="totalATW" class="count orange number f-30" data-from="0" data-to="0"><span class="terminalactive"><marquee>...</marquee></span></div>
+                <div id="totalATW" class="count orange number f-30" data-from="0" data-to="0"><span class="totalactivewotrx"><marquee>...</marquee></span></div>
                 <span class="count_bottom"><i class=""><span class="total_trx_percent_active_wo_trx"><marquee>...</marquee></span>% </i> from Total</span>
               </div>
             </div>
