@@ -152,10 +152,13 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::post('/download_recon_report_acquirer/filter_report_table',			['uses' => 'DownloadReconReportAcquirerController@FilterReportTable']);
 	Route::post('/download_recon_report_acquirer/filter_report_table_settlement',			['uses' => 'DownloadReconReportAcquirerController@FilterReportTableSettlement']);
 
-	Route::get('/download_acquirer_monthly_by_merchant', ['uses' => 'DownloadAcquirerMonthlyByMerchant@index']);
-	Route::post('/download_acquirer_monthly_by_merchant/zip_list_report', ['uses' => 'DownloadAcquirerMonthlyByMerchant@ZipListReport']);
-	Route::post('/download_acquirer_monthly_by_merchant/filter_report_table', ['uses' => 'DownloadAcquirerMonthlyByMerchant@FilterReportTable']);
+	Route::get('/download_acquirer_by_merchant', ['uses' => 'DownloadAcquirerByMerchant@index']);
+	Route::post('/download_acquirer_by_merchant/zip_list_report', ['uses' => 'DownloadAcquirerByMerchant@ZipListReport']);
+	Route::post('/download_acquirer_by_merchant/filter_report_table', ['uses' => 'DownloadAcquirerByMerchant@FilterReportTable']);
 
+	Route::get('/download_acquirer_onus_offus_by_merchant', ['uses' => 'DownloadAcquirerOnUsOffUsByMerchant@index']);
+	Route::post('/download_acquirer_onus_offus_by_merchant/zip_list_report', ['uses' => 'DownloadAcquirerOnUsOffUsByMerchant@ZipListReport']);
+	Route::post('/download_acquirer_onus_offus_by_merchant/filter_report_table', ['uses' => 'DownloadAcquirerOnUsOffUsByMerchant@FilterReportTable']);
 
 	Route::get('/download_detail_report_merchant',							['uses' => 'DownloadDetailReportMerchantController@index']);
 	Route::get('/download_detail_report_merchant/get_list_report',			['uses' => 'DownloadDetailReportMerchantController@GetListReport']);
@@ -169,11 +172,17 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::post('/download_recon_report_merchant/filter_report_table',			['uses' => 'DownloadReconReportMerchantController@FilterReportTable']);
 	Route::post('/download_recon_report_merchant/filter_report_table_settlement',			['uses' => 'DownloadReconReportMerchantController@FilterReportTableSettlement']);
 
-	Route::get('/download_merchant_monthly_by_acquirer', ['uses' => 'DownloadMerchantMonthlyByAcquirer@index']);
-	Route::post('/download_merchant_monthly_by_acquirer/zip_list_report', ['uses' => 'DownloadMerchantMonthlyByAcquirer@ZipListReport']);
-	Route::post('/download_merchant_monthly_by_acquirer/filter_report_table', ['uses' => 'DownloadMerchantMonthlyByAcquirer@FilterReportTable']);
+	Route::get('/download_merchant_by_acquirer', ['uses' => 'DownloadMerchantByAcquirer@index']);
+	Route::post('/download_merchant_by_acquirer/zip_list_report', ['uses' => 'DownloadMerchantByAcquirer@ZipListReport']);
+	Route::post('/download_merchant_by_acquirer/filter_report_table', ['uses' => 'DownloadMerchantByAcquirer@FilterReportTable']);
 
-	Route::get('/download_merchant_monthly_by_branch', ['uses' => 'DownloadMerchantMonthlyByBranch@index']);
+	Route::get('/download_merchant_by_branch', ['uses' => 'DownloadMerchantByBranch@index']);
+	Route::post('/download_merchant_by_branch/zip_list_report', ['uses' => 'DownloadMerchantByBranch@ZipListReport']);
+	Route::post('/download_merchant_by_branch/filter_report_table', ['uses' => 'DownloadMerchantByBranch@FilterReportTable']);
+
+	Route::get('/download_merchant_top10_highest_branch', ['uses' => 'DownloadMerchantTop10HighestBranch@index']);
+	Route::post('/download_merchant_top10_highest_branch/zip_list_report', ['uses' => 'DownloadMerchantTop10HighestBranch@ZipListReport']);
+	Route::post('/download_merchant_top10_highest_branch/filter_report_table', ['uses' => 'DownloadMerchantTop10HighestBranch@FilterReportTable']);
 
 	Route::get('/download_detail_report_branch',							['uses' => 'DownloadDetailReportBranchController@index']);
 	Route::get('/download_detail_report_branch/get_list_report',			['uses' => 'DownloadDetailReportBranchController@GetListReport']);
@@ -198,6 +207,14 @@ Route::group(['middleware' => 'global_middleware' ], function()
 	Route::post('/download_recon_report_provider/zip_list_report',			['uses' => 'DownloadReconReportProviderController@ZipListReport']);
 	Route::post('/download_recon_report_provider/filter_report_table',			['uses' => 'DownloadReconReportProviderController@FilterReportTable']);
 	Route::post('/download_recon_report_provider/filter_report_table_settlement',			['uses' => 'DownloadReconReportProviderController@FilterReportTableSettlement']);
+
+	Route::get('/download_provider_by_acquirer', ['uses' => 'DownloadProviderByAcquirer@index']);
+	Route::post('/download_provider_by_acquirer/zip_list_report', ['uses' => 'DownloadProviderByAcquirer@ZipListReport']);
+	Route::post('/download_provider_by_acquirer/filter_report_table', ['uses' => 'DownloadProviderByAcquirer@FilterReportTable']);
+
+	Route::get('/download_provider_by_corporate', ['uses' => 'DownloadProviderByCorporate@index']);
+	Route::post('/download_provider_by_corporate/zip_list_report', ['uses' => 'DownloadProviderByCorporate@ZipListReport']);
+	Route::post('/download_provider_by_corporate/filter_report_table', ['uses' => 'DownloadProviderByCorporate@FilterReportTable']);
 
 	Route::get('/download_detail_report_corporate',							['uses' => 'DownloadDetailReportCorporateController@index']);
 	Route::get('/download_detail_report_corporate/get_list_report',			['uses' => 'DownloadDetailReportCorporateController@GetListReport']);

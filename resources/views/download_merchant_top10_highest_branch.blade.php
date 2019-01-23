@@ -126,7 +126,7 @@
 		// dd(session()->all());
 	?>
   <div class="header panel-header" style="border-bottom: none;">
-      <h2><i class="fas fa-home"></i> <strong>Download Monthly Revenue Report By Merchant</strong></h3>
+      <h2><i class="fas fa-home"></i> <strong>Download Top 10 Highest Branch</strong></h3>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -146,35 +146,35 @@
 
 
                     <div class="row">
-                      <form id="ListReportTable_form" method="POST" action="/download_acquirer_monthly_by_merchant/filter_report_table">
-                      <!--
-                      <div class="col-md-3">
+                      <form id="ListReportTable_form" method="POST" action="/download_merchant_top10_highest_branch/filter_report_table">
+
+                    <!--  <div class="col-md-3">
                         <div class="form-group">
                           <label for="exampleInputEmail1">Branch</label>
                           <select class="form-control select2 selectBranch" name="branch_code" id="branch_code" style="width: 100%;" required>
                             <option value=""></option>
-                              <option value='AllBranch'> All Branch </option>
                           </select>
-                        </div><!-- /.input group --><!--
+                        </div>
                       </div>-->
 
                       <div class="col-md-3">
                         <div class="form-group">
                           <label>Range</label>
-                          <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')" disabled>
+                          <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')">
                             <option></option>
-                            <option value="d"> 1 Day </option>
-                            <option value="w"> 1 Week </option>
+                          <!--  <option value="d"> 1 Day </option>
+                            <option value="w"> 1 Week </option>-->
                             <option value="m" selected> 1 Month </option>
+                            <option value="y"> 1 Year </option>
                           </select>
                         </div><!-- /.form-group -->
                       </div>
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="exampleInputEmail1" id='detailHost'>From Date</label>
+                          <label for="exampleInputEmail1" id='detailHost'>Month</label>
                           <div class="input-group date">
-                            <input type="text" name="date" id="detailDate" class="form-control readonly" placeholder="Select Date" required="required" />
+                            <input type="text" name="date" id="detailDate" class="form-control readonly" placeholder="Select Month" required="required" />
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
@@ -197,7 +197,7 @@
                     </div>
 
                   <div class="row" id="box-result" style="display:none">
-                    <form id="listReport_form" method="POST" action="/download_acquirer_monthly_by_merchant/zip_list_report">
+                    <form id="listReport_form" method="POST" action="/download_merchant_top10_highest_branch/zip_list_report">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <table class="table table-bordered" id="tableListReport">
                       <thead>
@@ -291,7 +291,22 @@
     });
 
     document.getElementById(idLabel).innerHTML = 'Month';
-   } else if(id.value == 'w') {
+   }
+
+   else if(id.value == 'y') {
+     $('.input-group.date').datepicker('remove');
+     $('.input-group.date').datepicker({
+         autoclose: true,
+         todayHighlight: true,
+         format: "yyyy",
+        minViewMode: "years",
+       orientation: 'auto'
+     });
+
+     document.getElementById(idLabel).innerHTML = 'Year';
+    }
+
+    else if(id.value == 'w') {
     $('.input-group.date').datepicker('remove');
     $('.input-group.date').datepicker({
         autoclose: true,
@@ -399,7 +414,7 @@
               range : $('#range option:selected').val(),
               detailDate : $('#detailDate').val()
             },
-      url: '/download_acquirer_monthly_by_merchant/filter_report_table',
+      url: '/download_merchant_top10_highest_branch/filter_report_table',
       headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
         success: function(data){
 
@@ -458,5 +473,6 @@
   });
 
   });
+
   </script>
   @endsection

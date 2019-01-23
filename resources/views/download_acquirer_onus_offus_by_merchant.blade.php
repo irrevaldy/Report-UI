@@ -126,7 +126,7 @@
 		// dd(session()->all());
 	?>
   <div class="header panel-header" style="border-bottom: none;">
-      <h2><i class="fas fa-home"></i> <strong>Download Monthly Revenue Report By Branch</strong></h3>
+      <h2><i class="fas fa-home"></i> <strong>Download On Us & Off Us Report By Merchant</strong></h3>
   </div>
   <div class="row">
     <div class="col-md-12">
@@ -146,34 +146,35 @@
 
 
                     <div class="row">
-                      <form id="ListReportTable_form" method="POST" action="/inactive_tid/filter_report_table">
-
+                      <form id="ListReportTable_form" method="POST" action="/download_acquirer_onus_offus_by_merchant/filter_report_table">
+                      <!--
                       <div class="col-md-3">
                         <div class="form-group">
                           <label for="exampleInputEmail1">Branch</label>
                           <select class="form-control select2 selectBranch" name="branch_code" id="branch_code" style="width: 100%;" required>
                             <option value=""></option>
-                            </select>
-                            </div><!-- /.input group -->
-                      </div>
+                              <option value='AllBranch'> All Branch </option>
+                          </select>
+                        </div><!-- /.input group --><!--
+                      </div>-->
 
                       <div class="col-md-3">
                         <div class="form-group">
                           <label>Range</label>
-                          <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')" disabled>
-                            <option></option>
-                            <option value="d"> 1 Day </option>
-                            <option value="w"> 1 Week </option>
-                            <option value="m" selected> 1 Month </option>
+                          <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')">
+                            <!--  <option value="d"> 1 Day </option>
+                              <option value="w"> 1 Week </option>-->
+                              <option value="m" selected> 1 Month </option>
+                              <option value="y"> 1 Year </option>
                           </select>
                         </div><!-- /.form-group -->
                       </div>
 
                       <div class="col-md-3">
                         <div class="form-group">
-                          <label for="exampleInputEmail1" id='detailHost'>From Date</label>
+                          <label for="exampleInputEmail1" id='detailHost'>Month</label>
                           <div class="input-group date">
-                            <input type="text" name="date" id="detailDate" class="form-control readonly" placeholder="Select Date" required="required" />
+                            <input type="text" name="date" id="detailDate" class="form-control readonly" placeholder="Select Month" required="required" />
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
@@ -196,7 +197,7 @@
                     </div>
 
                   <div class="row" id="box-result" style="display:none">
-                    <form id="listReport_form" method="POST" action="/inactive_tid/zip_list_report">
+                    <form id="listReport_form" method="POST" action="/download_acquirer_onus_offus_by_merchant/zip_list_report">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <table class="table table-bordered" id="tableListReport">
                       <thead>
@@ -214,18 +215,19 @@
                     </div>
                     </form>
                   </div>
+
           </div>
       </div>
 
     </div>
   </div>
-</div>
+  </div>
 
 
 
-@endsection
+  @endsection
 
-@section('javascript')
+  @section('javascript')
     <script src="{{ asset('assets/plugins/charts-highstock/js/highstock.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
@@ -234,11 +236,11 @@
     <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 
-<script>
-$(function ()
-{
+  <script>
+  $(function ()
+  {
       $(".selectBranch").select2({
-          placeholder: "Select Branch",
+          placeholder: "Select Branch Code",
           allowClear: true
       });
 
@@ -254,9 +256,9 @@ $(function ()
            minViewMode: 1,
          orientation: 'auto'
        });
-});
+  });
 
-function switchtoMonth(id, state, idLabel){
+  function switchtoMonth(id, state, idLabel){
   if(id.value == 'm' && state == 'bank') {
     $('.bankdate').datepicker('remove');
     $('.bankdate').datepicker({
@@ -289,7 +291,22 @@ function switchtoMonth(id, state, idLabel){
     });
 
     document.getElementById(idLabel).innerHTML = 'Month';
-   } else if(id.value == 'w') {
+   }
+
+   else if(id.value == 'y') {
+     $('.input-group.date').datepicker('remove');
+     $('.input-group.date').datepicker({
+         autoclose: true,
+         todayHighlight: true,
+         format: "yyyy",
+        minViewMode: "years",
+       orientation: 'auto'
+     });
+
+     document.getElementById(idLabel).innerHTML = 'Year';
+    }
+
+    else if(id.value == 'w') {
     $('.input-group.date').datepicker('remove');
     $('.input-group.date').datepicker({
         autoclose: true,
@@ -310,9 +327,9 @@ function switchtoMonth(id, state, idLabel){
 
     document.getElementById(idLabel).innerHTML = 'From Date';
    }
-}
+  }
 
-$(document).ready(function(){
+  $(document).ready(function(){
 
   $('#example-select-all').prop('checked', true);
 
@@ -367,11 +384,11 @@ $(document).ready(function(){
 
     $( "#listReport_form" ).submit();
 
-	});
+  });
 
-});
+  });
 
-$("#ListReportTable_form").submit(function(e) {
+  $("#ListReportTable_form").submit(function(e) {
 
   e.preventDefault();
 
@@ -393,11 +410,11 @@ $("#ListReportTable_form").submit(function(e) {
 
     $.ajax({
       type: 'POST',
-      data: { bank_code : $('#bank_code option:selected').val(),
+      data: { //branch_code : $('#branch_code option:selected').val(),
               range : $('#range option:selected').val(),
               detailDate : $('#detailDate').val()
             },
-      url: '/inactive_tid/filter_report_table',
+      url: '/download_acquirer_onus_offus_by_merchant/filter_report_table',
       headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
         success: function(data){
 
@@ -416,6 +433,7 @@ $("#ListReportTable_form").submit(function(e) {
           var datemodified = data[i].datemodified;
           var size = data[i].size;
 
+
             var jRow = $('<tr>').append(
                 '<td style="width: 5%">'+ no +'</td>',
                 '<td style="width: 50%">'+ file +'</td>',
@@ -433,7 +451,7 @@ $("#ListReportTable_form").submit(function(e) {
 
     });
 
-	// Handle click on "Select all" control
+  // Handle click on "Select all" control
    $('#example-select-all').on('click', function(){
       // Check/uncheck all checkboxes in the table
       var rows = tableListReport.rows({ 'search': 'applied' }).nodes();
@@ -454,25 +472,6 @@ $("#ListReportTable_form").submit(function(e) {
    }
   });
 
-});
-
-$(function(){
-    $.ajax({
-      dataType: 'JSON',
-      type: 'GET',
-      url: '/branch_data_filtered',
-      success: function (data) {
-        for(var i = 0; i < data.length; i++)
-        {
-          $(".selectBranch").append('<option value="' + data[i]['branch_code'] + '">' + data[i]['branch_code'] + '</option>');
-        }
-      }
-    });
-
-
   });
-
-
-
-</script>
-@endsection
+  </script>
+  @endsection

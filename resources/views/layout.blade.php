@@ -683,9 +683,9 @@
                 @if ( in_array('SERPRO_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
                 @if ( in_array('SERPRO_CTP_V', $priv)  ) <li><a href="#"> By Card Type </a></li> @endif
                 @if ( in_array('SERPRO_CSC_V', $priv)  ) <li><a href="#"> By Card Scheme </a></li> @endif
-                @if ( in_array('SERPRO_ACQ_V', $priv)  ) <li><a href="#"> By Acquirer </a></li> @endif
+                @if ( in_array('SERPRO_ACQ_V', $priv)  ) <li><a href="/download_provider_by_acquirer" title="Acquirer Revenue Report"> Acquirer Revenue Report </a></li> @endif
                 @if ( in_array('SERPRO_ISS_V', $priv)  ) <li><a href="#"> By Issuer </a></li> @endif
-                @if ( in_array('SERPRO_CORP_V', $priv)  ) <li><a href="#"> By Corporate </a></li> @endif
+                @if ( in_array('SERPRO_CORP_V', $priv)  ) <li><a href="/download_provider_by_corporate" title="Corporate Revenue Report"> Corporate Revenue Report </a></li> @endif
                 @if ( in_array('SERPRO_MER_V', $priv)  ) <li><a href="#"> By Merchant </a></li> @endif
                 @if ( in_array('SERPRO_BRA_V', $priv)  ) <li><a href="#"> By Branch </a></li> @endif
                 @if ( in_array('SERPRO_STO_V', $priv)  ) <li><a href="#"> By Store </a></li> @endif
@@ -716,8 +716,8 @@
                 @if ( in_array('ACQ_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
                 @if ( in_array('ACQ_CTP_V', $priv)  ) <li><a href="#"> By Card Type </a></li> @endif
                 @if ( in_array('ACQ_CORP_V', $priv)  ) <li><a href="#"> By Corporate </a></li> @endif
-                @if ( in_array('ACQ_MER_V', $priv)  ) <li><a href="/download_acquirer_monthly_by_merchant"> Monthly Revenue By Merchant </a></li> @endif
-                @if ( in_array('ACQ_ONOFF_V', $priv)  ) <li><a href="#"> On Us & Off Us </a></li> @endif
+                @if ( in_array('ACQ_MER_V', $priv)  ) <li><a href="/download_acquirer_by_merchant" title="Revenue By Merchant"> Revenue By Merchant </a></li> @endif
+                @if ( in_array('ACQ_ONOFF_V', $priv)  ) <li><a href="/download_acquirer_onus_offus_by_merchant" title="On Us & Off Us By Merchant"> On Us & Off Us By Merchant </a></li> @endif
                 @if ( in_array('ACQ_DREP_V', $priv)  ) <li><a href="/download_detail_report_acquirer" title="Download Detail Report"> Download Detail Report </a></li> @endif
                 @if ( in_array('ACQ_DREC_V', $priv)  ) <li><a href="/download_recon_report_acquirer" title="Download Reconciliation Report"> Download Reconciliation Report </a></li> @endif
               </ul>
@@ -733,7 +733,7 @@
               in_array('CORP_DREC_V', $priv)
             )
             <li class="nav-parent ">
-              <a><i class="fa fa-university" aria-hidden="true"></i><span data-translate="Service Provider"> Corporate</span><span class="fas fa-angle-down arrow"></span></a>
+              <a><i class="fa fa-university" aria-hidden="true"></i><span data-translate="Corporate"> Corporate</span><span class="fas fa-angle-down arrow"></span></a>
               <ul class="children collapse">
                 @if ( in_array('CORP_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
                 @if ( in_array('CORP_ACQ_V', $priv)  ) <li><a href="#"> By Acquirer </a></li> @endif
@@ -756,13 +756,13 @@
               in_array('MER_DREC_V', $priv)
             )
             <li class="nav-parent ">
-              <a><svg aria-hidden="true" data-prefix="fas" data-icon="school" class="svg-inline--fa fa-school fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M0 224v272c0 8.84 7.16 16 16 16h80V192H32c-17.67 0-32 14.33-32 32zm360-48h-24v-40c0-4.42-3.58-8-8-8h-16c-4.42 0-8 3.58-8 8v64c0 4.42 3.58 8 8 8h48c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zm137.75-63.96l-160-106.67a32.02 32.02 0 0 0-35.5 0l-160 106.67A32.002 32.002 0 0 0 128 138.66V512h128V368c0-8.84 7.16-16 16-16h96c8.84 0 16 7.16 16 16v144h128V138.67c0-10.7-5.35-20.7-14.25-26.63zM320 256c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80zm288-64h-64v320h80c8.84 0 16-7.16 16-16V224c0-17.67-14.33-32-32-32z"></path></svg><span data-translate="Service Provider"> Merchant</span><span class="fas fa-angle-down arrow"></span></a>
+              <a><svg aria-hidden="true" data-prefix="fas" data-icon="school" class="svg-inline--fa fa-school fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M0 224v272c0 8.84 7.16 16 16 16h80V192H32c-17.67 0-32 14.33-32 32zm360-48h-24v-40c0-4.42-3.58-8-8-8h-16c-4.42 0-8 3.58-8 8v64c0 4.42 3.58 8 8 8h48c4.42 0 8-3.58 8-8v-16c0-4.42-3.58-8-8-8zm137.75-63.96l-160-106.67a32.02 32.02 0 0 0-35.5 0l-160 106.67A32.002 32.002 0 0 0 128 138.66V512h128V368c0-8.84 7.16-16 16-16h96c8.84 0 16 7.16 16 16v144h128V138.67c0-10.7-5.35-20.7-14.25-26.63zM320 256c-44.18 0-80-35.82-80-80s35.82-80 80-80 80 35.82 80 80-35.82 80-80 80zm288-64h-64v320h80c8.84 0 16-7.16 16-16V224c0-17.67-14.33-32-32-32z"></path></svg><span data-translate="Merchant"> Merchant</span><span class="fas fa-angle-down arrow"></span></a>
               <ul class="children collapse">
                 @if ( in_array('MER_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
-                @if ( in_array('MER_ACQ_V', $priv)  ) <li><a href="/download_merchant_monthly_by_acquirer" title="Monthly Revenue By Acquirer"> Monthly Revenue By Acquirer </a></li> @endif
-                @if ( in_array('MER_BRA_V', $priv)  ) <li><a href="/download_merchant_monthly_by_branch"> By Branch </a></li> @endif
+                @if ( in_array('MER_ACQ_V', $priv)  ) <li><a href="/download_merchant_by_acquirer" title="Revenue By Acquirer"> Revenue By Acquirer </a></li> @endif
+                @if ( in_array('MER_BRA_V', $priv)  ) <li><a href="/download_merchant_by_branch" title="Revenue By Branch"> Revenue By Branch </a></li> @endif
                 @if ( in_array('MER_STO_V', $priv)  ) <li><a href="#"> By Store </a></li> @endif
-                @if ( in_array('MER_T5BRA_V', $priv)  ) <li><a href="#"> Top Ten Branch </a></li> @endif
+                @if ( in_array('MER_T5BRA_V', $priv)  ) <li><a href="/download_merchant_top10_highest_branch" title="Top Ten Highest Branch Revenue"> Top Ten Highest Branch Revenue </a></li> @endif
                 @if ( in_array('MER_DREP_V', $priv)  ) <li><a href="/download_detail_report_merchant" title="Download Detail Report"> Download Detail Report </a></li> @endif
                 @if ( in_array('MER_DREC_V', $priv)  ) <li><a href="/download_recon_report_merchant" title="Daily Reconciliation Report"> Download Reconciliation Report </a></li> @endif
               </ul>
@@ -778,7 +778,7 @@
 	      in_array('BRA_DREC_V', $priv)
             )
             <li class="nav-parent ">
-              <a><i class="fa fa-sitemap" aria-hidden="true"></i><span data-translate="Service Provider"> Branch</span><span class="fas fa-angle-down arrow"></span></a>
+              <a><i class="fa fa-sitemap" aria-hidden="true"></i><span data-translate="Branch"> Branch</span><span class="fas fa-angle-down arrow"></span></a>
               <ul class="children collapse">
                 @if ( in_array('BRA_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
                 @if ( in_array('BRA_ACQ_V', $priv)  ) <li><a href="#"> By Acquirer </a></li> @endif
@@ -797,7 +797,7 @@
               in_array('STO_DREC_V', $priv)
             )
             <li class="nav-parent ">
-              <a><svg aria-hidden="true" data-prefix="fas" data-icon="store" class="svg-inline--fa fa-store fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 616 512"><path fill="currentColor" d="M602 118.6L537.1 15C531.3 5.7 521 0 510 0H106C95 0 84.7 5.7 78.9 15L14 118.6c-33.5 53.5-3.8 127.9 58.8 136.4 4.5.6 9.1.9 13.7.9 29.6 0 55.8-13 73.8-33.1 18 20.1 44.3 33.1 73.8 33.1 29.6 0 55.8-13 73.8-33.1 18 20.1 44.3 33.1 73.8 33.1 29.6 0 55.8-13 73.8-33.1 18.1 20.1 44.3 33.1 73.8 33.1 4.7 0 9.2-.3 13.7-.9 62.8-8.4 92.6-82.8 59-136.4zM529.5 288c-10 0-19.9-1.5-29.5-3.8V384H116v-99.8c-9.6 2.2-19.5 3.8-29.5 3.8-6 0-12.1-.4-18-1.2-5.6-.8-11.1-2.1-16.4-3.6V480c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32V283.2c-5.4 1.6-10.8 2.9-16.4 3.6-6.1.8-12.1 1.2-18.2 1.2z"></path></svg><span data-translate="Service Provider"> Store</span><span class="fas fa-angle-down arrow"></span></a>
+              <a><svg aria-hidden="true" data-prefix="fas" data-icon="store" class="svg-inline--fa fa-store fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 616 512"><path fill="currentColor" d="M602 118.6L537.1 15C531.3 5.7 521 0 510 0H106C95 0 84.7 5.7 78.9 15L14 118.6c-33.5 53.5-3.8 127.9 58.8 136.4 4.5.6 9.1.9 13.7.9 29.6 0 55.8-13 73.8-33.1 18 20.1 44.3 33.1 73.8 33.1 29.6 0 55.8-13 73.8-33.1 18 20.1 44.3 33.1 73.8 33.1 29.6 0 55.8-13 73.8-33.1 18.1 20.1 44.3 33.1 73.8 33.1 4.7 0 9.2-.3 13.7-.9 62.8-8.4 92.6-82.8 59-136.4zM529.5 288c-10 0-19.9-1.5-29.5-3.8V384H116v-99.8c-9.6 2.2-19.5 3.8-29.5 3.8-6 0-12.1-.4-18-1.2-5.6-.8-11.1-2.1-16.4-3.6V480c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32V283.2c-5.4 1.6-10.8 2.9-16.4 3.6-6.1.8-12.1 1.2-18.2 1.2z"></path></svg><span data-translate="Store"> Store</span><span class="fas fa-angle-down arrow"></span></a>
               <ul class="children collapse">
                 @if ( in_array('STO_TRX_V', $priv)  ) <li><a href="#"> By Transaction Type </a></li> @endif
                 @if ( in_array('STO_ACQ_V', $priv)  ) <li><a href="#"> By Acquirer </a></li> @endif

@@ -9,7 +9,7 @@ use GuzzleHttp\Promise;
 use Session;
 use ZIPARCHIVE;
 
-class DownloadAcquirerMonthlyByMerchant extends Controller
+class DownloadAcquirerByMerchant extends Controller
 {
    	public function __construct(){
 
@@ -17,7 +17,7 @@ class DownloadAcquirerMonthlyByMerchant extends Controller
 
     public function index(Request $request)
     {
-      return view('download_acquirer_monthly_by_merchant');
+      return view('download_acquirer_by_merchant');
     }
 
     public function FilterReportTable(Request $request)
@@ -32,7 +32,7 @@ class DownloadAcquirerMonthlyByMerchant extends Controller
       $username = $request->session()->get('username');
       //$merchant = $request->session()->get('merch_id');
 
-      $form_post = $client->request('POST', config('constants.api_serverv').'acquirer_monthly_by_merchant_filtered', [
+      $form_post = $client->request('POST', config('constants.api_serverv').'acquirer_onus_offus_by_merchant_filtered', [
         'json' => [
           //'branch' => $branch,
           'range' => $range,
