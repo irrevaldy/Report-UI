@@ -60,15 +60,19 @@ class FtpFileController extends Controller
       $tmpFile = tempnam(sys_get_temp_dir(), 'reports_');
       $checkedArr = $request->input('checkedArray');
       $checkedA= json_decode($checkedArr);
+
+      //return $checkedA;
       $username = $request->session()->get('username');
       $filename = $username.'-AllReport.zip';
 
-      $form_post = $client->request('POST', config('constants.api_serverv').'zip_list_report', [
+      $form_post = $client->request('POST', config('constants.api_serverv').'zip_list_report_ftp', [
         'sink' => $tmpFile,
         'json' => [
           'checkedA' => $checkedA
         ]
       ]);
+
+
       return response()->download(
           $tmpFile,
           $filename,
@@ -93,6 +97,7 @@ class FtpFileController extends Controller
         'sink' => $tmpFile
 
       ]);
+      
       return response()->download(
           $tmpFile,
           $filename,

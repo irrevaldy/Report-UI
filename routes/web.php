@@ -32,6 +32,7 @@ Route::group(['middleware' => 'global_middleware' ], function()
 
 	Route::get('/ftpFile',['uses' => 'FtpFileController@index']);
 	Route::post('/ftpFile/filter_report_table',['uses' => 'FtpFileController@FilterReportTable']);
+	Route::post('/ftpFile/zip_list_report',			['uses' => 'FtpFileController@ZipListReport']);
 	Route::post('/ftpFile/downloadFile','FtpFileController@downloadFile');
 
 	Route::get('/index', 													['uses' => 'indexController@index']);
@@ -198,14 +199,20 @@ Route::group(['middleware' => 'global_middleware' ], function()
 
 	Route::get('/download_detail_report_provider',							['uses' => 'DownloadDetailReportProviderController@index']);
 	Route::get('/download_detail_report_provider/get_list_report',			['uses' => 'DownloadDetailReportProviderController@GetListReport']);
-	Route::post('/download_detail_report_provider/zip_list_report',			['uses' => 'DownloadDetailReportProviderController@ZipListReport']);
-	Route::post('/download_detail_report_provider/filter_report_table',			['uses' => 'DownloadDetailReportProviderController@FilterReportTable']);
+//	Route::post('/download_detail_report_provider/zip_list_report',			['uses' => 'DownloadDetailReportProviderController@ZipListReport']);
+	Route::post('/download_detail_report_provider/zip_list_report',			['uses' => 'DownloadDetailReportProviderController@ZipListReportFtp']);
+	//Route::post('/download_detail_report_provider/filter_report_table',			['uses' => 'DownloadDetailReportProviderController@FilterReportTable']);
+	Route::post('/download_detail_report_provider/filter_report_table',			['uses' => 'DownloadDetailReportProviderController@FilterReportTableFtp']);
 	Route::post('/download_detail_report_provider/filter_report_table_settlement',			['uses' => 'DownloadDetailReportProviderController@FilterReportTableSettlement']);
 
 	Route::get('/download_recon_report_provider',							['uses' => 'DownloadReconReportProviderController@index']);
 	Route::get('/download_recon_report_provider/get_list_report',			['uses' => 'DownloadReconReportProviderController@GetListReport']);
-	Route::post('/download_recon_report_provider/zip_list_report',			['uses' => 'DownloadReconReportProviderController@ZipListReport']);
-	Route::post('/download_recon_report_provider/filter_report_table',			['uses' => 'DownloadReconReportProviderController@FilterReportTable']);
+	//Route::post('/download_recon_report_provider/zip_list_report',			['uses' => 'DownloadReconReportProviderController@ZipListReport']);
+	Route::post('/download_recon_report_provider/zip_list_report',			['uses' => 'DownloadReconReportProviderController@ZipListReportFtp']);
+	//Route::post('/download_recon_report_provider/filter_report_table',			['uses' => 'DownloadReconReportProviderController@FilterReportTable']);
+	Route::post('/download_recon_report_provider/filter_report_table',			['uses' => 'DownloadReconReportProviderController@FilterReportTableFtp']);
+
+
 	Route::post('/download_recon_report_provider/filter_report_table_settlement',			['uses' => 'DownloadReconReportProviderController@FilterReportTableSettlement']);
 
 	Route::get('/download_provider_by_acquirer', ['uses' => 'DownloadProviderByAcquirer@index']);

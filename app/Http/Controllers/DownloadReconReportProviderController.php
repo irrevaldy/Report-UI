@@ -88,6 +88,42 @@ class DownloadReconReportProviderController extends Controller
 
     }
 
+    public function FilterReportTableFtp(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+      $branch = $request->input('branch_code');
+      $range = $request->input('range');
+      $date = $request->input('detailDate');
+      $username = $request->session()->get('username');
+      //$merchant = $request->session()->get('merch_id');
+
+      $form_post = $client->request('POST', config('constants.api_serverv').'list_recon_report_filtered_ftp', [
+        'json' => [
+          'branch' => $branch,
+          'range' => $range,
+          'date' => $date,
+          'username' => $username
+        ]
+      ]);
+      $var = json_decode($form_post->getBody()->getContents());
+      //return $var;
+
+      if($var->success == true)
+      {
+        // Session::put('id', $var->data->Id);
+        $this->attrib = $var->result;
+
+        return $this->attrib;
+
+        //return redirect()->action('HomeController@index');
+        //return $username;
+      }
+      else{
+        return Redirect::back()->withInput()->withErrors($var->message);
+      }
+
+    }
+
     public function FilterReportTableSettlement(Request $request)
     {
       $client = new \GuzzleHttp\Client();
@@ -151,5 +187,28 @@ class DownloadReconReportProviderController extends Controller
 
     }
 
+    public function ZipListReportFtp(Request $request)
+    {
+      $client = new \GuzzleHttp\Client();
+      //$checkedArr = array();
+      $tmpFile = tempnam(sys_get_temp_dir(), 'reports_');
+      $checkedArr = $request->input('checkedArray');
+      $checkedA= json_decode($checkedArr);
+      $username = $request->session()->get('username');
+      $filename = $username.'-AllReport.zip';
 
+      $form_post = $client->request('POST', config('constants.api_serverv').'zip_list_report_ftp', [
+        'sink' => $tmpFile,
+        'json' => [
+          'checkedA' => $checkedA
+        ]
+      ]);
+      return response()->download(
+          $tmpFile,
+          $filename,
+          [
+              'Content-Type' => 'application/zip'
+          ]
+      )->deleteFileAfterSend(true);
+    }
 }

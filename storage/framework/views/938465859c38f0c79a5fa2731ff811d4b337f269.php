@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 <script>
   // FontAwesomeConfig = { searchPseudoElements: true };
@@ -126,13 +124,13 @@
 		// dd(session()->all());
 	?>
   <div class="header panel-header" style="border-bottom: none;">
-      <h2><i class="fas fa-home"></i> <strong>FTP File</strong></h3>
+      <h2><i class="fas fa-home"></i> <strong>Download Revenue Report By Corporate</strong></h3>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="panel no-bd bd-3 panel-stat">
           <div class="panel-header">
-              <h3><i class="icon-graph"></i> <strong>List of FTP File &ensp;</strong></h3>
+              <h3><i class="icon-graph"></i> <strong>List of Report &ensp;</strong></h3>
               <div class="control-btn">
                   <a href="#" class="panel-reload hidden"><i class="icon-reload"></i></a>
                   <!--<a class="hide-loading" style="display: none">
@@ -146,28 +144,29 @@
 
 
                     <div class="row">
-                      <form id="ListReportTable_form" method="POST" action="/ftpFile/filter_report_table">
-
-                    <!--  <div class="col-md-3">
+                      <form id="ListReportTable_form" method="POST" action="/download_provider_by_corporate/filter_report_table">
+                      <!--
+                      <div class="col-md-3">
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Bank</label>
-                          <select class="form-control select2 selectBank" name="bank_code" id="bank_code" style="width: 100%;" required>
+                          <label for="exampleInputEmail1">Branch</label>
+                          <select class="form-control select2 selectBranch" name="branch_code" id="branch_code" style="width: 100%;" required>
                             <option value=""></option>
-
+                              <option value='AllBranch'> All Branch </option>
                           </select>
-                        </div><
-                      </div>
+                        </div><!-- /.input group --><!--
+                      </div>-->
 
                       <div class="col-md-3">
                         <div class="form-group">
                           <label>Range</label>
-                          <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')" disabled>
+                          <select class="form-control select2 selectRange" name="range" id="range" style="width: 100%;" required="required" onChange="switchtoMonth(this, '', 'detailHost')">
                             <option></option>
-                            <option value="d"> 1 Day </option>
-                            <option value="w"> 1 Week </option>
+                          <!--  <option value="d"> 1 Day </option>
+                            <option value="w"> 1 Week </option>-->
                             <option value="m" selected> 1 Month </option>
+                            <option value="y"> 1 Year </option>
                           </select>
-                        </div>
+                        </div><!-- /.form-group -->
                       </div>
 
                       <div class="col-md-3">
@@ -179,13 +178,13 @@
                               <i class="fa fa-calendar"></i>
                             </div>
                           </div>
-                        </div>
-                      </div>-->
+                        </div><!-- /.input group -->
+                      </div>
                       <div class="col-md-3">
                         <div class="form-group">
-
+                          <label for="exampleInputEmail1" id='detailHost1' style="visibility: hidden;">From Date</label>
                           <div class="">
-                            <input type="Submit" class="generate btn btn-primary" id="btnSubmitReport" value="Show FTP File List">
+                            <input type="Submit" class="generate btn btn-primary" id="btnSubmitReport" value="Filter List">
                             <a class="hide-loading" style="display: none">
                               <i class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 14px"></i>
                               <span> Loading...</span>
@@ -197,8 +196,8 @@
                     </div>
 
                   <div class="row" id="box-result" style="display:none">
-                    <form id="listReport_form" method="POST" action="/ftpFile/zip_list_report">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <form id="listReport_form" method="POST" action="/download_provider_by_corporate/zip_list_report">
+                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                     <table class="table table-bordered" id="tableListReport">
                       <thead>
                         <tr>
@@ -216,41 +215,31 @@
                     </form>
                   </div>
 
-                <div class="row" id="box-result">
-                    <form id="Test_form" method="POST" action="/ftpFile/downloadFile">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-                    <div>
-                      <button type="submit" id="btnSubmit2">Submit</button>
-                    </div>
-                    </form>
-                  </div>
-
           </div>
       </div>
 
     </div>
   </div>
-</div>
+  </div>
 
 
 
-@endsection
+  <?php $__env->stopSection(); ?>
 
-@section('javascript')
-    <script src="{{ asset('assets/plugins/charts-highstock/js/highstock.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/maps-amcharts/ammap/ammap.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/countup/countUp.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/chartjs/Chart.min.js') }}"></script>
-    <!-- <script src="{{ asset('assets/js/pages/dashboard.js') }}"></script> -->
-    <script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
+  <?php $__env->startSection('javascript'); ?>
+    <script src="<?php echo e(asset('assets/plugins/charts-highstock/js/highstock.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/maps-amcharts/ammap/ammap.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/countup/countUp.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/chartjs/Chart.min.js')); ?>"></script>
+    <!-- <script src="<?php echo e(asset('assets/js/pages/dashboard.js')); ?>"></script> -->
+    <script src="<?php echo e(asset('assets/plugins/datatables/jquery.dataTables.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('assets/plugins/datatables/dataTables.bootstrap.min.js')); ?>"></script>
 
-<script>
-$(function ()
-{
-      $(".selectBank").select2({
-          placeholder: "Select Bank",
+  <script>
+  $(function ()
+  {
+      $(".selectBranch").select2({
+          placeholder: "Select Branch Code",
           allowClear: true
       });
 
@@ -266,9 +255,9 @@ $(function ()
            minViewMode: 1,
          orientation: 'auto'
        });
-});
+  });
 
-function switchtoMonth(id, state, idLabel){
+  function switchtoMonth(id, state, idLabel){
   if(id.value == 'm' && state == 'bank') {
     $('.bankdate').datepicker('remove');
     $('.bankdate').datepicker({
@@ -301,7 +290,20 @@ function switchtoMonth(id, state, idLabel){
     });
 
     document.getElementById(idLabel).innerHTML = 'Month';
-   } else if(id.value == 'w') {
+   }
+   else if(id.value == 'y') {
+     $('.input-group.date').datepicker('remove');
+     $('.input-group.date').datepicker({
+         autoclose: true,
+         todayHighlight: true,
+         format: "yyyy",
+        minViewMode: "years",
+       orientation: 'auto'
+     });
+
+     document.getElementById(idLabel).innerHTML = 'Year';
+    }
+    else if(id.value == 'w') {
     $('.input-group.date').datepicker('remove');
     $('.input-group.date').datepicker({
         autoclose: true,
@@ -322,9 +324,9 @@ function switchtoMonth(id, state, idLabel){
 
     document.getElementById(idLabel).innerHTML = 'From Date';
    }
-}
+  }
 
-$(document).ready(function(){
+  $(document).ready(function(){
 
   $('#example-select-all').prop('checked', true);
 
@@ -379,11 +381,11 @@ $(document).ready(function(){
 
     $( "#listReport_form" ).submit();
 
-	});
+  });
 
-});
+  });
 
-$("#ListReportTable_form").submit(function(e) {
+  $("#ListReportTable_form").submit(function(e) {
 
   e.preventDefault();
 
@@ -405,8 +407,12 @@ $("#ListReportTable_form").submit(function(e) {
 
     $.ajax({
       type: 'POST',
-      url: '/ftpFile/filter_report_table',
-      headers: {'X-CSRF_TOKEN': "{{ csrf_token() }}" },
+      data: { //branch_code : $('#branch_code option:selected').val(),
+              range : $('#range option:selected').val(),
+              detailDate : $('#detailDate').val()
+            },
+      url: '/download_provider_by_corporate/filter_report_table',
+      headers: {'X-CSRF_TOKEN': "<?php echo e(csrf_token()); ?>" },
         success: function(data){
 
         // var data = JSON.parse(msg);
@@ -423,6 +429,7 @@ $("#ListReportTable_form").submit(function(e) {
           var file = data[i].val;
           var datemodified = data[i].datemodified;
           var size = data[i].size;
+
 
             var jRow = $('<tr>').append(
                 '<td style="width: 5%">'+ no +'</td>',
@@ -441,7 +448,7 @@ $("#ListReportTable_form").submit(function(e) {
 
     });
 
-	// Handle click on "Select all" control
+  // Handle click on "Select all" control
    $('#example-select-all').on('click', function(){
       // Check/uncheck all checkboxes in the table
       var rows = tableListReport.rows({ 'search': 'applied' }).nodes();
@@ -462,25 +469,8 @@ $("#ListReportTable_form").submit(function(e) {
    }
   });
 
-});
-/*
-$(function(){
-    $.ajax({
-      dataType: 'JSON',
-      type: 'GET',
-      url: '/bank_data',
-      success: function (data) {
-        for(var i = 0; i < data.length; i++)
-        {
-          $("#bank_code").append('<option value="' + data[i]['FNAME'] + '">' + data[i]['FNAME'] + '</option>');
-        }
-      }
-    });
-
-
   });
+  </script>
+  <?php $__env->stopSection(); ?>
 
-*/
-
-</script>
-@endsection
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
